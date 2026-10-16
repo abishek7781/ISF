@@ -2655,3 +2655,38 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .contact-sec .ch-txt em{font-size:.82rem}
 }
 @media (max-width:680px){.contact-sec .channels{padding-left:1rem}}
+
+/* visit us on phones: the map fills the card, the address slides up over it as a sheet */
+@media (max-width:900px){
+  .visit-sec{min-height:0;display:block;padding:72px 0 24px}
+  .visit-sec .head{margin-bottom:.8rem}
+  .visit{position:relative;display:block;height:min(76svh,640px);border-radius:20px;overflow:hidden;box-shadow:0 26px 44px -26px rgba(0,0,0,.7)}
+  .visit-map{position:absolute;inset:0;width:100%!important;height:100%;aspect-ratio:auto!important;margin:0!important;border-radius:0!important;border:0;min-height:0;display:block}
+  .visit-map iframe{height:100%!important;width:100%}
+  .visit-side{position:absolute;left:0;right:0;bottom:0;display:block;background:#0F2240;border-top:1px solid rgba(255,255,255,.16);border-radius:20px 20px 0 0;padding:1.3rem 1.1rem 1rem;box-shadow:0 -18px 40px -14px rgba(0,0,0,.65)}
+  .visit-side::before{content:"";position:absolute;left:50%;top:8px;width:34px;height:4px;border-radius:3px;background:rgba(255,255,255,.35);transform:translateX(-50%)}
+  .visit-side .visit-card,[data-theme=dark] .visit-side .visit-card{background:none!important;color:#fff;border:0;border-radius:0;padding:0}
+  .visit-side .visit-card h3{color:#fff;font-size:1.15rem;margin:.1rem 0 .2rem}
+  .visit-side .visit-card p{color:#C8D3E6;max-width:none;font-size:.82rem;line-height:1.4;margin-bottom:.7rem}
+  .visit-side .visit-card small{color:#7AD680}
+  .visit-side .visit-code{display:none}
+  .visit-side .visit-call{color:#fff}
+  .visit-side .visit-alt{background:none;border:0;border-top:1px solid rgba(255,255,255,.14);border-radius:0;margin-top:.7rem;padding:.7rem 0 0;display:block}
+  .visit-side .visit-alt small{color:#7AD680}
+  .visit-side .visit-alt h3{color:#fff;font-size:.98rem;margin:.1rem 0}
+  .visit-side .visit-alt p{color:#C8D3E6;font-size:.78rem;margin:0 0 .4rem}
+  .visit-side .visit-mail a{color:#fff;font-size:.74rem}
+  .visit-side .visit-mail{display:flex;flex-wrap:wrap;gap:.2rem .9rem}
+}
+@media (max-width:900px){
+  .visit-side .visit-card small{display:block!important}
+  .visit-side .visit-card h3{display:block!important}
+  .visit-side .visit-call{display:inline-flex!important;font-size:.84rem}
+  .visit-side .visit-act{gap:.6rem .9rem}
+}
+@media (max-width:900px){
+  .visit-side .visit-card{display:block!important;grid-template-columns:none!important}
+  .visit-side .visit-card>*{grid-column:auto!important;grid-row:auto!important}
+  .visit-side .visit-card p{max-width:none!important}
+  .visit-side .visit-act{display:flex!important;flex-wrap:wrap;align-items:center}
+}
