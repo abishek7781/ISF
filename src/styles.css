@@ -2827,3 +2827,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 .entry-card .entry-x{top:-12px;right:-12px;background:#0E2447;border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.5)}
 @media (max-width:680px){.entry-card .entry-x{top:-10px;right:-6px}}
+@media (min-width:681px){
+  .entry-card{width:min(980px,100%);grid-template-columns:1fr 460px}
+  .entry-card .entry-photo h2{font-size:2.7rem;max-width:12ch}
+  .entry-card .cform{padding:1.5rem 1.6rem 1.3rem}
+}
