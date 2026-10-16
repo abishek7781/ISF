@@ -61,7 +61,7 @@ function OurServices() {
   const [group, setGroup] = useState('All')
   const list = OUR_SERVICES.map((s, i) => ({ ...s, n: i + 1 })).filter((s) => group === 'All' || s.group === group)
   return (
-    <section className="section">
+    <section className="section svc-sec">
       <div className="container">
         <Head label="Our service" title="The best badminton flooring company in India." aside="A wide variety of high-quality services, delivered by our own team from design to handover." />
         <div className="filters" role="tablist" aria-label="Filter services">

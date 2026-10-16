@@ -38,7 +38,7 @@ export default function Header({ theme, toggle }: { theme: string; toggle: () =>
     const start = (e: TouchEvent) => {
       const t = e.touches[0]
       x = t.clientX; y = t.clientY
-      ok = e.touches.length === 1 && window.innerWidth <= 1080 && !(e.target as Element).closest('.cert-loop,.tm,.net-mq,.bd-view,.bd-bottom,canvas,.lightbox,.vd-list,input,textarea,select,.dp-pop,.cookie')
+      ok = e.touches.length === 1 && window.innerWidth <= 1080 && !(e.target as Element).closest('.cert-loop,.tm,.bento,.filters,.pg-grid,.net-mq,.bd-view,.bd-bottom,canvas,.lightbox,.vd-list,input,textarea,select,.dp-pop,.cookie')
     }
     const end = (e: TouchEvent) => {
       if (!ok) return
