@@ -1,0 +1,10 @@
+node_modules
+dist
+dist.zip
+dist\ 2.zip
+backups
+.vite
+.claude
+.DS_Store
+Icon
+*.mov

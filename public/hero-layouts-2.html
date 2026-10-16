@@ -1,0 +1,106 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Products hero layouts 2</title><style>*{box-sizing:border-box;margin:0}body{background:#0b1626;color:#fff;font-family:Inter,system-ui,sans-serif;padding:24px}
+h1{font-size:18px;color:#cfe;margin-bottom:6px}p.s{font-size:12px;color:#8ea0bd;margin-bottom:18px}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.c{background:#0a1930;border:1px solid #ffffff1c;border-radius:14px;padding:12px}.c h3{font-size:13px;color:#7AD680;margin-bottom:8px}
+.st{position:relative;aspect-ratio:340/250;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#12284a,#0a1426)}
+.st img{display:block;width:100%;height:100%;object-fit:cover}
+.D{animation-duration:12s;animation-iteration-count:infinite}
+/* 1 reel */
+.e1 .k{position:absolute;left:50%;top:50%;width:150px;height:200px;margin:-100px 0 0 -75px;border-radius:14px;overflow:hidden;animation:rl 12s infinite;box-shadow:0 14px 22px -12px #000}
+@keyframes rl{0%,20%{transform:none;opacity:1}25%{transform:translateY(-260px);opacity:0}26%{transform:translateY(260px);opacity:0}30%,45%{transform:translateY(24px) scale(.86);opacity:.5}50%,70%{transform:translateY(16px) scale(.9);opacity:.7}75%,95%{transform:translateY(8px) scale(.95);opacity:.9}100%{transform:none;opacity:1}}
+.e1 .k:nth-child(2){animation-delay:-3s}.e1 .k:nth-child(3){animation-delay:-6s}.e1 .k:nth-child(4){animation-delay:-9s}
+/* 2 stairs */
+.e2 .k{position:absolute;width:120px;height:90px;border-radius:8px;overflow:hidden;transform:skewY(-12deg);box-shadow:0 12px 18px -10px #000;animation:st 6s ease-in-out infinite}
+.e2 .k:nth-child(1){left:20px;top:140px}.e2 .k:nth-child(2){left:92px;top:100px;animation-delay:-1.5s}.e2 .k:nth-child(3){left:164px;top:60px;animation-delay:-3s}.e2 .k:nth-child(4){left:236px;top:20px;animation-delay:-4.5s}
+@keyframes st{50%{transform:skewY(-12deg) translateY(-14px)}}
+/* 3 doors */
+.e3 img{position:absolute;inset:0;animation:fadeset 12s infinite}.e3 img:nth-child(2){animation-delay:3s}.e3 img:nth-child(3){animation-delay:6s}.e3 img:nth-child(4){animation-delay:9s}
+@keyframes fadeset{0%,23%{opacity:1}25%,100%{opacity:0}}
+.e3 .l,.e3 .r{position:absolute;top:0;bottom:0;width:50%;background:#0E2447;z-index:3;animation:dr 3s ease-in-out infinite}.e3 .l{left:0;--x:-101%}.e3 .r{right:0;--x:101%;background:#3F9E45}
+@keyframes dr{0%{transform:none}30%,80%{transform:translateX(var(--x))}100%{transform:none}}
+/* 4 blinds */
+.e4 .bl{position:absolute;inset:0;display:flex;flex-direction:column}.e4 .bl i{flex:1;background:#0a1426;animation:bd 3s ease-in-out infinite;transform-origin:center}
+.e4 img{position:absolute;inset:0;animation:fadeset 12s infinite}.e4 img:nth-child(2){animation-delay:3s}.e4 img:nth-child(3){animation-delay:6s}.e4 img:nth-child(4){animation-delay:9s}
+@keyframes bd{0%,10%{transform:scaleY(1)}40%,80%{transform:scaleY(0)}100%{transform:scaleY(1)}}
+.e4 .bl{z-index:3}
+/* 5 spotlight grid */
+.e5{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;padding:10px}.e5 .k{border-radius:10px;overflow:hidden;animation:sp 12s infinite;transform-origin:center}
+@keyframes sp{0%,22%{transform:scale(1.14);z-index:2;filter:brightness(1.1)}27%,100%{transform:scale(.94);filter:brightness(.55)}}
+.e5 .k:nth-child(2){animation-delay:3s}.e5 .k:nth-child(3){animation-delay:9s}.e5 .k:nth-child(4){animation-delay:6s}
+/* 6 puzzle */
+.e6{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;padding:14px}.e6 .k{overflow:hidden;animation:pz 6s ease-in-out infinite}.e6 .k:nth-child(1){--x:-120px;--y:-80px}.e6 .k:nth-child(2){--x:120px;--y:-80px}.e6 .k:nth-child(3){--x:-120px;--y:80px}.e6 .k:nth-child(4){--x:120px;--y:80px}
+@keyframes pz{0%{transform:translate(var(--x),var(--y)) rotate(18deg);opacity:0}25%,75%{transform:none;opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(-18deg);opacity:0}}
+/* 7 wall */
+.e7{perspective:600px}.e7 .wall{position:absolute;left:50%;top:50%;width:360px;height:150px;margin:-75px 0 0 -180px;display:flex;gap:6px;transform:rotateY(-28deg);transform-style:preserve-3d;animation:wl 10s ease-in-out infinite}
+.e7 .wall div{flex:1;border-radius:8px;overflow:hidden}
+@keyframes wl{50%{transform:rotateY(28deg)}}
+/* 8 ring carousel */
+.e8{perspective:900px}.e8 .ring{position:absolute;left:50%;top:50%;width:110px;height:140px;margin:-70px 0 0 -55px;transform-style:preserve-3d;animation:rg 14s linear infinite}
+.e8 .ring div{position:absolute;inset:0;border-radius:8px;overflow:hidden;backface-visibility:hidden}
+.e8 .ring div:nth-child(1){transform:rotateY(0) translateZ(120px)}.e8 .ring div:nth-child(2){transform:rotateY(90deg) translateZ(120px)}.e8 .ring div:nth-child(3){transform:rotateY(180deg) translateZ(120px)}.e8 .ring div:nth-child(4){transform:rotateY(270deg) translateZ(120px)}
+@keyframes rg{to{transform:rotateY(-360deg)}}
+/* 9 strips */
+.e9 .row{position:absolute;left:0;right:0;height:25%;overflow:hidden}.e9 .row .in{display:flex;width:300%;height:100%;animation:sr 12s ease-in-out infinite}
+.e9 .row:nth-child(2n) .in{animation-direction:reverse}
+.e9 .row .in img{width:33.33%;height:100%}
+@keyframes sr{0%,20%{transform:translateX(0)}30%,50%{transform:translateX(-33.33%)}60%,80%{transform:translateX(-66.66%)}100%{transform:translateX(0)}}
+.e9 .row:nth-child(1){top:0}.e9 .row:nth-child(2){top:25%}.e9 .row:nth-child(3){top:50%}.e9 .row:nth-child(4){top:75%}
+/* 10 hanging frames */
+.e10 .fr{position:absolute;top:0;width:86px;transform-origin:50% 0;animation:hg 4s ease-in-out infinite}
+.e10 .fr::before{content:"";position:absolute;left:50%;top:0;width:1px;height:46px;background:#9aa7bf}
+.e10 .fr .pic{position:absolute;top:46px;left:0;width:86px;height:104px;border:5px solid #f4efe4;border-radius:3px;overflow:hidden;box-shadow:0 10px 16px -8px #000}
+.e10 .fr:nth-child(1){left:30px;animation-delay:0s}.e10 .fr:nth-child(2){left:106px;animation-delay:-.6s}.e10 .fr:nth-child(3){left:182px;animation-delay:-1.2s}.e10 .fr:nth-child(4){left:258px;animation-delay:-1.8s}
+@keyframes hg{0%,100%{transform:rotate(7deg)}50%{transform:rotate(-7deg)}}
+/* 11 book */
+.e11{perspective:900px}.e11 .bk{position:absolute;left:50%;top:50%;width:200px;height:150px;margin:-75px 0 0 -100px;transform-style:preserve-3d}
+.e11 .pg{position:absolute;left:100px;top:0;width:100px;height:150px;transform-origin:left center;transform-style:preserve-3d;animation:fl 12s infinite;border-radius:0 8px 8px 0;overflow:hidden}
+.e11 .pg .f,.e11 .pg .b{position:absolute;inset:0;backface-visibility:hidden}.e11 .pg .b{transform:rotateY(180deg)}
+@keyframes fl{0%,20%{transform:rotateY(0);z-index:4}30%,100%{transform:rotateY(-180deg)}}
+.e11 .base{position:absolute;left:0;top:0;width:100px;height:150px;border-radius:8px 0 0 8px;overflow:hidden}
+.e11 .pg:nth-child(3){animation-delay:3s}.e11 .pg:nth-child(4){animation-delay:6s}.e11 .pg:nth-child(5){animation-delay:9s}
+/* 12 rows accordion */
+.e12{display:flex;flex-direction:column;gap:6px;padding:12px}.e12 .k{flex:1;border-radius:12px;overflow:hidden;animation:ln 12s infinite}
+@keyframes ln{0%,22%{flex:4}27%,100%{flex:1}}
+.e12 .k:nth-child(2){animation-delay:3s}.e12 .k:nth-child(3){animation-delay:6s}.e12 .k:nth-child(4){animation-delay:9s}
+/* 13 retro tv */
+.e13 .tv{position:absolute;inset:16px;border-radius:18px;border:7px solid #20262e;overflow:hidden;box-shadow:0 0 0 2px #3a4350,0 14px 24px -10px #000}
+.e13 .tv img{position:absolute;inset:0;animation:fadeset 12s infinite,gl 12s infinite}.e13 .tv img:nth-child(2){animation-delay:3s,3s}.e13 .tv img:nth-child(3){animation-delay:6s,6s}.e13 .tv img:nth-child(4){animation-delay:9s,9s}
+@keyframes gl{0%,2%{transform:translateX(0)}1%{transform:translateX(6px) skewX(4deg)}3%{transform:translateX(-5px)}4%,100%{transform:none}}
+.e13 .tv::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px);pointer-events:none}
+/* 14 lens */
+.e14 .lens{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px;border-radius:50%;overflow:hidden;border:6px solid #1c232d;box-shadow:0 0 0 3px #7AD680,0 16px 26px -10px #000}
+.e14 .lens img{position:absolute;inset:0;animation:fadeset 12s infinite}.e14 .lens img:nth-child(2){animation-delay:3s}.e14 .lens img:nth-child(3){animation-delay:6s}.e14 .lens img:nth-child(4){animation-delay:9s}
+.e14 .ap{position:absolute;left:50%;top:50%;width:230px;height:230px;margin:-115px;border-radius:50%;border:2px dashed #7AD68088;animation:rot 20s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+/* 15 wave grid */
+.e15{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px}.e15 .k{border-radius:12px;overflow:hidden;animation:wv 5s ease-in-out infinite}
+@keyframes wv{0%,100%{transform:translateY(16px)}50%{transform:translateY(-16px)}}
+.e15 .k:nth-child(2){animation-delay:-1.2s}.e15 .k:nth-child(3){animation-delay:-2.5s}.e15 .k:nth-child(4){animation-delay:-3.7s}
+/* 16 venn */
+.e16 .cc{position:absolute;width:140px;height:140px;border-radius:50%;overflow:hidden;opacity:.92;animation:vn 8s ease-in-out infinite;border:2px solid #ffffff44}
+.e16 .cc:nth-child(1){left:50px;top:20px}.e16 .cc:nth-child(2){left:150px;top:20px;animation-delay:-2s}.e16 .cc:nth-child(3){left:50px;top:90px;animation-delay:-4s}.e16 .cc:nth-child(4){left:150px;top:90px;animation-delay:-6s}
+@keyframes vn{50%{transform:scale(1.12)}}
+/* 17 slide-in panels */
+.e17 .p{position:absolute;width:50%;height:50%;overflow:hidden;animation:sl 8s cubic-bezier(.3,1,.4,1) infinite}
+.e17 .p:nth-child(1){left:0;top:0;--x:-100%;--y:0}.e17 .p:nth-child(2){left:50%;top:0;--x:0;--y:-100%}.e17 .p:nth-child(3){left:0;top:50%;--x:0;--y:100%}.e17 .p:nth-child(4){left:50%;top:50%;--x:100%;--y:0}
+@keyframes sl{0%{transform:translate(var(--x),var(--y))}20%,80%{transform:none}100%{transform:translate(var(--x),var(--y))}}
+/* 18 wave ribbons */
+.e18 .ri{position:absolute;left:0;right:0;height:56px;overflow:hidden;animation:rb 6s ease-in-out infinite}
+.e18 .ri img{position:absolute;left:0;top:0;width:100%;height:250px}
+.e18 .ri:nth-child(1){top:6px}.e18 .ri:nth-child(2){top:66px;animation-delay:-1.5s}.e18 .ri:nth-child(3){top:126px;animation-delay:-3s}.e18 .ri:nth-child(4){top:186px;animation-delay:-4.5s}
+.e18 .ri:nth-child(2) img{top:-60px}.e18 .ri:nth-child(3) img{top:-120px}.e18 .ri:nth-child(4) img{top:-180px}
+@keyframes rb{0%,100%{transform:translateX(-18px)}50%{transform:translateX(18px)}}
+/* 19 device */
+.e19 .dv{position:absolute;left:50%;top:50%;width:150px;height:216px;margin:-108px 0 0 -75px;border-radius:22px;border:6px solid #1c232d;box-shadow:0 0 0 2px #3a4350,0 16px 28px -10px #000;overflow:hidden;animation:fl2 5s ease-in-out infinite}
+.e19 .dv img{position:absolute;inset:0;animation:fadeset 12s infinite}.e19 .dv img:nth-child(2){animation-delay:3s}.e19 .dv img:nth-child(3){animation-delay:6s}.e19 .dv img:nth-child(4){animation-delay:9s}
+.e19 .dv::before{content:"";position:absolute;left:50%;top:6px;width:44px;height:6px;margin-left:-22px;border-radius:4px;background:#1c232d;z-index:2}
+.e19 .sd{position:absolute;width:58px;height:82px;border-radius:10px;overflow:hidden;opacity:.7}.e19 .s1{left:18px;top:40px;transform:rotate(-8deg)}.e19 .s2{right:18px;top:120px;transform:rotate(8deg)}
+@keyframes fl2{50%{transform:translateY(-10px)}}
+/* 20 pinwheel */
+.e20 .pw{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px;animation:rot 14s linear infinite}
+.e20 .pw div{position:absolute;width:100px;height:100px;overflow:hidden}
+.e20 .pw div:nth-child(1){left:0;top:0;clip-path:polygon(0 0,100% 0,0 100%)}.e20 .pw div:nth-child(2){right:0;top:0;clip-path:polygon(0 0,100% 0,100% 100%)}.e20 .pw div:nth-child(3){right:0;bottom:0;clip-path:polygon(100% 0,100% 100%,0 100%)}.e20 .pw div:nth-child(4){left:0;bottom:0;clip-path:polygon(0 0,100% 100%,0 100%)}
+.e20 .pw div img{width:200px;height:200px;position:absolute}
+.e20 .pw div:nth-child(1) img{left:0;top:0}.e20 .pw div:nth-child(2) img{right:0;top:0}.e20 .pw div:nth-child(3) img{right:0;bottom:0}.e20 .pw div:nth-child(4) img{left:0;bottom:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style><h1>Products hero, right side: 20 more layouts</h1><p class=s>Same four photos, different ideas. Each loops on its own.</p><div class=g><div class=c><h3>1. Reel of stacked cards sliding up</h3><div class="st e1"><div class=k><img src="/assets/badminton4.jpg" alt=""></div><div class=k><img src="/assets/products/pickleball.webp" alt=""></div><div class=k><img src="/assets/products/floodlights.webp" alt=""></div><div class=k><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>2. Staircase of slanted tiles</h3><div class="st e2"><div class=k><img src="/assets/badminton4.jpg" alt=""></div><div class=k><img src="/assets/products/pickleball.webp" alt=""></div><div class=k><img src="/assets/products/floodlights.webp" alt=""></div><div class=k><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>3. Doors opening on each photo</h3><div class="st e3"><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""><div class=l></div><div class=r></div></div></div><div class=c><h3>4. Window blinds transition</h3><div class="st e4"><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""><div class=bl><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div><div class=c><h3>5. Spotlight grid (one tile enlarges)</h3><div class="st e5"><div class=k><img src="/assets/badminton4.jpg" alt=""></div><div class=k><img src="/assets/products/pickleball.webp" alt=""></div><div class=k><img src="/assets/products/floodlights.webp" alt=""></div><div class=k><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>6. Puzzle pieces assembling</h3><div class="st e6"><div class=k><img src="/assets/badminton4.jpg" alt=""></div><div class=k><img src="/assets/products/pickleball.webp" alt=""></div><div class=k><img src="/assets/products/floodlights.webp" alt=""></div><div class=k><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>7. Tilted wall that sways</h3><div class="st e7"><div class=wall><div><img src="/assets/badminton4.jpg" alt=""></div><div><img src="/assets/products/pickleball.webp" alt=""></div><div><img src="/assets/products/floodlights.webp" alt=""></div><div><img src="/assets/products/basketball.webp" alt=""></div></div></div></div><div class=c><h3>8. 3D ring carousel</h3><div class="st e8"><div class=ring><div><img src="/assets/badminton4.jpg" alt=""></div><div><img src="/assets/products/pickleball.webp" alt=""></div><div><img src="/assets/products/floodlights.webp" alt=""></div><div><img src="/assets/products/basketball.webp" alt=""></div></div></div></div><div class=c><h3>9. Sliding strips, alternate directions</h3><div class="st e9"><div class=row><div class=in><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""></div></div><div class=row><div class=in><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""></div></div><div class=row><div class=in><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""><img src="/assets/badminton4.jpg" alt=""></div></div><div class=row><div class=in><img src="/assets/products/basketball.webp" alt=""><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""></div></div></div></div><div class=c><h3>10. Framed photos hanging and swaying</h3><div class="st e10"><div class=fr><div class=pic><img src="/assets/badminton4.jpg" alt=""></div></div><div class=fr><div class=pic><img src="/assets/products/pickleball.webp" alt=""></div></div><div class=fr><div class=pic><img src="/assets/products/floodlights.webp" alt=""></div></div><div class=fr><div class=pic><img src="/assets/products/basketball.webp" alt=""></div></div></div></div><div class=c><h3>11. Book pages turning</h3><div class="st e11"><div class=bk><div class=base><img src="/assets/products/basketball.webp" alt=""></div><div class=pg><div class=f><img src="/assets/badminton4.jpg" alt=""></div><div class=b><img src="/assets/products/pickleball.webp" alt=""></div></div><div class=pg><div class=f><img src="/assets/products/pickleball.webp" alt=""></div><div class=b><img src="/assets/products/floodlights.webp" alt=""></div></div><div class=pg><div class=f><img src="/assets/products/floodlights.webp" alt=""></div><div class=b><img src="/assets/products/basketball.webp" alt=""></div></div><div class=pg><div class=f><img src="/assets/products/basketball.webp" alt=""></div><div class=b><img src="/assets/badminton4.jpg" alt=""></div></div></div></div></div><div class=c><h3>12. Horizontal rows expanding</h3><div class="st e12"><div class=k><img src="/assets/badminton4.jpg" alt=""></div><div class=k><img src="/assets/products/pickleball.webp" alt=""></div><div class=k><img src="/assets/products/floodlights.webp" alt=""></div><div class=k><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>13. Retro TV with scanlines and glitch</h3><div class="st e13"><div class=tv><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>14. Camera lens with dashed ring</h3><div class="st e14"><div class=ap></div><div class=lens><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>15. Wave of four tall tiles</h3><div class="st e15"><div class=k><img src="/assets/badminton4.jpg" alt=""></div><div class=k><img src="/assets/products/pickleball.webp" alt=""></div><div class=k><img src="/assets/products/floodlights.webp" alt=""></div><div class=k><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>16. Overlapping circles</h3><div class="st e16"><div class=cc><img src="/assets/badminton4.jpg" alt=""></div><div class=cc><img src="/assets/products/pickleball.webp" alt=""></div><div class=cc><img src="/assets/products/floodlights.webp" alt=""></div><div class=cc><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>17. Panels sliding in from four sides</h3><div class="st e17"><div class=p><img src="/assets/badminton4.jpg" alt=""></div><div class=p><img src="/assets/products/pickleball.webp" alt=""></div><div class=p><img src="/assets/products/floodlights.webp" alt=""></div><div class=p><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>18. Wave ribbons of one photo</h3><div class="st e18"><div class=ri><img src="/assets/badminton4.jpg" alt=""></div><div class=ri><img src="/assets/badminton4.jpg" alt=""></div><div class=ri><img src="/assets/badminton4.jpg" alt=""></div><div class=ri><img src="/assets/badminton4.jpg" alt=""></div></div></div><div class=c><h3>19. Phone mockup slideshow</h3><div class="st e19"><div class="sd s1"><img src="/assets/products/pickleball.webp" alt=""></div><div class="sd s2"><img src="/assets/products/floodlights.webp" alt=""></div><div class=dv><img src="/assets/badminton4.jpg" alt=""><img src="/assets/products/pickleball.webp" alt=""><img src="/assets/products/floodlights.webp" alt=""><img src="/assets/products/basketball.webp" alt=""></div></div></div><div class=c><h3>20. Pinwheel of four triangles</h3><div class="st e20"><div class=pw><div><img src="/assets/badminton4.jpg" alt=""></div><div><img src="/assets/products/pickleball.webp" alt=""></div><div><img src="/assets/products/floodlights.webp" alt=""></div><div><img src="/assets/products/basketball.webp" alt=""></div></div></div></div></div>
