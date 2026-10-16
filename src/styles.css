@@ -2566,3 +2566,23 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 @media (max-width:680px){.fp-sign{left:auto;right:16px;bottom:12px;font-size:2.2rem}.fp-front{z-index:5}.fp-back{z-index:3}.fp-front::after{z-index:1}}
 @media (max-width:680px){.fp-front{z-index:2}.fp-back{z-index:3}}
+
+/* founder on phones, final: portrait photo with an offset patterned card behind it */
+@media (max-width:680px){
+  .founder-photo{max-width:286px;margin:0 auto;padding:0 14px 14px 0}
+  .fp{overflow:visible;border-radius:0;box-shadow:none;aspect-ratio:4/5;height:auto}
+  .fp-back{display:none!important}
+  .fp::after{display:none}
+  /* the card behind: green outline, navy gradient, faint court lines and a dotted corner */
+  .fp::before{content:"";position:absolute;inset:16px -14px -14px 16px;z-index:0;border-radius:22px;border:2px solid #7AD680;
+    background:
+      radial-gradient(circle,rgba(122,214,128,.55) 1.4px,transparent 1.8px) right 14px bottom 14px/14px 14px no-repeat,
+      linear-gradient(90deg,transparent calc(50% - 1px),rgba(255,255,255,.12) 50%,transparent calc(50% + 1px)),
+      linear-gradient(0deg,transparent calc(30% - 1px),rgba(255,255,255,.12) 30%,transparent calc(30% + 1px)),
+      linear-gradient(0deg,transparent calc(70% - 1px),rgba(255,255,255,.12) 70%,transparent calc(70% + 1px)),
+      linear-gradient(160deg,#3564AE,#0E2447)}
+  .fp-front{z-index:2;border-radius:22px;overflow:hidden;box-shadow:0 22px 34px -16px rgba(0,0,0,.85)}
+  .fp-front::after{z-index:1}
+  .fp-sign{left:auto;right:16px;bottom:12px;z-index:3}
+}
+@media (max-width:680px){.founder-photo{max-width:292px;padding:0 24px 24px 0}.fp::before{inset:24px -24px -24px 24px;border-radius:24px}}
