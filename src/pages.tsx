@@ -1,7 +1,7 @@
 import { Brochure } from './components/Tools'
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Phone } from 'lucide-react'
 import Hero from './components/Hero'
 import {
   About, Certifications, Contact, FAQ, Head, Network, Products, Reach, Testimonials, Videos,
@@ -89,8 +89,8 @@ function CtaBand() {
       <div className="container cta-in">
         <h2>{t('Hear from the experts in badminton court flooring and construction.')}</h2>
         <div className="cta-actions">
-          <Link to="/contact" className="btn btn-primary">{t('Get a call back')} <ArrowRight size={18} /></Link>
-          <a href={`tel:${CONTACT.phone}`} className="btn btn-outline-light">{t('Call')} {CONTACT.phone}</a>
+          <Link to="/contact" className="cta-main"><span>{t('Get a call back')}</span><i><ArrowRight size={18} /></i></Link>
+          <a href={`tel:${CONTACT.phone}`} className="cta-call"><i><Phone size={17} /></i><span><small>{t('Call')}</small><b>{CONTACT.phone}</b></span></a>
         </div>
       </div>
     </section>

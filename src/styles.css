@@ -2517,3 +2517,22 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .wa-fab{bottom:20px}
 }
 @media (min-width:681px){.wa-fab{bottom:20px}}
+
+/* call-to-action band: a green pill with a sliding arrow disc, and a glass call chip with a pulsing phone */
+.cta-actions{align-items:center;gap:1rem}
+.cta-main{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:1.1rem;padding:.45rem .45rem .45rem 1.7rem;border-radius:99px;background:linear-gradient(120deg,#4DB354,#2F7F35);color:#fff;font-weight:700;font-size:1rem;box-shadow:0 14px 30px -12px rgba(63,158,69,.9),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .3s,box-shadow .3s}
+.cta-main::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s}
+.cta-main i{width:44px;height:44px;border-radius:50%;background:#fff;color:#2F7F35;display:grid;place-items:center;transition:transform .35s}
+.cta-main:hover{transform:translateY(-3px);box-shadow:0 20px 34px -12px rgba(63,158,69,1),inset 0 1px 0 rgba(255,255,255,.35)}
+.cta-main:hover::after{left:130%}
+.cta-main:hover i{transform:translateX(4px) rotate(-45deg)}
+.cta-call{display:inline-flex;align-items:center;gap:.9rem;padding:.45rem 1.6rem .45rem .45rem;border-radius:99px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);color:#fff;transition:background .3s,border-color .3s,transform .3s}
+.cta-call i{position:relative;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;color:#7AD680}
+.cta-call i::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #7AD680;animation:cta-ring 2s ease-out infinite}
+.cta-call span{display:grid;line-height:1.15;text-align:left}
+.cta-call small{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.cta-call b{font-size:1.05rem;font-weight:700;letter-spacing:.01em}
+.cta-call:hover{background:rgba(255,255,255,.16);border-color:#7AD680;transform:translateY(-3px)}
+@keyframes cta-ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+@media (max-width:680px){.cta-main,.cta-call{width:100%;justify-content:space-between}.cta-call{justify-content:flex-start}.cta-main{padding-left:1.4rem}}
+@media (prefers-reduced-motion:reduce){.cta-call i::after{animation:none}}
