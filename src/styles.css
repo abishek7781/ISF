@@ -2836,3 +2836,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 /* entry popup: selects get a properly inset arrow; the form card gets a border line */
 .entry-card .entry-form{border:2px solid #3F9E45;box-shadow:0 18px 40px -8px rgba(0,0,0,.6),0 0 0 5px rgba(255,255,255,.18)}
 .entry-card .cform select{-webkit-appearance:none;appearance:none;padding-right:2.4rem!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230E2447' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 1rem center!important;background-size:14px!important}
+
+/* border moves from the form card to the photo card: a fine white edge and an inset frame line */
+.entry-card .entry-form{border:0;box-shadow:0 18px 40px -8px rgba(0,0,0,.6)}
+.entry-card{box-shadow:0 40px 80px -20px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.55),0 0 0 4px rgba(14,36,71,.55)}
+.entry-card::after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.4);border-radius:12px;pointer-events:none;z-index:0}
