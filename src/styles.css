@@ -2755,3 +2755,9 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.82) 0 34%,rgba(255,255,255,.7) 34% 66%,rgba(19,136,8,.85) 66% 100%);-webkit-background-clip:text;background-clip:text}
 }
 @media (max-width:680px){.foot-m{background:linear-gradient(160deg,#071327,#16356b)}}
+/* footer gradient drifts slowly */
+@media (max-width:680px){
+  .foot-m{background:linear-gradient(135deg,#071327 0%,#16356b 35%,#0b2a5c 60%,#071327 100%);background-size:260% 260%;animation:foot-drift 9s ease-in-out infinite alternate}
+}
+@keyframes foot-drift{0%{background-position:0% 20%}100%{background-position:100% 80%}}
+@media (prefers-reduced-motion:reduce){.foot-m{animation:none}}
