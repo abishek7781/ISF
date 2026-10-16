@@ -2536,3 +2536,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @keyframes cta-ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
 @media (max-width:680px){.cta-main,.cta-call{width:100%;justify-content:space-between}.cta-call{justify-content:flex-start}.cta-main{padding-left:1.4rem}}
 @media (prefers-reduced-motion:reduce){.cta-call i::after{animation:none}}
+
+/* founder on phones: a full-width rounded portrait with the signature on it, no polaroid stack */
+@media (max-width:680px){
+  .ab-founder{min-height:0;display:block;padding:68px 0 32px}
+  .founder-grid{gap:1rem}
+  .founder-photo{max-width:none;width:100%;margin:0}
+  .fp{transform:none;aspect-ratio:auto;width:100%;height:min(40svh,360px);border-radius:20px;overflow:hidden;box-shadow:0 24px 40px -22px rgba(0,0,0,.8)}
+  .fp-back,.fp-tape{display:none}
+  .fp-front{left:0;top:0;width:100%;height:100%;transform:none;padding:0;background:none;box-shadow:none}
+  .fp:hover .fp-front{transform:none}
+  .founder-photo .fp-front img{border-radius:0;object-position:50% 14%}
+  .fp-front::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,rgba(6,14,28,.82))}
+  .fp-sign{left:18px;right:auto;bottom:12px;z-index:2;font-size:2.4rem;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+  .founder-name{display:none}
+}
