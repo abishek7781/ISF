@@ -689,7 +689,7 @@ const TIME_SLOTS = Array.from({ length: 15 }, (_, i) => { const mins = 600 + i *
 const slotLabel = (v: string) => { const [h, m] = v.split(':').map(Number); return `${h % 12 === 0 ? 12 : h % 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}` }
 
 export function ContactForm() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const [params] = useSearchParams()
   const asked = params.get('project') || ''
   const [project, setProject] = useState(ZOHO.projectTypes.includes(asked) ? asked : '')
@@ -744,7 +744,8 @@ export function ContactForm() {
     setStatus('sending')
     try {
       await postLead(fields)
-      setMessage(t('Thank you. Our team will call you back at your preferred time.'))
+      const when = new Date(Number(y), Number(mo) - 1, Number(day)).toLocaleDateString(lang === 'en' ? 'en-IN' : lang, { weekday: 'long', day: 'numeric', month: 'long' })
+      setMessage(`${t('Thank you. We will call you on')} ${when}, ${time}.`)
       setStatus('done')
       form.reset()
       setProject(''); setDate(''); setTime(''); setCode('+91'); setOptIn(false)
@@ -792,7 +793,7 @@ export function ContactForm() {
       </button>
       <p className="ct-note">{t('Calls are made Monday to Saturday. Sundays are closed.')}</p>
       {problem && <p className="err" role="alert">{problem}</p>}
-      {status === 'done' && <p className="ok" role="status"><Check size={16} /> {message}</p>}
+      {status === 'done' && <p className="ok ok-big" role="status"><i><Check size={18} /></i><span>{message}</span></p>}
       {status === 'error' && <p className="err" role="alert">{t('Something went wrong. Please call us on')} {CONTACT.phone} {t('or try again.')}</p>}
     </form>
   )

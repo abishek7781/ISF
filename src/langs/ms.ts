@@ -106,6 +106,7 @@ export const MS: Record<string, string> = {
   "Please choose a date for the call. Sundays are closed.": "Sila pilih tarikh untuk panggilan. Hari Ahad ditutup.",
   "Please choose a time between 10:00 AM and 5:00 PM.": "Sila pilih masa antara 10:00 pagi dan 5:00 petang.",
   "Thank you. Our team will call you back at your preferred time.": "Terima kasih. Pasukan kami akan menghubungi anda pada masa pilihan anda.",
+  "Thank you. We will call you on": "Terima kasih. Kami akan menghubungi anda pada",
   "Hear from the experts in badminton court flooring and construction. Calls are made Monday to Saturday, 10:00 AM to 5:00 PM.": "Dengar daripada pakar lantai dan pembinaan gelanggang badminton. Panggilan dibuat Isnin hingga Sabtu, 10:00 pagi hingga 5:00 petang.",
   "Project type": "Jenis projek",
   "Project Type": "Jenis Projek",

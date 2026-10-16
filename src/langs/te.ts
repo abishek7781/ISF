@@ -106,6 +106,7 @@ export const TE: Record<string, string> = {
   "Please choose a date for the call. Sundays are closed.": "కాల్ కోసం తేదీని ఎంచుకోండి. ఆదివారం సెలవు.",
   "Please choose a time between 10:00 AM and 5:00 PM.": "ఉదయం 10:00 నుండి సాయంత్రం 5:00 మధ్య సమయాన్ని ఎంచుకోండి.",
   "Thank you. Our team will call you back at your preferred time.": "ధన్యవాదాలు. మీకు నచ్చిన సమయంలో మా బృందం మీకు కాల్ చేస్తుంది.",
+  "Thank you. We will call you on": "ధన్యవాదాలు. మేము మీకు కాల్ చేస్తాము:",
   "Hear from the experts in badminton court flooring and construction. Calls are made Monday to Saturday, 10:00 AM to 5:00 PM.": "బ్యాడ్మింటన్ కోర్టు ఫ్లోరింగ్, నిర్మాణంలో నిపుణుల నుండి వినండి. కాల్స్ సోమవారం నుండి శనివారం, ఉదయం 10:00 నుండి సాయంత్రం 5:00 వరకు.",
   "Project type": "ప్రాజెక్ట్ రకం",
   "Project Type": "ప్రాజెక్ట్ రకం",

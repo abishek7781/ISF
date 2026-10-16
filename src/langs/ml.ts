@@ -106,6 +106,7 @@ export const ML: Record<string, string> = {
   "Please choose a date for the call. Sundays are closed.": "കോളിനായി ഒരു തീയതി തിരഞ്ഞെടുക്കൂ. ഞായറാഴ്ച അവധി.",
   "Please choose a time between 10:00 AM and 5:00 PM.": "രാവിലെ 10:00 മുതൽ വൈകിട്ട് 5:00 വരെയുള്ള സമയം തിരഞ്ഞെടുക്കൂ.",
   "Thank you. Our team will call you back at your preferred time.": "നന്ദി. നിങ്ങൾ ഇഷ്ടപ്പെട്ട സമയത്ത് ഞങ്ങളുടെ ടീം നിങ്ങളെ വിളിക്കും.",
+  "Thank you. We will call you on": "നന്ദി. ഞങ്ങൾ നിങ്ങളെ വിളിക്കും:",
   "Hear from the experts in badminton court flooring and construction. Calls are made Monday to Saturday, 10:00 AM to 5:00 PM.": "ബാഡ്മിന്റൺ കോർട്ട് ഫ്ലോറിങ്ങിലും നിർമാണത്തിലും വിദഗ്ധരിൽ നിന്ന് കേൾക്കൂ. കോളുകൾ തിങ്കൾ മുതൽ ശനി വരെ, രാവിലെ 10:00 മുതൽ വൈകിട്ട് 5:00 വരെ.",
   "Project type": "പ്രോജക്ട് തരം",
   "Project Type": "പ്രോജക്ട് തരം",

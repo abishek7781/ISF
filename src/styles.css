@@ -2862,3 +2862,10 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .svc-sec{padding:44px 0 28px}
   #faq.section{padding:44px 0 24px}
 }
+
+/* lead sent: a clear confirmation with the chosen call time */
+.ok-big{align-items:flex-start;gap:.7rem;padding:.8rem .9rem;border-radius:12px;background:rgba(63,158,69,.12);border:1px solid rgba(63,158,69,.45);font-weight:600;line-height:1.35;animation:ok-pop .45s cubic-bezier(.2,.9,.3,1) both}
+.ok-big i{flex:none;width:26px;height:26px;border-radius:50%;background:#3F9E45;color:#fff;display:grid;place-items:center}
+.entry-card .cform .ok-big,.cform .ok-big{color:#14213d}
+.contact-sec .cform .ok-big{color:#fff}
+@keyframes ok-pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}

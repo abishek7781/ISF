@@ -106,6 +106,7 @@ export const TA: Record<string, string> = {
   "Please choose a date for the call. Sundays are closed.": "அழைப்புக்கான தேதியைத் தேர்ந்தெடுக்கவும். ஞாயிறு விடுமுறை.",
   "Please choose a time between 10:00 AM and 5:00 PM.": "காலை 10:00 முதல் மாலை 5:00 வரை ஒரு நேரத்தைத் தேர்ந்தெடுக்கவும்.",
   "Thank you. Our team will call you back at your preferred time.": "நன்றி. உங்கள் விருப்ப நேரத்தில் எங்கள் குழு உங்களை அழைக்கும்.",
+  "Thank you. We will call you on": "நன்றி. நாங்கள் உங்களை அழைப்போம்:",
   "Hear from the experts in badminton court flooring and construction. Calls are made Monday to Saturday, 10:00 AM to 5:00 PM.": "பேட்மிண்டன் கோர்ட் தரைத்தளம் மற்றும் கட்டுமான நிபுணர்களிடமிருந்து கேளுங்கள். அழைப்புகள் திங்கள் முதல் சனி வரை, காலை 10:00 முதல் மாலை 5:00 வரை செய்யப்படும்.",
   "Project type": "திட்ட வகை",
   "Project Type": "திட்ட வகை",

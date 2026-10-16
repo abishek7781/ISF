@@ -112,6 +112,7 @@ export function Brochure() {
       Phone: `${code}${asciiDigits(d.phone).replace(/\D/g, '').replace(/^0+/, '')}`,
       LEADCF4: ZOHO.brochureType,
       LEADCF5: 'Brochure download',
+      'Lead Source': 'Web Download',
     }
     setStatus('sending')
     try {

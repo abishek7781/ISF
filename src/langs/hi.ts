@@ -106,6 +106,7 @@ export const HI: Record<string, string> = {
   "Please choose a date for the call. Sundays are closed.": "कृपया कॉल के लिए तारीख़ चुनें। रविवार को अवकाश रहता है।",
   "Please choose a time between 10:00 AM and 5:00 PM.": "कृपया सुबह 10:00 से शाम 5:00 के बीच का समय चुनें।",
   "Thank you. Our team will call you back at your preferred time.": "धन्यवाद। हमारी टीम आपके पसंदीदा समय पर आपको कॉल करेगी।",
+  "Thank you. We will call you on": "धन्यवाद। हम आपको कॉल करेंगे:",
   "Hear from the experts in badminton court flooring and construction. Calls are made Monday to Saturday, 10:00 AM to 5:00 PM.": "बैडमिंटन कोर्ट फ़्लोरिंग और निर्माण के विशेषज्ञों से सुनें। कॉल सोमवार से शनिवार, सुबह 10:00 से शाम 5:00 बजे तक की जाती हैं।",
   "Project type": "प्रोजेक्ट का प्रकार",
   "Project Type": "प्रोजेक्ट का प्रकार",

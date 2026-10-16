@@ -40,3 +40,4 @@ export function postLead(fields: Record<string, string>): Promise<void> {
     window.setTimeout(() => finish(false), 10000)
   })
 }
+
