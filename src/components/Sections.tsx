@@ -696,7 +696,7 @@ function Island({ message, onDone }: { message: string; onDone: () => void }) {
   }, [onDone])
   return createPortal(
     <div className="island" role="status" onClick={onDone}>
-      <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12.5l4.2 4.2L18.5 8" /></svg></i><span>{message}</span>
+      <div className="island-in"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12.5l4.2 4.2L18.5 8" /></svg></i><span>{message}</span></div>
     </div>,
     document.body,
   )
