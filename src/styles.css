@@ -2885,3 +2885,10 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 @keyframes island-tx{0%,26%{opacity:0}34%,88%{opacity:1}94%,100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.island,.island span{animation:none;width:min(92vw,400px);height:62px;opacity:1}}
+
+/* the tick pops in as the capsule finishes widening, then draws itself, then fades with the text */
+.island i{animation:island-disc 6.5s cubic-bezier(.3,1.5,.5,1) both}
+.island i svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:20;stroke-dashoffset:20;animation:island-tick 6.5s ease both}
+@keyframes island-disc{0%,24%{transform:scale(0);opacity:0}32%{transform:scale(1.18);opacity:1}37%,90%{transform:scale(1);opacity:1}95%,100%{transform:scale(0);opacity:0}}
+@keyframes island-tick{0%,32%{stroke-dashoffset:20}44%,100%{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.island i,.island i svg{animation:none;stroke-dashoffset:0;transform:none;opacity:1}}
