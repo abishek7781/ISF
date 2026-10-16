@@ -283,7 +283,6 @@ export function Products() {
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (!e.isIntersecting) return
       const g = e.target as HTMLElement
-      if (g.scrollLeft > 20) return
       g.classList.remove('nudge')
       void g.offsetWidth
       g.classList.add('nudge')
