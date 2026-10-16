@@ -2691,3 +2691,9 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .visit-side .visit-act{display:flex!important;flex-wrap:wrap;align-items:center}
 }
 @media (max-width:680px){.visit-side .visit-alt{display:none!important}}
+/* the address sheet is frosted glass in the same navy */
+@media (max-width:900px){
+  .visit-side{background:rgba(15,34,64,.58)!important;-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);border-top:1px solid rgba(255,255,255,.28)!important;box-shadow:0 -14px 34px -12px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18)!important}
+  .visit-side .visit-card p{color:#E1E9F6!important}
+}
+@media (max-width:900px){.visit-side{background:rgba(15,34,64,.7)!important}}
