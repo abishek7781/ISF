@@ -2955,3 +2955,13 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .figure dt{flex:none;min-width:80px}
   .figure dd{text-align:left;max-width:none}
 }
+/* phones: balanced 2 x 2 grid, odometer centred above its label */
+@media (max-width:680px){
+  .figures{grid-template-columns:1fr 1fr!important;gap:10px;border-top:0!important;margin-top:1.2rem}
+  .figure,.figure:first-child,.figure:nth-child(n+3){flex-direction:column;justify-content:center;align-items:center;gap:.6rem;padding:1rem .5rem;text-align:center;border:1px solid #223150;border-radius:14px;background:linear-gradient(160deg,#121b2d,#0c1424)}
+  .figure dt{min-width:0;display:flex;justify-content:center}
+  .figure dd{text-align:center;max-width:none}
+  .figure dd strong{font-size:.78rem;letter-spacing:.02em}
+  .od-row{justify-content:center}
+  .od-d{width:20px;height:34px}.od-d em{height:34px;font-size:1.15rem}.od-s{width:16px;height:34px;font-size:1.15rem}
+}
