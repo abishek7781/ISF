@@ -273,6 +273,23 @@ const LANES: { img: string; label: string; desc: string; to: string; pos?: strin
 export function Products() {
   const { t } = useI18n()
   const [act, setAct] = useState<number | null>(null)
+  const pgRef = useRef<HTMLElement>(null)
+  // phones: when a product row scrolls into view, nudge it left and back to show it can be swiped
+  useEffect(() => {
+    if (!window.matchMedia('(max-width: 680px)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const grids = pgRef.current?.querySelectorAll<HTMLElement>('.pg-grid')
+    if (!grids?.length) return
+    const timers: number[] = []
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return
+      const g = e.target as HTMLElement
+      io.unobserve(g)
+      g.classList.add('nudge')
+      timers.push(window.setTimeout(() => g.classList.remove('nudge'), 1900))
+    }), { threshold: 0.7 })
+    grids.forEach((g) => io.observe(g))
+    return () => { io.disconnect(); timers.forEach(clearTimeout) }
+  }, [])
   const heading = t('Everything a sports venue needs, from the floor up.').split(' ')
   return (
     <>
@@ -307,7 +324,7 @@ export function Products() {
         </div>
       </div>
     </section>
-    <section id="products" className="pg">
+    <section id="products" className="pg" ref={pgRef}>
       <div className="container">
         {CAPABILITIES.map((c, i) => (
           <div key={c.key} id={c.key} className="pg-group">

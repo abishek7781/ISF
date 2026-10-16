@@ -2795,3 +2795,10 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .cta-actions{width:100%}
   .cta-call{margin-left:auto}
 }
+
+/* products (phone): one-time swipe hint */
+@media (max-width:680px){
+  .pg-grid.nudge{scroll-snap-type:none}
+  .pg-grid.nudge .pg-card{animation:pg-nudge 1.6s cubic-bezier(.45,0,.25,1) 1}
+  @keyframes pg-nudge{0%,100%{transform:translateX(0)}35%,55%{transform:translateX(-46px)}}
+}
