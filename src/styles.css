@@ -2628,3 +2628,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   #contact .send-btn{height:52px;margin-top:.4rem}
   #contact .ct-note{margin-top:.2rem}
 }
+
+/* contact card on phones: compact and thumb-friendly */
+@media (max-width:680px){
+  #contact .cform{width:min(calc(100% - 32px),340px);padding:1.3rem 1.1rem 1.4rem;gap:.6rem}
+  #contact .cform h3{font-size:1.3rem;margin-bottom:0}
+  #contact .cform .cform-sub{display:none}
+  #contact .cform .field input,#contact .cform .field select,#contact .cform .dp-trigger{height:44px!important;font-size:.9rem}
+  #contact .cform .row{grid-template-columns:1fr 1fr;gap:.5rem}
+  #contact .cform .row select,#contact .cform .row .dp-trigger{font-size:.82rem;padding-left:.7rem!important}
+  #contact .phone-field{grid-template-columns:104px 1fr}
+  #contact .opt-in{font-size:.78rem}
+  #contact .send-btn{height:46px;margin-top:.2rem}
+  #contact .ct-note{display:none}
+}
+@media (max-width:680px){#contact .cform{padding-top:1.6rem}#contact .cform h3{padding-right:2.6rem}}
