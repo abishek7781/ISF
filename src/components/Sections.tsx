@@ -688,6 +688,20 @@ export const COUNTRY_CODES = [['+91', 'India'], ['+1', 'USA / Canada'], ['+44', 
 const TIME_SLOTS = Array.from({ length: 15 }, (_, i) => { const mins = 600 + i * 30; return `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}` })
 const slotLabel = (v: string) => { const [h, m] = v.split(':').map(Number); return `${h % 12 === 0 ? 12 : h % 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}` }
 
+/** Thank-you notice that drops out of the top of the screen like a phone's dynamic island, then tucks away again. */
+function Island({ message, onDone }: { message: string; onDone: () => void }) {
+  useEffect(() => {
+    const id = window.setTimeout(onDone, 6500)
+    return () => clearTimeout(id)
+  }, [onDone])
+  return createPortal(
+    <div className="island" role="status" onClick={onDone}>
+      <i><Check size={16} strokeWidth={3} /></i><span>{message}</span>
+    </div>,
+    document.body,
+  )
+}
+
 export function ContactForm() {
   const { t, lang } = useI18n()
   const [params] = useSearchParams()
@@ -745,7 +759,7 @@ export function ContactForm() {
     try {
       await postLead(fields)
       const when = new Date(Number(y), Number(mo) - 1, Number(day)).toLocaleDateString(lang === 'en' ? 'en-IN' : lang, { weekday: 'long', day: 'numeric', month: 'long' })
-      setMessage(`${t('Thank you. We will call you on')} ${when}, ${time}.`)
+      setMessage(`${t('Thank you. We will call you on')} ${when}, ${tz.hour}:${tz.minute} ${tz.ampm}.`)
       setStatus('done')
       form.reset()
       setProject(''); setDate(''); setTime(''); setCode('+91'); setOptIn(false)
@@ -793,7 +807,7 @@ export function ContactForm() {
       </button>
       <p className="ct-note">{t('Calls are made Monday to Saturday. Sundays are closed.')}</p>
       {problem && <p className="err" role="alert">{problem}</p>}
-      {status === 'done' && <p className="ok ok-big" role="status"><i><Check size={18} /></i><span>{message}</span></p>}
+      {status === 'done' && <Island message={message} onDone={() => setStatus('idle')} />}
       {status === 'error' && <p className="err" role="alert">{t('Something went wrong. Please call us on')} {CONTACT.phone} {t('or try again.')}</p>}
     </form>
   )
