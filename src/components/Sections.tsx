@@ -852,7 +852,23 @@ export function Footer() {
   const soc = { Facebook, YouTube: Youtube, Instagram, LinkedIn: Linkedin } as const
   return (
     <footer className="footer">
-      <div className="container">
+      <div className="foot-m">
+        <div className="foot-m-word" aria-label="India Sports Infra"><span>INDIA</span><span>SPORTS</span><span className="g">INFRA</span></div>
+        <div className="foot-m-row">
+          <div className="foot-m-soc">
+            {(Object.keys(soc) as (keyof typeof soc)[]).map((k) => {
+              const I = soc[k]
+              return <a key={k} href={CONTACT.social[k]} target="_blank" rel="noreferrer" aria-label={k}><I size={18} /></a>
+            })}
+          </div>
+          <button type="button" className="foot-m-top" aria-label={t('Back to top')} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><ArrowUp size={18} /></button>
+        </div>
+        <div className="foot-m-info">
+          <div><a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a><small>{t('Chennai, India')}</small></div>
+          <div className="r"><span>© 2026</span><Link to="/privacy">{t('Privacy Policy')}</Link></div>
+        </div>
+      </div>
+      <div className="container foot-desk">
         <div className="foot-grid">
           <div className="foot-brand">
             <img src={A('logo-dark.webp')} alt="India Sports Infra" width="900" height="344" />
