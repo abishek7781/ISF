@@ -2832,3 +2832,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .entry-card .entry-photo h2{font-size:2.7rem;max-width:12ch}
   .entry-card .cform{padding:1.5rem 1.6rem 1.3rem}
 }
+
+/* entry popup: selects get a properly inset arrow; the form card gets a border line */
+.entry-card .entry-form{border:2px solid #3F9E45;box-shadow:0 18px 40px -8px rgba(0,0,0,.6),0 0 0 5px rgba(255,255,255,.18)}
+.entry-card .cform select{-webkit-appearance:none;appearance:none;padding-right:2.4rem!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230E2447' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 1rem center!important;background-size:14px!important}
