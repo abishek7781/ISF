@@ -2928,3 +2928,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .island-in{position:static;transform:none;width:auto;display:contents}
   .island-in span{flex:none}
 }
+
+/* phones/tablets: form fields are at least 16px, so iOS and Android do not zoom the page when a field is focused */
+@media (max-width:1080px){
+  input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}
+}
