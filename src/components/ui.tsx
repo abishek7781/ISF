@@ -29,6 +29,28 @@ export function Counter({ to, suffix = '', duration = 1800 }: { to: number; suff
   return <span ref={ref}>{v.toLocaleString('en-IN')}{suffix}</span>
 }
 
+/** Phone version of a counter: every digit sits in its own box and rolls like a car odometer when it scrolls into view. */
+export function Odometer({ to, suffix = '' }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const on = useInView(ref, { once: true })
+  const text = String(to)
+  return (
+    <span className="od" ref={ref}>
+      <span className="sr">{to}{suffix}</span>
+      <span aria-hidden="true" className="od-row">
+        {text.split('').map((c, i) => (
+          <i key={i} className="od-d">
+            <b style={{ transform: on ? `translateY(-${Number(c) * 10}%)` : undefined, transitionDelay: `${i * 0.12}s` }}>
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => <em key={n}>{n}</em>)}
+            </b>
+          </i>
+        ))}
+        {suffix && <i className="od-s">{suffix}</i>}
+      </span>
+    </span>
+  )
+}
+
 export function SectionHead({ eyebrow, title, text, center = true }: { eyebrow: string; title: ReactNode; text?: string; center?: boolean }) {
   return (
     <Reveal className={`section-head ${center ? 'center' : ''}`}>

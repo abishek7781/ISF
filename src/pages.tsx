@@ -6,7 +6,7 @@ import Hero from './components/Hero'
 import {
   About, Certifications, Contact, FAQ, Head, Network, Products, Reach, Testimonials, Videos,
 } from './components/Sections'
-import { Counter, Reveal } from './components/ui'
+import { Counter, Odometer, Reveal } from './components/ui'
 import { useI18n } from './i18n'
 import { A, CLIENTS, CONTACT, OUR_SERVICES, PARTNERS, STATS } from './data/content'
 
@@ -44,7 +44,7 @@ function Intro() {
         <dl className="figures">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08} className="figure">
-              <dt><Counter to={s.value} suffix={s.suffix} /></dt>
+              <dt><span className="fig-n"><Counter to={s.value} suffix={s.suffix} /></span><Odometer to={s.value} suffix={s.suffix} /></dt>
               <dd><strong>{t(s.label)}</strong><span>{t(s.note)}</span></dd>
             </Reveal>
           ))}

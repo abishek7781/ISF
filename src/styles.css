@@ -2933,3 +2933,20 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @media (max-width:1080px){
   input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}
 }
+
+/* stats: odometer digits on phones (desktop keeps the large counting numbers) */
+.od{display:none}
+@media (max-width:680px){
+  .fig-n{display:none}
+  .od{display:block}
+  .od-row{display:flex;gap:3px}
+  .od-d{position:relative;display:block;width:30px;height:44px;border-radius:6px;overflow:hidden;background:linear-gradient(#1c2740 49%,#0a1120 50%,#162036);box-shadow:inset 0 0 0 1px #2a3d66,0 4px 10px -4px rgba(0,0,0,.6)}
+  .od-d::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.55);z-index:2}
+  .od-d b{display:block;transition:transform 1.5s cubic-bezier(.2,.8,.2,1)}
+  .od-d em{display:grid;place-items:center;height:44px;font-style:normal;font:900 1.5rem var(--head);color:#fff}
+  .od-s{display:grid;place-items:center;width:24px;height:44px;font:900 1.5rem var(--head);font-style:normal;color:#6DBB72}
+  .figures{grid-template-columns:1fr!important;margin-top:1.4rem;border-top:2px solid var(--green)}
+  .figure,.figure:first-child,.figure:nth-child(n+3){display:flex;align-items:center;justify-content:space-between;gap:12px;padding:.7rem 0;margin:0;border-left:0;border-bottom:1px solid var(--line)}
+  .figure dd{margin:0;text-align:right;max-width:46%}
+  .figure dd strong{font-size:.86rem}
+}
