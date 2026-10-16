@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section id="home" className="hero">
       <div className="hero-media" aria-hidden="true">
-        <img src={A('badminton4-hd.webp')} alt="" fetchPriority="high" />
+        <img src={A('skating.webp')} alt="" fetchPriority="high" />
         <iframe title="ISF showreel" tabIndex={-1} className={playing ? 'on' : ''}
           onLoad={(e) => e.currentTarget.contentWindow?.postMessage(JSON.stringify({ event: 'listening' }), '*')}
           src="https://www.youtube-nocookie.com/embed/QskICZm-AD0?autoplay=1&mute=1&loop=1&playlist=QskICZm-AD0&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1"
