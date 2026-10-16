@@ -2965,3 +2965,9 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .od-row{justify-content:center}
   .od-d{width:20px;height:34px}.od-d em{height:34px;font-size:1.15rem}.od-s{width:16px;height:34px;font-size:1.15rem}
 }
+
+/* tablets and phones: the Assemble / Explode button sits in the top-left corner, clear of the 3D layers */
+@media (max-width:1080px){
+  .bd-view .bd-toggle{left:16px!important;right:auto!important;top:12px!important;bottom:auto!important;z-index:3}
+  .bd-view .bd-hint,.bd-screen.rev .bd-view .bd-hint,.bd-screen.wide .bd-view .bd-hint{top:16px!important;bottom:auto!important;right:16px!important;left:auto!important}
+}
