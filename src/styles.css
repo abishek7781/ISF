@@ -2614,3 +2614,17 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .cta-actions{flex-direction:column;align-items:flex-start;width:auto}
   .cta-main,.cta-call{width:auto;justify-content:flex-start}
 }
+
+/* contact card: a real folded corner (paper flap with a soft shadow) */
+.contact-sec .cform::after{content:"";position:absolute;top:0;right:0;width:0;height:0;z-index:1;pointer-events:none;border-bottom:52px solid #A8E3AD;border-right:52px solid transparent;filter:drop-shadow(-3px 4px 3px rgba(0,0,0,.38));
+  -webkit-mask:linear-gradient(135deg,#000 40%,rgba(0,0,0,.78))}
+/* the flap's far edge catches light */
+.contact-sec .cform .cform-fold{display:none}
+@media (max-width:680px){
+  #contact .cform{width:min(calc(100% - 44px),330px);margin-inline:auto;padding:2rem 1.3rem 2.3rem;gap:1rem}
+  #contact .cform h3{font-size:1.5rem;margin-bottom:.2rem}
+  #contact .cform .cform-sub{display:block;font-size:.84rem;line-height:1.5;margin-bottom:.4rem}
+  #contact .cform .field input,#contact .cform .field select,#contact .cform .dp-trigger{height:50px!important}
+  #contact .send-btn{height:52px;margin-top:.4rem}
+  #contact .ct-note{margin-top:.2rem}
+}
