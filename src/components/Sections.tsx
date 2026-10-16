@@ -255,7 +255,7 @@ export function About() {
           <Reveal>
             <span className="ab-kicker">{t('Our vision')}</span>
             <blockquote>{t('To give every player ')}<em>{t('the best playing experience')}</em>{t(', on floors and arenas scientifically designed to minimise injury.')}</blockquote>
-            <Link to="/contact" className="btn btn-primary">{t('Talk to our team')} <ArrowRight size={18} /></Link>
+            <Link to="/contact" className="vis-btn"><span className="vis-t">{t('Talk to our team')}</span><span className="vis-a"><ArrowRight size={18} /></span></Link>
           </Reveal>
         </div>
       </section>

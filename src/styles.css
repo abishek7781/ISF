@@ -2586,3 +2586,15 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .fp-sign{left:auto;right:16px;bottom:12px;z-index:3}
 }
 @media (max-width:680px){.founder-photo{max-width:292px;padding:0 24px 24px 0}.fp::before{inset:24px -24px -24px 24px;border-radius:24px}}
+
+/* vision button: outlined pill that fills with green from the bottom, with a ringed arrow */
+.vis-btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:1rem;margin-top:.4rem;padding:.55rem .55rem .55rem 1.7rem;border-radius:99px;border:1.5px solid #7AD680;color:#fff;font-weight:700;font-size:1rem;transition:color .4s,transform .3s,box-shadow .3s}
+.vis-btn::before{content:"";position:absolute;left:-5%;right:-5%;bottom:-130%;height:130%;z-index:-1;background:linear-gradient(120deg,#4DB354,#2F7F35);border-radius:50% 50% 0 0;transition:bottom .55s cubic-bezier(.3,.8,.3,1)}
+.vis-a{width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(122,214,128,.7);display:grid;place-items:center;color:#7AD680;transition:background .35s,color .35s,border-color .35s,transform .35s}
+.vis-btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(63,158,69,.9)}
+.vis-btn:hover::before{bottom:-5%}
+.vis-btn:hover .vis-a{background:#fff;color:#2F7F35;border-color:#fff;transform:translateX(3px) rotate(-45deg)}
+:root:not([data-theme=dark]) .vis-btn{color:var(--navy);border-color:var(--green)}
+:root:not([data-theme=dark]) .vis-btn:hover{color:#fff}
+:root:not([data-theme=dark]) .vis-a{color:var(--green);border-color:rgba(47,127,53,.6)}
+@media (max-width:680px){.vis-btn{width:100%;justify-content:space-between}}
