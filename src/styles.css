@@ -2690,3 +2690,4 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .visit-side .visit-card p{max-width:none!important}
   .visit-side .visit-act{display:flex!important;flex-wrap:wrap;align-items:center}
 }
+@media (max-width:680px){.visit-side .visit-alt{display:none!important}}
