@@ -2761,3 +2761,9 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 @keyframes foot-drift{0%{background-position:0% 20%}100%{background-position:100% 80%}}
 @media (prefers-reduced-motion:reduce){.foot-m{animation:none}}
+/* small tag in the top corner of the footer block, under the slanted edge */
+@media (max-width:680px){
+  .foot-m{padding-top:3.5rem}
+  .foot-m-tag{position:absolute;left:1.1rem;top:1.9rem;display:flex;align-items:center;gap:.55rem;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7AD680}
+  .foot-m-tag i{width:26px;height:2px;background:currentColor;display:block}
+}
