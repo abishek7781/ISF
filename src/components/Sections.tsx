@@ -189,8 +189,8 @@ export function About() {
             <h2 className="ab-title">{t('Building the floors India plays on,')} <em>{t('since 2017.')}</em></h2>
             <p className="ab-lead">{t('From one workshop in Chennai making solid wooden sports floors to a team that builds complete venues for more than a dozen sports.')}</p>
             <div className="ab2-cta">
-              <Link to="/contact" className="btn btn-primary">{t('Talk to our team')} <ArrowRight size={18} /></Link>
-              <a className="ab2-link" href="#story" onClick={(e) => { e.preventDefault(); document.querySelector('.ab-story')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}>{t('Where we started')} <ChevronDown size={16} /></a>
+              <Link to="/contact" className="ab2-b1"><span>{t('Talk to our team')}</span><i><ArrowRight size={17} /></i></Link>
+              <a className="ab2-b2" href="#story" onClick={(e) => { e.preventDefault(); document.querySelector('.ab-story')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}><span>{t('Where we started')}</span><i><ChevronDown size={16} /></i></a>
             </div>
           </Reveal>
           <div className="ab2-logo" aria-hidden="true">

@@ -2767,3 +2767,20 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m-tag{position:absolute;left:1.1rem;top:1.9rem;display:flex;align-items:center;gap:.55rem;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7AD680}
   .foot-m-tag i{width:26px;height:2px;background:currentColor;display:block}
 }
+
+/* About hero buttons: a green pill with an arrow disc, and a glass pill with a bobbing chevron */
+.ab2-b1,.ab2-b2{position:relative;display:inline-flex;align-items:center;gap:.8rem;border-radius:99px;font-weight:700;font-size:.92rem;transition:transform .3s,box-shadow .3s,background .3s,border-color .3s}
+.ab2-b1{overflow:hidden;padding:.3rem .3rem .3rem 1.4rem;background:linear-gradient(120deg,#4DB354,#2F7F35);color:#fff;box-shadow:0 14px 28px -12px rgba(63,158,69,.9),inset 0 1px 0 rgba(255,255,255,.35)}
+.ab2-b1::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s}
+.ab2-b1 i{width:36px;height:36px;border-radius:50%;background:#fff;color:#2F7F35;display:grid;place-items:center;transition:transform .35s}
+.ab2-b1:hover{transform:translateY(-3px)}
+.ab2-b1:hover::after{left:130%}
+.ab2-b1:hover i{transform:translateX(3px) rotate(-45deg)}
+.ab2-b2{padding:.3rem .3rem .3rem 1.2rem;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff}
+.ab2-b2 i{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(122,214,128,.7);color:#7AD680;display:grid;place-items:center;animation:ab2-bob 1.8s ease-in-out infinite}
+.ab2-b2:hover{background:rgba(255,255,255,.16);border-color:#7AD680;transform:translateY(-3px)}
+@keyframes ab2-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+:root:not([data-theme=dark]) .ab2-b2{color:var(--navy);border-color:rgba(14,36,71,.3);background:rgba(14,36,71,.05)}
+:root:not([data-theme=dark]) .ab2-b2 i{color:var(--green);border-color:rgba(47,127,53,.6)}
+@media (max-width:900px){.ab2-b1,.ab2-b2{font-size:.84rem}.ab2-b1 i,.ab2-b2 i{width:32px;height:32px}.ab2-b1{padding-left:1.1rem}.ab2-b2{padding-left:1rem}}
+@media (prefers-reduced-motion:reduce){.ab2-b2 i{animation:none}}
