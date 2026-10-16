@@ -2799,6 +2799,6 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 /* products (phone): one-time swipe hint */
 @media (max-width:680px){
   .pg-grid.nudge{scroll-snap-type:none}
-  .pg-grid.nudge .pg-card{animation:pg-nudge 1.6s cubic-bezier(.45,0,.25,1) 1}
-  @keyframes pg-nudge{0%,100%{transform:translateX(0)}35%,55%{transform:translateX(-46px)}}
+  .pg-grid.nudge .pg-card{animation:pg-nudge 2.4s cubic-bezier(.45,0,.25,1) .5s 1}
+  @keyframes pg-nudge{0%,100%{transform:translateX(0)}22%,36%{transform:translateX(-84px)}52%{transform:translateX(0)}68%,80%{transform:translateX(-84px)}}
 }

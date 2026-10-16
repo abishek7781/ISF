@@ -283,10 +283,12 @@ export function Products() {
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (!e.isIntersecting) return
       const g = e.target as HTMLElement
-      io.unobserve(g)
+      if (g.scrollLeft > 20) return
+      g.classList.remove('nudge')
+      void g.offsetWidth
       g.classList.add('nudge')
-      timers.push(window.setTimeout(() => g.classList.remove('nudge'), 1900))
-    }), { threshold: 0.7 })
+      timers.push(window.setTimeout(() => g.classList.remove('nudge'), 2700))
+    }), { threshold: 0.5 })
     grids.forEach((g) => io.observe(g))
     return () => { io.disconnect(); timers.forEach(clearTimeout) }
   }, [])
