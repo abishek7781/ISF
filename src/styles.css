@@ -2791,3 +2791,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .cta-main{align-self:flex-start}
   .cta-call{align-self:flex-end}
 }
+@media (max-width:680px){
+  .cta-actions{width:100%}
+  .cta-call{margin-left:auto}
+}
