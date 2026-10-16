@@ -2406,3 +2406,6 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .entry-card .cform .row select{font-size:.8rem;padding-left:.5rem!important;padding-right:1.4rem!important}
   .entry-photo{min-height:0}
 }
+
+/* Zoho adds its own cookie bar (loaded by its chat/PageSense scripts). The site's own banner is the one visitors use. */
+#zcb-banner,.zcb-bar{display:none!important}
