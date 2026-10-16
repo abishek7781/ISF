@@ -2784,3 +2784,10 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 :root:not([data-theme=dark]) .ab2-b2 i{color:var(--green);border-color:rgba(47,127,53,.6)}
 @media (max-width:900px){.ab2-b1,.ab2-b2{font-size:.84rem}.ab2-b1 i,.ab2-b2 i{width:32px;height:32px}.ab2-b1{padding-left:1.1rem}.ab2-b2{padding-left:1rem}}
 @media (prefers-reduced-motion:reduce){.ab2-b2 i{animation:none}}
+
+/* CTA band (phone): zig-zag the two buttons */
+@media (max-width:680px){
+  .cta-actions{align-items:stretch}
+  .cta-main{align-self:flex-start}
+  .cta-call{align-self:flex-end}
+}
