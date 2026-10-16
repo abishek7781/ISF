@@ -2508,3 +2508,12 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .brochure{padding-top:1rem;padding-bottom:1rem;gap:.6rem}
   .bk-stage{display:none}
 }
+
+/* products on phones: groups sit close together instead of each filling a screen */
+@media (max-width:680px){
+  .pg-group{min-height:0;display:block;padding:44px 0 8px}
+  .pg-group:first-child{padding-top:72px}
+  .pg-group:last-child{padding-bottom:36px}
+  .wa-fab{bottom:20px}
+}
+@media (min-width:681px){.wa-fab{bottom:20px}}
