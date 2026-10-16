@@ -2840,4 +2840,3 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 /* border moves from the form card to the photo card: a fine white edge and an inset frame line */
 .entry-card .entry-form{border:0;box-shadow:0 18px 40px -8px rgba(0,0,0,.6)}
 .entry-card{box-shadow:0 40px 80px -20px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.55),0 0 0 4px rgba(14,36,71,.55)}
-.entry-card::after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.4);border-radius:12px;pointer-events:none;z-index:0}
