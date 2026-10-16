@@ -84,35 +84,18 @@ export default function EntryForm() {
   const finish = () => {
     setOpen(false); setLeaving(false)
   }
-  // Closing sucks the card into the Contact link in the menu (or the menu button on phones), like a genie.
+  // Closing slides the card down off the screen while it fades out.
   const close = () => {
     if (leaving) return
     const el = card.current
-    const links = Array.from(document.querySelectorAll<HTMLElement>('.nav a[href="/contact"], .menu-btn'))
-    const target = links.find((a) => a.getBoundingClientRect().width > 0)
-    if (!el || !target || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return }
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return }
     setLeaving(true)
-    const gz = buildGenie(el, target)
-    const DUR = 1250
-    const t0 = performance.now()
-    const frame = (n: number) => {
-      const t = Math.min(1, (n - t0) / DUR)
-      gz.frame(t)
-      if (t < 1) raf = requestAnimationFrame(frame)
-      else end()
-    }
-    let raf = requestAnimationFrame(frame)
-    let done = false
-    const end = () => {
-      if (done) return
-      done = true
-      cancelAnimationFrame(raf)
-      gz.destroy()
-      finish()
-      target.classList.add('genie-hit')
-      window.setTimeout(() => target.classList.remove('genie-hit'), 900)
-    }
-    window.setTimeout(end, 1900)   // safety net if the browser pauses animations (background tab)
+    const an = el.animate(
+      [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(110%)' }],
+      { duration: 550, easing: 'cubic-bezier(.5,0,.2,1)', fill: 'forwards' },
+    )
+    an.onfinish = finish
+    window.setTimeout(finish, 900)   // safety net if the browser pauses animations (background tab)
   }
   useEffect(() => {
     if (!open) return

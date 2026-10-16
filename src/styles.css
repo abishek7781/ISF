@@ -2166,7 +2166,7 @@ h3{font-size:1.25rem;letter-spacing:-.01em}
 .entry-form{border-radius:0 22px 22px 0}
 .entry-form .dp-pop{z-index:30}
 @media (max-width:680px){.entry-photo{border-radius:22px 22px 0 0}.entry-form{border-radius:0 0 22px 22px}}
-.entry.leaving::before{opacity:0;transition:opacity .6s ease}
+.entry.leaving::before{opacity:0;transition:opacity .55s ease}
 .entry.leaving{pointer-events:none}
 @keyframes genie-hit{0%{box-shadow:0 0 0 0 rgba(93,184,100,.8)}60%{transform:scale(1.14);box-shadow:0 0 0 12px rgba(93,184,100,0)}100%{box-shadow:0 0 0 0 rgba(93,184,100,0)}}
 .genie-hit{animation:genie-hit .8s ease;border-radius:99px}
