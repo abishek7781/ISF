@@ -2802,3 +2802,28 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .pg-grid.nudge .pg-card{animation:pg-nudge 2.4s cubic-bezier(.45,0,.25,1) .5s 1}
   @keyframes pg-nudge{0%,100%{transform:translateX(0)}22%,36%{transform:translateX(-84px)}52%{transform:translateX(0)}68%,80%{transform:translateX(-84px)}}
 }
+
+/* entry popup: full photo with a solid white form card on top (no glass) */
+.entry-card{display:grid;grid-template-columns:1fr 340px;width:min(780px,100%);min-height:470px;padding:20px;gap:0;background-size:cover;background-position:center;border:0;border-radius:18px;box-shadow:0 40px 80px -20px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.2)}
+.entry-card::before{content:"";position:absolute;inset:0;border-radius:18px;background:linear-gradient(100deg,rgba(8,20,38,.86),rgba(8,20,38,.45) 60%,rgba(8,20,38,.15));pointer-events:none}
+.entry-card>:not(.entry-x){position:relative;z-index:1}
+.entry-card .entry-photo{background:none!important;border-radius:0;padding:.6rem 1.2rem .6rem .6rem;justify-content:flex-start;gap:.8rem}
+.entry-card .entry-photo::before,.entry-card .entry-photo::after,.entry-blur{display:none!important}
+.entry-card .entry-photo h2{font-size:2.3rem;line-height:1;max-width:11ch;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+.entry-card .entry-photo h2 em{display:inline;font-style:normal;color:#7AD680;-webkit-text-stroke:0}
+.entry-card .entry-form{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:14px;box-shadow:0 18px 40px -8px rgba(0,0,0,.6)}
+.entry-card .cform{color:#14213d;padding:1.3rem 1.2rem 1.1rem}
+.entry-card .cform h3{color:#0E2447;font-size:1.35rem}
+.entry-card .cform .field input,.entry-card .cform .field select,.entry-card .cform .dp-trigger{background:#fff!important;border:1px solid #cfd6e2!important;color:#14213d!important}
+.entry-card .cform .field input::placeholder{color:#7b879c!important}
+.entry-card .cform .field label,.entry-card .cform label,.entry-card .cform .opt,.entry-card .cform small{color:#52607a}
+.entry-card .cform .dp-trigger,.entry-card .cform .dp-trigger *{color:#14213d}
+.entry-x{background:rgba(0,0,0,.5);border-color:rgba(255,255,255,.35);top:10px;right:10px}
+@media (max-width:680px){
+  .entry-card{grid-template-columns:1fr;min-height:0;padding:14px}
+  .entry-card .entry-photo{padding:.4rem .2rem 1rem}
+  .entry-card .entry-photo h2{font-size:1.6rem;max-width:none}
+  .entry-card::before{background:linear-gradient(180deg,rgba(8,20,38,.85),rgba(8,20,38,.4))}
+}
+.entry-card .entry-x{top:-12px;right:-12px;background:#0E2447;border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+@media (max-width:680px){.entry-card .entry-x{top:-10px;right:-6px}}

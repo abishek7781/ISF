@@ -107,7 +107,7 @@ export default function EntryForm() {
   if (!open) return null
   return (
     <div className={`entry ${leaving ? 'leaving' : ''}`} role="dialog" aria-modal="true" aria-label={t('Get in Touch')} onMouseDown={(e) => { if (e.target === e.currentTarget) close() }}>
-      <div className="entry-card" ref={card}>
+      <div className="entry-card" ref={card} style={{ backgroundImage: `url(${A('entry-badminton.jpeg')})` }}>
         <button className="entry-x" onClick={close} aria-label="Close"><X size={18} /></button>
         <div className="entry-photo" style={{ backgroundImage: `url(${A('entry-badminton.jpeg')})` }}>
           <span className="entry-blur" style={{ backgroundImage: `url(${A('entry-badminton.jpeg')})` }} aria-hidden="true" />
