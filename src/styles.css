@@ -2643,3 +2643,14 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   #contact .ct-note{display:none}
 }
 @media (max-width:680px){#contact .cform{padding-top:1.6rem}#contact .cform h3{padding-right:2.6rem}}
+
+/* contact details on phones: small icon, small text */
+@media (max-width:680px){
+  .contact-sec .channels{gap:.7rem}
+  .contact-sec .channels a{gap:.8rem}
+  .contact-sec .ch-ico{width:38px!important;height:38px!important;clip-path:none!important;border-radius:50%}
+  .contact-sec .ch-ico svg{width:18px!important;height:18px!important}
+  .contact-sec .ch-txt{font-size:.82rem;line-height:1.25}
+  .contact-sec .ch-txt strong{font-size:.95rem!important;margin-bottom:.1rem}
+  .contact-sec .ch-txt em{font-size:.82rem}
+}
