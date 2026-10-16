@@ -2734,3 +2734,10 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 .wa-fab{transition:opacity .3s,transform .3s}
 .wa-fab.wa-hide{opacity:0;transform:scale(.6);pointer-events:none}
 @media (max-width:680px){.foot-m{padding-bottom:1.3rem}}
+/* footer name: INDIA SPORTS together on one line (INDIA softly filled with the flag colours), a bigger INFRA below */
+@media (max-width:680px){
+  .foot-m-word{display:block;line-height:.9}
+  .foot-m-word .r1{display:flex;gap:.45rem;align-items:baseline;font-size:clamp(1.5rem,7.8vw,2rem)}
+  .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.5) 0 34%,rgba(255,255,255,.4) 34% 66%,rgba(19,136,8,.5) 66% 100%);-webkit-background-clip:text;background-clip:text}
+  .foot-m-word .g{display:block;margin-top:.1rem;font-size:clamp(2.6rem,14.5vw,3.6rem)}
+}

@@ -853,7 +853,7 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="foot-m">
-        <div className="foot-m-word" aria-label="India Sports Infra"><span>INDIA</span><span>SPORTS</span><span className="g">INFRA</span></div>
+        <div className="foot-m-word" aria-label="India Sports Infra"><span className="r1"><span className="in">INDIA</span><span>SPORTS</span></span><span className="g">INFRA</span></div>
         <div className="foot-m-row">
           <div className="foot-m-soc">
             {(Object.keys(soc) as (keyof typeof soc)[]).map((k) => {
