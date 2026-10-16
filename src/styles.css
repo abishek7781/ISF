@@ -2854,3 +2854,11 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .entry-card::after{content:"";position:absolute;left:50%;top:8px;width:38px;height:4px;margin-left:-19px;border-radius:3px;background:rgba(255,255,255,.7);z-index:3}
   .entry-card .entry-x{top:12px;right:12px;width:30px;height:30px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.4);box-shadow:none}
 }
+
+/* phones: no forced full-screen height on these home sections, so there is no big empty gap between them */
+@media (max-width:680px){
+  .intro,.faq-sec,#faq,.services-sec,.svc-sec{min-height:0!important;justify-content:flex-start}
+  .section.intro{padding:44px 0 28px}
+  .svc-sec{padding:44px 0 28px}
+  #faq.section{padding:44px 0 24px}
+}
