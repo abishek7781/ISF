@@ -2598,3 +2598,19 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 :root:not([data-theme=dark]) .vis-btn:hover{color:#fff}
 :root:not([data-theme=dark]) .vis-a{color:var(--green);border-color:rgba(47,127,53,.6)}
 @media (max-width:680px){.vis-btn{width:100%;justify-content:space-between}}
+
+/* smaller buttons: shorter, and only as wide as their content */
+.vis-btn{gap:.8rem;padding:.3rem .3rem .3rem 1.3rem;font-size:.92rem}
+.vis-a{width:34px;height:34px}
+.cta-main{gap:.9rem;padding:.3rem .3rem .3rem 1.4rem;font-size:.92rem}
+.cta-main i{width:34px;height:34px}
+.cta-call{gap:.7rem;padding:.3rem 1.2rem .3rem .3rem}
+.cta-call i{width:34px;height:34px}
+.cta-call small{font-size:.6rem}
+.cta-call b{font-size:.95rem}
+.cta-actions{gap:.7rem}
+@media (max-width:680px){
+  .vis-btn{width:auto}
+  .cta-actions{flex-direction:column;align-items:flex-start;width:auto}
+  .cta-main,.cta-call{width:auto;justify-content:flex-start}
+}
