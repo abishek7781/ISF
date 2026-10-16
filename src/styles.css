@@ -2654,3 +2654,4 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .contact-sec .ch-txt strong{font-size:.95rem!important;margin-bottom:.1rem}
   .contact-sec .ch-txt em{font-size:.82rem}
 }
+@media (max-width:680px){.contact-sec .channels{padding-left:1rem}}
