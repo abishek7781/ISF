@@ -2751,3 +2751,6 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 @keyframes foot-wave{to{background-position:70px 47%,0 0}}
 @media (prefers-reduced-motion:reduce){.foot-m-word .g{animation:none}}
+@media (max-width:680px){
+  .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.82) 0 34%,rgba(255,255,255,.7) 34% 66%,rgba(19,136,8,.85) 66% 100%);-webkit-background-clip:text;background-clip:text}
+}
