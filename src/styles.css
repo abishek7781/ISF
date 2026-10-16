@@ -2731,3 +2731,6 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m-info{margin-top:.8rem;padding-top:.7rem;font-size:.78rem}
   .foot-m-info a{font-size:.92rem}
 }
+.wa-fab{transition:opacity .3s,transform .3s}
+.wa-fab.wa-hide{opacity:0;transform:scale(.6);pointer-events:none}
+@media (max-width:680px){.foot-m{padding-bottom:1.3rem}}
