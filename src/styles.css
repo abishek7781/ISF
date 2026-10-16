@@ -2722,3 +2722,12 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m{padding-top:3rem}
   .foot-m-row{margin-top:1rem}
 }
+@media (max-width:680px){
+  .foot-m{padding:2.6rem 1.1rem 4.4rem;margin-top:0}
+  .foot-m-word{font-size:clamp(1.7rem,9vw,2.3rem);line-height:.86}
+  .foot-m-row{margin-top:.8rem}
+  .foot-m-soc a{width:36px;height:36px;border-radius:10px}
+  .foot-m-top{width:38px;height:38px}
+  .foot-m-info{margin-top:.8rem;padding-top:.7rem;font-size:.78rem}
+  .foot-m-info a{font-size:.92rem}
+}
