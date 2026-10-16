@@ -2551,3 +2551,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .fp-sign{left:18px;right:auto;bottom:12px;z-index:2;font-size:2.4rem;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
   .founder-name{display:none}
 }
+
+/* founder on phones, v2: portrait rectangle, left side black and white, right side colour, split on a slant */
+@media (max-width:680px){
+  .ab-story{min-height:0;padding:72px 0 20px}
+  .ab-principles{min-height:0;display:block;padding:44px 0 24px}
+  .ab-founder{padding:36px 0 28px}
+  .founder-photo{max-width:300px;margin:0 auto}
+  .fp{height:auto;aspect-ratio:4/5;border-radius:22px;transform:none}
+  .fp-back{display:block;position:absolute;inset:0;left:0;top:0;width:100%;height:100%;transform:none;padding:0;background:none;box-shadow:none;z-index:3;pointer-events:none;clip-path:polygon(0 0,54% 0,38% 100%,0 100%)}
+  .founder-photo .fp-back img{filter:grayscale(1) contrast(1.08);opacity:1;object-position:50% 14%}
+  .fp::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(to right,transparent calc(46% - 1px),rgba(122,214,128,.95) 46%,transparent calc(46% + 1px));transform:skewX(-9deg);transform-origin:50% 50%;mix-blend-mode:normal}
+  .fp-sign{z-index:5}
+}
+@media (max-width:680px){.fp-sign{left:auto;right:16px;bottom:12px;font-size:2.2rem}.fp-front{z-index:5}.fp-back{z-index:3}.fp-front::after{z-index:1}}
+@media (max-width:680px){.fp-front{z-index:2}.fp-back{z-index:3}}
