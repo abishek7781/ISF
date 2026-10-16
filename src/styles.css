@@ -2754,3 +2754,4 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @media (max-width:680px){
   .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.82) 0 34%,rgba(255,255,255,.7) 34% 66%,rgba(19,136,8,.85) 66% 100%);-webkit-background-clip:text;background-clip:text}
 }
+@media (max-width:680px){.foot-m{background:linear-gradient(160deg,#071327,#16356b)}}
