@@ -2893,6 +2893,6 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @keyframes island-tick{0%,32%{stroke-dashoffset:20}44%,100%{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.island i,.island i svg{animation:none;stroke-dashoffset:0;transform:none;opacity:1}}
 /* the text is laid out at its final size from the start, and only fades in once the capsule has finished widening, so it never moves */
-.island span{flex:none;width:calc(min(92vw,400px) - 3.7rem);animation-name:island-tx2}
+.island span{flex:none;width:calc(min(92vw,400px) - 4.4rem);animation-name:island-tx2}
 @keyframes island-tx2{0%,30%{opacity:0}37%,88%{opacity:1}94%,100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.island span{animation:none;opacity:1}}
