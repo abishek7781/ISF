@@ -3157,3 +3157,19 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @media (max-width:680px){
   .c-floor{display:none}
 }
+
+/* visit us: the map with the frosted address sheet is the same on every phone and small tablet */
+@media (max-width:900px){
+  .visit-sec{min-height:0!important;display:block!important;padding:72px 0 24px!important}
+  .visit-side .visit-alt{display:none!important}
+  .visit{display:block!important;position:relative;height:max(min(76svh,640px),460px)!important;border-radius:20px;overflow:hidden}
+  .visit-map{position:absolute!important;inset:0;width:100%!important;height:100%!important;aspect-ratio:auto!important;border-radius:0!important}
+  .visit-map iframe{height:100%!important;width:100%!important}
+  .visit-side{position:absolute!important;left:0;right:0;bottom:0;width:auto!important;margin:0!important}
+}
+@media (max-width:360px){
+  .visit-side{padding:1.2rem .9rem .9rem!important}
+  .visit-side .visit-card h3{font-size:1.05rem!important}
+  .visit-side .visit-card p{font-size:.78rem!important}
+  .visit-side .visit-act{gap:.45rem .7rem!important}
+}
