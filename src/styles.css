@@ -3173,3 +3173,16 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .visit-side .visit-card p{font-size:.78rem!important}
   .visit-side .visit-act{gap:.45rem .7rem!important}
 }
+
+/* tablet: book above, centred text and the form below, so nothing is squeezed or cut off */
+@media (min-width:681px) and (max-width:1000px){
+  .brochure-sec{padding:5rem 0 5.5rem!important}
+  .brochure{grid-template-columns:1fr!important;justify-items:center;text-align:center;gap:1.4rem!important;padding:0!important;width:100%!important}
+  .rb-book{--W:224px!important;--H:308px!important}
+  .rb-stage{width:560px!important;height:480px!important;zoom:.78}
+  .br-ball{display:none!important}
+  .br-main{width:100%;max-width:520px;display:grid;justify-items:center}
+  .br-text p{margin-inline:auto}
+  .br-form{width:100%;max-width:440px;text-align:left}
+  .br-form .br-dl{white-space:nowrap}
+}
