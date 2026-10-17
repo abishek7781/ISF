@@ -3147,3 +3147,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 /* dark theme: no stars or moonbeams, only a soft blurred shade */
 [data-theme=dark] .c-wall::after,[data-theme=dark] .c-wall::before,[data-theme=dark] .c-floor::after{display:none}
 [data-theme=dark] .c-wall{background:radial-gradient(ellipse 60% 55% at 30% 20%,rgba(53,100,174,.2),transparent 75%),radial-gradient(ellipse 50% 50% at 85% 70%,rgba(30,60,120,.18),transparent 75%),linear-gradient(180deg,#0a1630,#060d1b 68%)}
+
+/* wood floor sits higher so more of it shows, in both themes */
+.c-floor{height:60%}
+.c-floor::before{-webkit-mask-image:linear-gradient(180deg,transparent,#000 22%);mask-image:linear-gradient(180deg,transparent,#000 22%);transform:perspective(520px) rotateX(56deg) scale(1.6)}
+[data-theme=dark] .c-floor::before{filter:brightness(.62) saturate(.9)}
