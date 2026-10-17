@@ -1,4 +1,5 @@
 import { INDIA_PATH } from '../data/indiaPath'
+import { useEffect, useRef, useState } from 'react'
 import { Reveal } from './ui'
 import { useI18n } from '../i18n'
 
@@ -20,9 +21,40 @@ const SITES: { name: string; lon: number; lat: number; dx: number; dy: number }[
 /** "Where we have built": India's outline on a faint dot grid, with glowing pins and white name tags. */
 export default function IndiaMap() {
   const { t } = useI18n()
+  const dots = useRef<HTMLDivElement>(null)
+  const [glows, setGlows] = useState<{ x: number; y: number; d: number; dl: number }[]>([])
+  // A few of the grid dots light up now and then, each on its own random rhythm.
+  useEffect(() => {
+    const el = dots.current
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const make = () => {
+      const w = el.clientWidth, h = el.clientHeight
+      const cols = Math.floor(w / 18), rows = Math.floor(h / 18)
+      const count = Math.min(70, Math.round((cols * rows) / 45))
+      const out: { x: number; y: number; d: number; dl: number }[] = []
+      const seen = new Set<string>()
+      while (out.length < count && seen.size < cols * rows) {
+        const c = Math.floor(Math.random() * cols), r = Math.floor(Math.random() * rows)
+        const k = `${c}:${r}`
+        if (seen.has(k)) continue
+        seen.add(k)
+        // keep to the part of the grid that is visible (the grid fades out toward the edges)
+        const nx = (c * 18 + 9) / w - 0.5, ny = (r * 18 + 9) / h - 0.45
+        if ((nx / 0.6) ** 2 + (ny / 0.7) ** 2 > 0.9) continue
+        out.push({ x: c * 18 + 9, y: r * 18 + 9, d: 2.6 + Math.random() * 3.6, dl: -Math.random() * 6 })
+      }
+      setGlows(out)
+    }
+    make()
+    const ro = new ResizeObserver(make)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
   return (
     <Reveal className="imap2">
-      <div className="imap2-dots" aria-hidden="true" />
+      <div className="imap2-dots" aria-hidden="true" ref={dots}>
+        {glows.map((g, i) => <i key={i} style={{ left: g.x, top: g.y, animationDuration: `${g.d.toFixed(2)}s`, animationDelay: `${g.dl.toFixed(2)}s` }} />)}
+      </div>
       <div className="imap2-box">
         <svg className="imap2-svg" viewBox="-6 -4 290 312" role="img" aria-label={t('Map of India with our project locations')}>
           <path className="imap2-land" d={INDIA_PATH} />
