@@ -3207,3 +3207,24 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 :root:not([data-theme=dark]) .ab2-b1:hover,:root:not([data-theme=dark]) .ab2-b2:hover{background:#e9eff8!important;box-shadow:inset 6px 6px 12px #c3cddd,inset -5px -5px 10px #ffffff!important}
 @media (max-width:900px){.ab2-b1,.ab2-b2{padding:.8rem 1.1rem!important;font-size:.82rem;border-radius:14px!important;box-shadow:5px 5px 12px #070d1a,-4px -4px 10px #1d3157!important}
   :root:not([data-theme=dark]) .ab2-b1,:root:not([data-theme=dark]) .ab2-b2{box-shadow:5px 5px 12px #c3cddd,-4px -4px 10px #fff!important}}
+
+/* About hero: a solid primary button and a scroll cue (a mouse wheel) instead of a second button */
+.ab2-b1{background:#fff!important;color:#0E2447!important;border-radius:99px!important;padding:.95rem 1.8rem!important;box-shadow:0 12px 26px -12px rgba(255,255,255,.9)!important;font-weight:700}
+.ab2-b1:hover{transform:translateY(-3px)!important;box-shadow:0 18px 30px -12px rgba(255,255,255,.95)!important;background:#fff!important}
+.ab2-b1 i{color:#2F7F35!important}
+.ab2-b1:hover i{transform:translateX(4px)!important}
+:root:not([data-theme=dark]) .ab2-b1{background:#0E2447!important;color:#fff!important;box-shadow:0 12px 26px -12px rgba(14,36,71,.75)!important}
+:root:not([data-theme=dark]) .ab2-b1:hover{background:#0E2447!important;box-shadow:0 18px 30px -12px rgba(14,36,71,.85)!important}
+:root:not([data-theme=dark]) .ab2-b1 i{color:#7AD680!important}
+.ab2-b2{flex-direction:row-reverse;background:none!important;box-shadow:none!important;padding:.4rem .3rem!important;border-radius:0!important;color:#fff!important;gap:.8rem}
+:root:not([data-theme=dark]) .ab2-b2{background:none!important;box-shadow:none!important;color:#0E2447!important}
+.ab2-b2:hover,:root:not([data-theme=dark]) .ab2-b2:hover{background:none!important;box-shadow:none!important;color:#7AD680!important}
+:root:not([data-theme=dark]) .ab2-b2:hover{color:#2F7F35!important}
+.ab2-b2 i{position:relative;display:block!important;width:22px!important;height:34px!important;border:1.6px solid currentColor!important;border-radius:12px!important;opacity:.85}
+.ab2-b2 i svg{display:none}
+.ab2-b2 i::after{content:"";position:absolute;left:50%;top:6px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:#7AD680;animation:ab2-wheel 1.6s ease-in-out infinite}
+:root:not([data-theme=dark]) .ab2-b2 i::after{background:#2F7F35}
+@keyframes ab2-wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+.ab2-b2:hover i,.ab2-b2:hover i{transform:none!important}
+@media (prefers-reduced-motion:reduce){.ab2-b2 i::after{animation:none}}
+@media (max-width:900px){.ab2-b1{padding:.8rem 1.3rem!important}.ab2-b2{padding:.3rem .2rem!important;font-size:.82rem}}
