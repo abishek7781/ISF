@@ -2986,3 +2986,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @media (max-width:680px){
   .foot-m{background:#070d18!important;animation:none!important;background-size:auto!important}
 }
+
+/* phone footer: the space around its curved top takes the colour of the section above, a slightly lighter dark navy, and a light-theme version */
+@media (max-width:680px){
+  .footer{background:var(--navy)}
+  [data-theme=dark] .footer{background:var(--dark-2)}
+  .foot-m{background:#0f2243!important}
+  :root:not([data-theme=dark]) .foot-m{background:#eef2f9!important;color:#0E2447}
+  :root:not([data-theme=dark]) .foot-m-tag{color:#2F7F35}
+  :root:not([data-theme=dark]) .foot-m-word{-webkit-text-stroke-color:rgba(14,36,71,.75)}
+  :root:not([data-theme=dark]) .foot-m-word .g{-webkit-text-stroke-color:#2F7F35}
+  :root:not([data-theme=dark]) .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.95) 0 34%,rgba(14,36,71,.18) 34% 66%,rgba(19,136,8,.95) 66% 100%);-webkit-background-clip:text;background-clip:text}
+  :root:not([data-theme=dark]) .foot-m-soc a{border-color:rgba(14,36,71,.3);color:#0E2447}
+  :root:not([data-theme=dark]) .foot-m-nav a,:root:not([data-theme=dark]) .foot-m-info a{color:#0E2447}
+  :root:not([data-theme=dark]) .foot-m-info{color:#4a5a78;border-top-color:rgba(14,36,71,.16)}
+}
