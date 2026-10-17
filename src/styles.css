@@ -2700,7 +2700,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 
 /* footer on phones: slanted navy block, big outlined name, socials with a back-to-top button */
 .foot-m{display:none}
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-desk{display:none}
   .footer{background:#0A1628}
   .foot-m{display:block;position:relative;background:#0E2447;clip-path:polygon(0 8%,100% 0,100% 100%,0 100%);padding:3.6rem 1.2rem 1.4rem;margin-top:.5rem}
@@ -2716,13 +2716,13 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m-info .r{text-align:right;display:grid;gap:.15rem}
   .foot-m-info .r a{font-size:.8rem;font-weight:500;text-decoration:underline;text-underline-offset:3px;opacity:.9}
 }
-@media (max-width:680px){.foot-m{padding-bottom:5.2rem}}
-@media (max-width:680px){
+@media (max-width:1080px){.foot-m{padding-bottom:5.2rem}}
+@media (max-width:1080px){
   .foot-m-word{font-size:clamp(2rem,10.5vw,2.8rem);-webkit-text-stroke-width:1.2px}
   .foot-m{padding-top:3rem}
   .foot-m-row{margin-top:1rem}
 }
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m{padding:2.6rem 1.1rem 4.4rem;margin-top:0}
   .foot-m-word{font-size:clamp(1.7rem,9vw,2.3rem);line-height:.86}
   .foot-m-row{margin-top:.8rem}
@@ -2733,16 +2733,16 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 .wa-fab{transition:opacity .3s,transform .3s}
 .wa-fab.wa-hide{opacity:0;transform:scale(.6);pointer-events:none}
-@media (max-width:680px){.foot-m{padding-bottom:1.3rem}}
+@media (max-width:1080px){.foot-m{padding-bottom:1.3rem}}
 /* footer name: INDIA SPORTS together on one line (INDIA softly filled with the flag colours), a bigger INFRA below */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m-word{display:block;line-height:.9}
   .foot-m-word .r1{display:flex;gap:.45rem;align-items:baseline;font-size:clamp(1.5rem,7.8vw,2rem)}
   .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.5) 0 34%,rgba(255,255,255,.4) 34% 66%,rgba(19,136,8,.5) 66% 100%);-webkit-background-clip:text;background-clip:text}
   .foot-m-word .g{display:block;margin-top:.1rem;font-size:clamp(2.6rem,14.5vw,3.6rem)}
 }
 /* INFRA: slightly smaller, filled to half height with a gently moving water wave */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m-word .g{font-size:clamp(2.3rem,12.5vw,3.1rem);
     background:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6Q20 0 40 6T80 6V12H0Z' fill='%237AD680' fill-opacity='.8'/%3E%3C/svg%3E") 0 47%/70px 10px repeat-x,
@@ -2751,18 +2751,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 @keyframes foot-wave{to{background-position:70px 47%,0 0}}
 @media (prefers-reduced-motion:reduce){.foot-m-word .g{animation:none}}
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m-word .in{background:linear-gradient(180deg,rgba(255,153,51,.82) 0 34%,rgba(255,255,255,.7) 34% 66%,rgba(19,136,8,.85) 66% 100%);-webkit-background-clip:text;background-clip:text}
 }
-@media (max-width:680px){.foot-m{background:linear-gradient(160deg,#071327,#16356b)}}
+@media (max-width:1080px){.foot-m{background:linear-gradient(160deg,#071327,#16356b)}}
 /* footer gradient drifts slowly */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m{background:linear-gradient(135deg,#071327 0%,#16356b 35%,#0b2a5c 60%,#071327 100%);background-size:260% 260%;animation:foot-drift 9s ease-in-out infinite alternate}
 }
 @keyframes foot-drift{0%{background-position:0% 20%}100%{background-position:100% 80%}}
 @media (prefers-reduced-motion:reduce){.foot-m{animation:none}}
 /* small tag in the top corner of the footer block, under the slanted edge */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m{padding-top:3.5rem}
   .foot-m-tag{position:absolute;left:1.1rem;top:1.9rem;display:flex;align-items:center;gap:.55rem;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7AD680}
   .foot-m-tag i{width:26px;height:2px;background:currentColor;display:block}
@@ -2973,7 +2973,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 
 /* footer on phones: soft curved top (instead of the slant) and a row of page links */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m{clip-path:none!important;border-radius:50% 50% 0 0/34px 34px 0 0;margin-top:0}
   .foot-m-tag{top:2.3rem}
   .foot-m{padding-top:4.4rem}
@@ -2983,12 +2983,12 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 
 /* phone footer: still, dark background */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m{background:#070d18!important;animation:none!important;background-size:auto!important}
 }
 
 /* phone footer: the space around its curved top takes the colour of the section above, a slightly lighter dark navy, and a light-theme version */
-@media (max-width:680px){
+@media (max-width:1080px){
   .footer{background:var(--navy)}
   [data-theme=dark] .footer{background:var(--dark-2)}
   .foot-m{background:#0f2243!important}
@@ -3003,18 +3003,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 }
 
 /* INDIA: the flag colours at full strength */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m-word .in{background:linear-gradient(180deg,#FF9933 0 34%,#FFFFFF 34% 66%,#138808 66% 100%)!important;-webkit-background-clip:text!important;background-clip:text!important}
   :root:not([data-theme=dark]) .foot-m-word .in{background:linear-gradient(180deg,#FF9933 0 34%,#CDD5E3 34% 66%,#138808 66% 100%)!important;-webkit-background-clip:text!important;background-clip:text!important}
 }
 /* INFRA: plain solid green for now (the water animation was removed) */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m-word .g{background:none!important;animation:none!important;-webkit-text-stroke:0!important;display:block;margin-top:.1rem;line-height:.9;font-size:clamp(2.3rem,12.5vw,3.1rem);color:#7AD680!important;-webkit-text-fill-color:#7AD680}
   :root:not([data-theme=dark]) .foot-m-word .g{color:#2F7F35!important;-webkit-text-fill-color:#2F7F35}
 }
 
 /* phone footer: INFRA as a wood floor with a moving shine and a polished-floor reflection */
-@media (max-width:680px){
+@media (max-width:1080px){
   .foot-m-word .g{display:block;width:max-content;position:relative;margin:.1rem 0 1.15rem;color:transparent!important;-webkit-text-fill-color:transparent;
     background:repeating-linear-gradient(90deg,#d9a566 0 9px,#c28640 9px 10px),linear-gradient(#ffffff33,#00000033)!important;background-blend-mode:multiply;
     -webkit-background-clip:text!important;background-clip:text!important;-webkit-box-reflect:below -4px linear-gradient(transparent 42%,rgba(255,255,255,.3))}
