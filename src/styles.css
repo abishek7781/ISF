@@ -3234,7 +3234,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   background:radial-gradient(ellipse 60% 70% at 50% 55%,#12305e,#07101f 75%);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 60px -34px rgba(0,0,0,.7)}
 .imap-glow{position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(63,158,69,.22),transparent 45%)}
 .imap-svg{position:relative;height:calc(var(--h) - 30px);width:auto;aspect-ratio:290/312;max-width:92%;overflow:visible}
-.imap-land{fill:#15335f;stroke:#3a74d0;stroke-width:.9;stroke-linejoin:round;filter:drop-shadow(0 0 14px rgba(53,100,174,.45))}
+.imap-land{fill:#15335f;stroke:#3a74d0;stroke-width:.9;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 14px rgba(53,100,174,.45))}
 .imap-pin{fill:#7AD680;filter:drop-shadow(0 0 4px #7AD680)}
 .imap-ring{fill:none;stroke:#7AD680;stroke-width:1;animation:imap-ring 2.4s ease-out infinite}
 @keyframes imap-ring{0%{r:2;opacity:1}100%{r:15;opacity:0}}

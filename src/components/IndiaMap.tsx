@@ -8,8 +8,12 @@ const CS = Math.cos((22 * Math.PI) / 180)
 const project = (lon: number, lat: number): [number, number] => [(lon - 68) * K * CS, (36.5 - lat) * K]
 
 /** Places on the map. Add more (longitude, latitude) here as project locations are confirmed. */
-const SITES: { name: string; lon: number; lat: number }[] = [
+const SITES: { name: string; lon: number; lat: number; left?: boolean }[] = [
   { name: 'Chennai', lon: 80.27, lat: 13.08 },
+  { name: 'Bengaluru', lon: 77.59, lat: 12.97, left: true },
+  { name: 'Telangana', lon: 78.49, lat: 17.38, left: true },
+  { name: 'Andhra Pradesh', lon: 80.65, lat: 16.51 },
+  { name: 'Kolkata', lon: 88.36, lat: 22.57 },
   { name: 'Andaman', lon: 92.74, lat: 11.62 },
 ]
 
@@ -27,7 +31,7 @@ export default function IndiaMap() {
             <g key={s.name}>
               <circle className="imap-ring" cx={x} cy={y} r="2" />
               <circle className="imap-pin" cx={x} cy={y} r="3.2" />
-              <text className="imap-lab" x={x + 7} y={y + 3}>{t(s.name)}</text>
+              <text className="imap-lab" x={s.left ? x - 7 : x + 7} y={y + 3} textAnchor={s.left ? 'end' : 'start'}>{t(s.name)}</text>
             </g>
           )
         })}
