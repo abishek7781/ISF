@@ -3054,9 +3054,51 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .brochure-sec>.container{width:100%}
   .brochure{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;
     width:fit-content;max-width:100%!important;margin-inline:auto;padding:0 5.5rem 0 0!important;min-height:0!important;grid-template-columns:auto minmax(0,500px)!important;gap:clamp(3rem,7vw,7rem)!important;justify-content:center;align-items:center}
-  .brochure .bk-stage{display:block!important;zoom:1.55}
+  .brochure .bk-stage{display:none!important}
+  .rb-stage{display:grid!important}
   .br-ball{display:block!important;right:0}
   .br-text h2{font-size:clamp(2.2rem,3.8vw,3.4rem)}
   .br-form{max-width:460px}
 }
-@media (min-width:681px) and (max-width:1000px){.brochure .bk-stage{zoom:1.1}}
+@media (min-width:681px) and (max-width:1000px){.rb-book{--W:160px!important;--H:220px!important}.rb-stage{width:420px!important;height:380px!important}}
+
+/* the desktop book: glossy photo-jacket hardcover with real page thickness; opens, turns a page, closes */
+.rb-stage{display:none;position:relative;width:560px;height:480px;perspective:1500px;place-items:center}
+.rb-stage::after{content:"";position:absolute;left:10%;right:10%;bottom:52px;height:40px;background:radial-gradient(ellipse at center,rgba(0,0,0,.55),transparent 70%);filter:blur(8px)}
+.rb-book{--W:224px;--H:308px;--N:18;position:relative;width:var(--W);height:var(--H);transform-style:preserve-3d;animation:rb-view 10s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes rb-view{
+  0%,6%{transform:translateX(0) rotateX(52deg) rotateZ(-30deg) scale(.95)}
+  26%,70%{transform:translateX(calc(var(--W)/2)) rotateX(40deg) rotateZ(-10deg) scale(1)}
+  90%,100%{transform:translateX(0) rotateX(52deg) rotateZ(-30deg) scale(.95)}}
+.rb-face{position:absolute;inset:0;backface-visibility:hidden}
+.rb-bc{position:absolute;inset:-3px -3px -3px -1px;border-radius:2px 7px 7px 2px;background:#0b1a33;transform:translateZ(-1px);box-shadow:0 30px 40px -12px rgba(0,0,0,.8)}
+.rb-pg{position:absolute;inset:3px 4px 3px 2px;border-radius:1px 3px 3px 1px;background:linear-gradient(90deg,#d8d1bf 0,#f4efe2 6%,#fbf8ef 60%,#efe8d6);border-right:1px solid #cfc7b1;transform:translateZ(calc(var(--i)*.75px))}
+.rb-pg:nth-of-type(odd){filter:brightness(.97)}
+.rb-rp{position:absolute;inset:3px 4px 3px 2px;border-radius:1px 3px 3px 1px;padding:20px 18px;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent 7%),linear-gradient(90deg,#f6f1e4,#fcfaf3);transform:translateZ(calc(var(--N)*.75px + .6px));color:#14213d}
+.rb-rp h5{font:800 17px var(--head);letter-spacing:-.02em;margin-bottom:9px}
+.rb-rp img{width:100%;height:96px;object-fit:cover;border-radius:3px;margin-bottom:9px;box-shadow:0 3px 8px rgba(0,0,0,.3)}
+.rb-rp ul{list-style:none;margin:0;padding:0}.rb-rp li{border-bottom:1px solid #d7cfb9;padding:6px 0;font-size:10px;color:#4a5670}
+.rb-hg{position:absolute;inset:0;transform-origin:0 50%;transform-style:preserve-3d}
+.rb-cover{animation:rb-cov 10s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes rb-cov{0%,6%{transform:translateZ(calc(var(--N)*.75px + 2.4px)) rotateY(0)}26%,70%{transform:translateZ(calc(var(--N)*.75px + 2.4px)) rotateY(-172deg)}90%,100%{transform:translateZ(calc(var(--N)*.75px + 2.4px)) rotateY(0)}}
+.rb-cf{border-radius:2px 7px 7px 2px;overflow:hidden;background:linear-gradient(180deg,rgba(8,20,38,.05),rgba(8,20,38,.9)),url(/assets/entry-badminton.jpeg) center/cover;box-shadow:inset 3px 0 5px rgba(0,0,0,.35)}
+.rb-cf::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,.2),transparent 18%,transparent 70%,rgba(0,0,0,.25));pointer-events:none}
+.rb-cf::before{content:"";position:absolute;left:12px;top:0;bottom:0;width:6px;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.15),rgba(0,0,0,.2));z-index:3}
+.rb-gl{position:absolute;inset:0;z-index:4;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 48%,transparent 60%) -120% 0/60% 100% no-repeat;animation:rb-gloss 10s ease-in-out infinite}
+@keyframes rb-gloss{0%,8%{background-position:-120% 0}22%,100%{background-position:220% 0}}
+.rb-ct{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 28px 34px;color:#fff}
+.rb-ct small{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#7AD680;font-weight:700;margin-bottom:6px}
+.rb-ct b{font:800 30px/1 var(--head);letter-spacing:-.03em}
+.rb-cb{border-radius:7px 2px 2px 7px;transform:rotateY(180deg);background:linear-gradient(270deg,rgba(0,0,0,.3),transparent 12%),#0e2247;display:grid;place-content:center;text-align:center;color:#fff;box-shadow:inset -3px 0 6px rgba(0,0,0,.25)}
+.rb-cb b{font:800 20px var(--head)}.rb-cb small{margin-top:6px;color:#7AD680;letter-spacing:.14em;font-size:10px}
+.rb-flip{animation:rb-flp 10s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes rb-flp{0%,30%{transform:translateZ(calc(var(--N)*.75px + 1.4px)) rotateY(0)}44%,62%{transform:translateZ(calc(var(--N)*.75px + 1.4px)) rotateY(-168deg)}74%,100%{transform:translateZ(calc(var(--N)*.75px + 1.4px)) rotateY(0)}}
+.rb-flip .rb-face{inset:3px 4px 3px 2px;border-radius:1px 4px 4px 1px;padding:18px 16px;color:#14213d}
+.rb-f1{background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 8%),#faf6ea}.rb-f1 img{width:100%;height:170px;object-fit:cover;border-radius:3px;box-shadow:0 3px 8px rgba(0,0,0,.3)}.rb-f1 b{display:block;margin-top:9px;font:800 14px var(--head)}
+.rb-f2{transform:rotateY(180deg);background:linear-gradient(270deg,rgba(0,0,0,.22),transparent 8%),#f7f2e4}.rb-f2 h5{font:800 15px var(--head);margin-bottom:7px}.rb-f2 p{font-size:10px;line-height:1.55;color:#4a5670}
+.rb-f1::after,.rb-f2::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 40%,rgba(255,255,255,.15))}
+@media (prefers-reduced-motion:reduce){
+  .rb-book{animation:none;transform:translateX(calc(var(--W)/2)) rotateX(40deg) rotateZ(-10deg)}
+  .rb-cover{animation:none;transform:translateZ(calc(var(--N)*.75px + 2.4px)) rotateY(-172deg)}
+  .rb-flip,.rb-gl{animation:none}
+}

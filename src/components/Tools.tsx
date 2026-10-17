@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Check, Download, Ruler } from 'lucide-react'
-import { A, ZOHO } from '../data/content'
+import { A, CONTACT, ZOHO } from '../data/content'
 import { useI18n } from '../i18n'
 import { postLead } from '../lib/zoho'
 import { COUNTRY_CODES, asciiDigits } from './Sections'
@@ -45,6 +45,36 @@ async function playBook(book: HTMLElement) {
   await bookAn(cover, [{ transform: 'translateZ(2px) rotateY(-168deg)' }, { transform: 'translateZ(2px) rotateY(0)' }], { duration: 650 })
   await bookAn(book, [{ transform: 'translateX(var(--bk-slide)) rotateZ(-3deg) rotateY(0) rotateX(8deg)' }, { transform: rest }], { duration: 600 })
   ;[cover, ...pgs, book].forEach((e) => e.getAnimations().forEach((a) => a.cancel()))
+}
+
+/** Desktop book: a 3D hardcover with a glossy photo jacket that opens, turns a page and closes again (pure CSS, see .rb-* styles). */
+function RealBook() {
+  const { t } = useI18n()
+  const flip = BOOK_PAGES[1]
+  return (
+    <div className="rb-stage" aria-hidden="true">
+      <div className="rb-book">
+        <div className="rb-bc" />
+        {Array.from({ length: 18 }, (_, i) => <i className="rb-pg" key={i} style={{ ['--i' as string]: i }} />)}
+        <div className="rb-rp">
+          <h5>{t('Contents')}</h5>
+          <img src={A('badminton4.jpg')} alt="" loading="lazy" />
+          <ul>{BOOK_PAGES.slice(0, 6).map((p) => <li key={p.head}>{t(p.head)}</li>)}</ul>
+        </div>
+        <div className="rb-hg rb-flip">
+          <div className="rb-face rb-f1"><img src={A(flip.img!)} alt="" loading="lazy" /><b>{t(flip.head)}</b></div>
+          <div className="rb-face rb-f2"><h5>{t(flip.backHead)}</h5><p>{t(flip.back)}</p></div>
+        </div>
+        <div className="rb-hg rb-cover">
+          <div className="rb-face rb-cf">
+            <i className="rb-gl" />
+            <div className="rb-ct"><small>{t('Brochure')}</small><b>India Sports<br />Infra</b></div>
+          </div>
+          <div className="rb-face rb-cb"><b>{t('Inside')}</b><small>{CONTACT.phone}</small></div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function BrochureBook({ bookRef }: { bookRef: React.RefObject<HTMLDivElement | null> }) {
@@ -135,6 +165,7 @@ export function Brochure() {
         <Reveal className="brochure">
           <div className="br-bg" aria-hidden="true"><i className="sp1" /><i className="sp2" /></div>
           <BrochureBook bookRef={bookRef} />
+          <RealBook />
           <div className="br-cover" aria-hidden="true">
             <img src={A('entry-badminton.jpeg')} alt="" loading="lazy" />
             <span className="br-cv-pdf">PDF</span>
