@@ -823,6 +823,7 @@ export function Contact() {
   return (
     <>
       <section id="contact" className="section contact-sec">
+        <div className="c-bg" aria-hidden="true"><i className="c-wall" /><i className="c-floor" /></div>
         <div className="container contact-grid">
           <div className="contact-side">
             <span className="c-kicker"><ChevronsRight size={16} /> {t('Contact')}</span>

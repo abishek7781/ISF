@@ -3116,3 +3116,18 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   #products .pg-group:last-child{margin-bottom:0}
   #products{padding-bottom:1.5rem}
 }
+
+/* contact background: a sunlit hall wall above a wood floor in perspective (replaces the blurred photo) */
+.contact-sec::before,.contact-sec::after{display:none!important}
+.c-bg{--b0:#f4f7fb;position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+[data-theme=dark] .c-bg{--b0:#08111f}
+.c-wall{position:absolute;inset:0;background:linear-gradient(180deg,#e9f0fa,#f8fafd 62%)}
+[data-theme=dark] .c-wall{background:linear-gradient(180deg,#0b1730,#08111f 62%)}
+.c-wall::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 10%,rgba(255,214,120,.38) 12% 22%,transparent 24%,transparent 38%,rgba(255,214,120,.32) 40% 50%,transparent 52%,transparent 66%,rgba(255,214,120,.32) 68% 78%,transparent 80%);filter:blur(6px);animation:c-sun 9s ease-in-out infinite alternate}
+[data-theme=dark] .c-wall::before{opacity:.45}
+@keyframes c-sun{to{transform:translateX(28px)}}
+.c-floor{position:absolute;left:0;right:0;bottom:0;height:62%;overflow:hidden}
+.c-floor::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(196,138,56,.75) 0 26px,rgba(150,100,35,.75) 26px 28px);transform:perspective(420px) rotateX(58deg) scale(1.7);transform-origin:50% 100%}
+[data-theme=dark] .c-floor::before{filter:brightness(.5) saturate(.9)}
+.c-floor::after{content:"";position:absolute;inset:0;background:linear-gradient(var(--b0),transparent 55%)}
+@media (prefers-reduced-motion:reduce){.c-wall::before{animation:none}}
