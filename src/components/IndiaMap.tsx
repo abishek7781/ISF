@@ -1,5 +1,5 @@
 import { INDIA_PATH } from '../data/indiaPath'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Reveal } from './ui'
 import { useI18n } from '../i18n'
 
@@ -21,40 +21,69 @@ const SITES: { name: string; lon: number; lat: number; dx: number; dy: number }[
 /** "Where we have built": India's outline on a faint dot grid, with glowing pins and white name tags. */
 export default function IndiaMap() {
   const { t } = useI18n()
-  const dots = useRef<HTMLDivElement>(null)
-  const [glows, setGlows] = useState<{ x: number; y: number; d: number; dl: number }[]>([])
-  // A few of the grid dots light up now and then, each on its own random rhythm.
+  const wrap = useRef<HTMLDivElement>(null)
+  const cv = useRef<HTMLCanvasElement>(null)
+  // The dot grid is drawn on a canvas. It stays still until the mouse moves over it; then the dots near the cursor
+  // light up and grow, and settle again when the mouse leaves.
   useEffect(() => {
-    const el = dots.current
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const make = () => {
-      const w = el.clientWidth, h = el.clientHeight
-      const cols = Math.floor(w / 18), rows = Math.floor(h / 18)
-      const count = Math.min(70, Math.round((cols * rows) / 45))
-      const out: { x: number; y: number; d: number; dl: number }[] = []
-      const seen = new Set<string>()
-      while (out.length < count && seen.size < cols * rows) {
-        const c = Math.floor(Math.random() * cols), r = Math.floor(Math.random() * rows)
-        const k = `${c}:${r}`
-        if (seen.has(k)) continue
-        seen.add(k)
-        // keep to the part of the grid that is visible (the grid fades out toward the edges)
-        const nx = (c * 18 + 9) / w - 0.5, ny = (r * 18 + 9) / h - 0.45
-        if ((nx / 0.6) ** 2 + (ny / 0.7) ** 2 > 0.9) continue
-        out.push({ x: c * 18 + 9, y: r * 18 + 9, d: 2.6 + Math.random() * 3.6, dl: -Math.random() * 6 })
+    const c = cv.current, box = wrap.current
+    if (!c || !box) return
+    const ctx = c.getContext('2d')
+    if (!ctx) return
+    const S = 18, R = 150
+    const st = { mx: 0, my: 0, on: false, k: 0, raf: 0, w: 0, h: 0, dpr: 1 }
+    const dark = () => document.documentElement.dataset.theme === 'dark'
+    const draw = () => {
+      ctx.setTransform(st.dpr, 0, 0, st.dpr, 0, 0)
+      ctx.clearRect(0, 0, st.w, st.h)
+      const rgb = dark() ? '255,255,255' : '14,36,71'
+      const base = dark() ? 0.16 : 0.2
+      for (let y = S / 2; y < st.h; y += S) {
+        for (let x = S / 2; x < st.w; x += S) {
+          let lit = 0
+          if (st.k > 0.01) {
+            const d = Math.hypot(x - st.mx, y - st.my)
+            if (d < R) lit = (1 - d / R) ** 2 * st.k
+          }
+          ctx.fillStyle = `rgba(${rgb},${Math.min(1, base + lit * 0.8)})`
+          ctx.beginPath()
+          ctx.arc(x, y, 1.3 + lit * 1.7, 0, 6.2832)
+          ctx.fill()
+        }
       }
-      setGlows(out)
     }
-    make()
-    const ro = new ResizeObserver(make)
-    ro.observe(el)
-    return () => ro.disconnect()
+    const tick = () => {
+      st.k += ((st.on ? 1 : 0) - st.k) * 0.14
+      draw()
+      st.raf = st.k > 0.01 || st.on ? requestAnimationFrame(tick) : 0
+      if (!st.raf) { st.k = 0; draw() }
+    }
+    const kick = () => { if (!st.raf) st.raf = requestAnimationFrame(tick) }
+    const size = () => {
+      st.dpr = Math.min(window.devicePixelRatio || 1, 2)
+      st.w = c.clientWidth; st.h = c.clientHeight
+      c.width = Math.round(st.w * st.dpr); c.height = Math.round(st.h * st.dpr)
+      draw()
+    }
+    const move = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return
+      const r = c.getBoundingClientRect()
+      st.mx = e.clientX - r.left; st.my = e.clientY - r.top; st.on = true; kick()
+    }
+    const leave = () => { st.on = false; kick() }
+    size()
+    const ro = new ResizeObserver(size)
+    ro.observe(c)
+    const mo = new MutationObserver(draw)
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!reduce) { box.addEventListener('pointermove', move); box.addEventListener('pointerleave', leave) }
+    return () => { ro.disconnect(); mo.disconnect(); cancelAnimationFrame(st.raf); box.removeEventListener('pointermove', move); box.removeEventListener('pointerleave', leave) }
   }, [])
   return (
     <Reveal className="imap2">
-      <div className="imap2-dots" aria-hidden="true" ref={dots}>
-        {glows.map((g, i) => <i key={i} style={{ left: g.x, top: g.y, animationDuration: `${g.d.toFixed(2)}s`, animationDelay: `${g.dl.toFixed(2)}s` }} />)}
-      </div>
+     <div className="imap2-in" ref={wrap}>
+      <div className="imap2-dots" aria-hidden="true"><canvas ref={cv} /></div>
       <div className="imap2-box">
         <svg className="imap2-svg" viewBox="-6 -4 290 312" role="img" aria-label={t('Map of India with our project locations')}>
           <path className="imap2-land" d={INDIA_PATH} />
@@ -77,6 +106,7 @@ export default function IndiaMap() {
           )
         })}
       </div>
+     </div>
     </Reveal>
   )
 }
