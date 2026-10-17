@@ -3191,3 +3191,19 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 .offscreen,.offscreen *,.offscreen *::before,.offscreen *::after{animation-play-state:paused!important}
 /* phones and tablets: no live blur over the playing video */
 @media (max-width:1080px){.hero-bar{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(6,14,30,.88)}}
+
+/* About hero buttons: soft raised keys that press in on hover */
+.ab2-b1,.ab2-b2{padding:.95rem 1.7rem!important;border-radius:16px!important;background:#14233f!important;border:0!important;color:#cfe0ff!important;overflow:visible;gap:.7rem;font-size:.92rem;
+  box-shadow:8px 8px 18px #070d1a,-6px -6px 14px #1d3157!important;-webkit-backdrop-filter:none;backdrop-filter:none;transition:box-shadow .35s,transform .35s,color .3s}
+.ab2-b1{color:#7AD680!important}
+.ab2-b1::after{display:none}
+.ab2-b1 i,.ab2-b2 i{width:auto!important;height:auto!important;border:0!important;background:none!important;border-radius:0;color:inherit!important;animation:none;display:inline-grid;transition:transform .35s}
+.ab2-b1:hover,.ab2-b2:hover{transform:none!important;box-shadow:inset 6px 6px 12px #070d1a,inset -5px -5px 10px #1d3157!important;background:#14233f!important;border:0!important}
+.ab2-b1:hover i{transform:translateX(4px) rotate(0)!important}
+.ab2-b2:hover i{transform:translateY(3px)!important}
+.ab2-b1:active,.ab2-b2:active{transform:scale(.98)!important}
+:root:not([data-theme=dark]) .ab2-b1,:root:not([data-theme=dark]) .ab2-b2{background:#e9eff8!important;color:#0E2447!important;box-shadow:8px 8px 18px #c3cddd,-6px -6px 14px #ffffff!important}
+:root:not([data-theme=dark]) .ab2-b1{color:#2F7F35!important}
+:root:not([data-theme=dark]) .ab2-b1:hover,:root:not([data-theme=dark]) .ab2-b2:hover{background:#e9eff8!important;box-shadow:inset 6px 6px 12px #c3cddd,inset -5px -5px 10px #ffffff!important}
+@media (max-width:900px){.ab2-b1,.ab2-b2{padding:.8rem 1.1rem!important;font-size:.82rem;border-radius:14px!important;box-shadow:5px 5px 12px #070d1a,-4px -4px 10px #1d3157!important}
+  :root:not([data-theme=dark]) .ab2-b1,:root:not([data-theme=dark]) .ab2-b2{box-shadow:5px 5px 12px #c3cddd,-4px -4px 10px #fff!important}}
