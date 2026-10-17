@@ -3117,17 +3117,29 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   #products{padding-bottom:1.5rem}
 }
 
-/* contact background: a sunlit hall wall above a wood floor in perspective (replaces the blurred photo) */
+/* contact background: a hall wall lit by window sunlight (moonlight in dark theme) above a wood floor in perspective */
 .contact-sec::before,.contact-sec::after{display:none!important}
-.c-bg{--b0:#f4f7fb;position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
-[data-theme=dark] .c-bg{--b0:#08111f}
-.c-wall{position:absolute;inset:0;background:linear-gradient(180deg,#e9f0fa,#f8fafd 62%)}
-[data-theme=dark] .c-wall{background:linear-gradient(180deg,#0b1730,#08111f 62%)}
-.c-wall::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 10%,rgba(255,214,120,.38) 12% 22%,transparent 24%,transparent 38%,rgba(255,214,120,.32) 40% 50%,transparent 52%,transparent 66%,rgba(255,214,120,.32) 68% 78%,transparent 80%);filter:blur(6px);animation:c-sun 9s ease-in-out infinite alternate}
-[data-theme=dark] .c-wall::before{opacity:.45}
-@keyframes c-sun{to{transform:translateX(28px)}}
-.c-floor{position:absolute;left:0;right:0;bottom:0;height:62%;overflow:hidden}
-.c-floor::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(196,138,56,.75) 0 26px,rgba(150,100,35,.75) 26px 28px);transform:perspective(420px) rotateX(58deg) scale(1.7);transform-origin:50% 100%}
-[data-theme=dark] .c-floor::before{filter:brightness(.5) saturate(.9)}
-.c-floor::after{content:"";position:absolute;inset:0;background:linear-gradient(var(--b0),transparent 55%)}
-@media (prefers-reduced-motion:reduce){.c-wall::before{animation:none}}
+.c-bg{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;--shaft:rgba(255,226,150,.55);--glow:rgba(255,222,140,.5)}
+[data-theme=dark] .c-bg{--shaft:rgba(176,204,255,.3);--glow:rgba(190,215,255,.16)}
+.c-wall{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 12% -5%,var(--glow),transparent 70%),linear-gradient(180deg,#dde8f5,#f6f9fd 68%)}
+[data-theme=dark] .c-wall{background:radial-gradient(ellipse 40% 50% at 84% 4%,rgba(200,220,255,.28),transparent 70%),linear-gradient(180deg,#0a1630,#060d1b 68%)}
+/* light shafts through the windows: slanted bands that fade out along their length */
+.c-wall::before{content:"";position:absolute;inset:-6% -4% 0;
+  background:linear-gradient(113deg,transparent 6%,var(--shaft) 9% 20%,transparent 23%,transparent 35%,var(--shaft) 38% 46%,transparent 49%,transparent 62%,var(--shaft) 65% 76%,transparent 79%);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.85) 45%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.85) 45%,transparent 100%);
+  filter:blur(9px);animation:c-sun 12s ease-in-out infinite alternate}
+@keyframes c-sun{0%{transform:translateX(-16px);opacity:.85}100%{transform:translateX(22px);opacity:1}}
+/* floating dust in the light, or stars at night */
+.c-wall::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0 1.2px,transparent 2px) 12% 22%/190px 160px,radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 2px) 55% 60%/230px 200px,radial-gradient(circle,rgba(255,244,214,.9) 0 1.6px,transparent 2.6px) 80% 18%/170px 210px;
+  animation:c-dust 16s linear infinite;opacity:.85}
+@keyframes c-dust{to{background-position:12% -140%,55% 140%,80% -192%}}
+[data-theme=dark] .c-wall::after{background:radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.8px) 8% 10%/140px 90px,radial-gradient(circle,rgba(210,225,255,.8) 0 .8px,transparent 1.6px) 40% 30%/110px 80px,radial-gradient(circle,rgba(255,255,255,.7) 0 1.2px,transparent 2px) 70% 6%/170px 110px;animation:c-twinkle 5s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 70%);mask-image:linear-gradient(180deg,#000 30%,transparent 70%)}
+@keyframes c-twinkle{to{opacity:.35}}
+.c-floor{position:absolute;left:0;right:0;bottom:0;height:42%;overflow:hidden}
+.c-floor::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(196,138,56,.85) 0 26px,rgba(150,100,35,.85) 26px 28px);transform:perspective(420px) rotateX(58deg) scale(1.7);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);mask-image:linear-gradient(180deg,transparent,#000 45%)}
+[data-theme=dark] .c-floor::before{filter:brightness(.42) saturate(.8)}
+/* the window light landing on the boards */
+.c-floor::after{content:"";position:absolute;inset:0;background:linear-gradient(113deg,transparent 8%,rgba(255,240,190,.55) 12% 24%,transparent 28%,transparent 42%,rgba(255,240,190,.45) 46% 56%,transparent 60%,transparent 72%,rgba(255,240,190,.5) 76% 88%,transparent 92%);mix-blend-mode:soft-light;filter:blur(4px);-webkit-mask-image:linear-gradient(180deg,transparent,#000 50%);mask-image:linear-gradient(180deg,transparent,#000 50%);animation:c-sun 12s ease-in-out infinite alternate}
+[data-theme=dark] .c-floor::after{background:linear-gradient(113deg,transparent 8%,rgba(170,200,255,.5) 12% 24%,transparent 28%,transparent 42%,rgba(170,200,255,.4) 46% 56%,transparent 60%,transparent 72%,rgba(170,200,255,.45) 76% 88%,transparent 92%);mix-blend-mode:screen;opacity:.5}
+@media (prefers-reduced-motion:reduce){.c-wall::before,.c-wall::after,.c-floor::after{animation:none}}
