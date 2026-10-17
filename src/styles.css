@@ -2981,3 +2981,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m-nav a{color:#fff;font-weight:600;font-size:.86rem;opacity:.92}
   .foot-m-nav a:active{opacity:.6}
 }
+
+/* phone footer: still, dark background */
+@media (max-width:680px){
+  .foot-m{background:#070d18!important;animation:none!important;background-size:auto!important}
+}
