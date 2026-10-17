@@ -25,10 +25,10 @@ export default function PrivacyPage() {
           <span className="pv-kicker">{t('Legal')}</span>
           <h1>{t('Privacy Policy')}</h1>
           <p className="pv-date">Last updated: 5 October 2026</p>
-          <p className="pv-lead">This policy explains what personal information India Sports Floorings (&ldquo;ISF&rdquo;, &ldquo;we&rdquo;) collects through this website, why we collect it, and the choices you have.</p>
+          <p className="pv-lead">This policy explains what personal information India Sports Infra (&ldquo;ISF&rdquo;, &ldquo;we&rdquo;) collects through this website, why we collect it, and the choices you have.</p>
 
           <h2>1. Who we are</h2>
-          <p>India Sports Floorings, {CONTACT.address.join(', ')}. You can reach us at <a href={`mailto:${email}`}>{email}</a> or on <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a>.</p>
+          <p>India Sports Infra, {CONTACT.address.join(', ')}. You can reach us at <a href={`mailto:${email}`}>{email}</a> or on <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a>.</p>
 
           <h2>2. What we collect</h2>
           <p>When you send a request through our contact form we collect your name, your WhatsApp phone number, the type of project you are planning, any sport you describe, and the date and time you would like us to call you. If you message or call us directly, we keep what you tell us in that conversation.</p>

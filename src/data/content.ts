@@ -97,7 +97,7 @@ export const GALLERY = [
 ]
 
 export const VIDEOS = [
-  { id: 'U71SKGrzVmo', title: 'Project showcase', by: 'India Sports Floorings' },
+  { id: 'U71SKGrzVmo', title: 'Project showcase', by: 'India Sports Infra' },
   { id: 'DNBAU1VIOT8', title: 'Wooden flooring testimonial', by: 'TT Sports Academy' },
   { id: 'CTsATYJz7yE', title: 'Narendra Varma Raju', by: 'Gayathri Sports Arena' },
   { id: '31yrUbdA_sM', title: 'Vidya Balan', by: 'Client testimonial' },
@@ -139,7 +139,7 @@ export const FAQS = [
   { q: 'What types of sports flooring do you offer in India?', a: 'Durable indoor court flooring, resilient outdoor sports surfaces and specialised gym flooring, tailored to the sport and the venue.' },
   { q: 'Can you install sports flooring in commercial spaces in India?', a: 'Yes. We install high-performance flooring for gyms, sports complexes and recreation centres, meeting both functional and aesthetic requirements.' },
   { q: 'Do you provide sports flooring maintenance services in India?', a: 'Yes. Our maintenance service covers everything from routine cleaning to repair work, keeping your floor in top condition.' },
-  { q: 'What makes India Sports Flooring different from other flooring companies in India?', a: 'Flooring designed to international standards, precise installation by an experienced team, and a strong focus on durability, performance and customer satisfaction.' },
+  { q: 'What makes India Sports Infra different from other flooring companies in India?', a: 'Flooring designed to international standards, precise installation by an experienced team, and a strong focus on durability, performance and customer satisfaction.' },
   { q: 'How can I get a quote for sports flooring in India?', a: 'Share your project details with us and our team will prepare a comprehensive quote tailored to your requirements.' },
   { q: 'Which type of flooring is used for a badminton hall?', a: 'A shock-absorbent surface with the right balance of grip and cushioning, typically synthetic wood or cushioned vinyl designed for indoor sport.' },
   { q: 'What is the cost of constructing an indoor badminton court in India?', a: 'It depends on court size, flooring type, lighting and amenities, and typically ranges from INR 10 lakhs to 30 lakhs. We provide a detailed quote for your specific needs.' },

@@ -128,7 +128,7 @@ function Journey() {
             <div className="st3-in">
               <span className="st3-rule" aria-hidden="true" />
               <h3>{t('Where we started')}</h3>
-              <p>{t('India Sports Floorings began in 2017 manufacturing solid wooden sports flooring and importing badminton court mats for Chennai, then expanded across South India and into a wider range of flooring products.')}</p>
+              <p>{t('India Sports Infra began in 2017 manufacturing solid wooden sports flooring and importing badminton court mats for Chennai, then expanded across South India and into a wider range of flooring products.')}</p>
             </div>
           </Reveal>
           <Reveal delay={0.1} className="st3-c st3-now">
@@ -185,7 +185,7 @@ export function About() {
         <span className="ab2-year" aria-hidden="true">2017</span>
         <div className="container ab-hero-grid">
           <Reveal>
-            <span className="ab2-kicker"><i /> {t('About India Sports Floorings')}</span>
+            <span className="ab2-kicker"><i /> {t('About India Sports Infra')}</span>
             <h2 className="ab-title">{t('Building the floors India plays on,')} <em>{t('since 2017.')}</em></h2>
             <p className="ab-lead">{t('From one workshop in Chennai making solid wooden sports floors to a team that builds complete venues for more than a dozen sports.')}</p>
             <div className="ab2-cta">
@@ -215,7 +215,7 @@ export function About() {
       <section className="ab-founder">
         <div className="container founder-grid">
           <Reveal className="founder-photo">
-            <div className="fp" role="img" aria-label={t('Manendra, founder of India Sports Floorings')}>
+            <div className="fp" role="img" aria-label={t('Manendra, founder of India Sports Infra')}>
               <div className="fp-print fp-back" aria-hidden="true"><img src={A('founder.webp')} alt="" loading="lazy" /></div>
               <div className="fp-print fp-front">
                 <img src={A('founder.webp')} alt="" loading="lazy" />
@@ -227,9 +227,9 @@ export function About() {
           <Reveal delay={0.1} className="founder-text">
             <span className="ab-kicker">{t('The founder')}</span>
             <h2 className="founder-name">Manendra</h2>
-            <p className="founder-role">{t('Founder, India Sports Floorings')}</p>
+            <p className="founder-role">{t('Founder, India Sports Infra')}</p>
             <blockquote className="founder-quote">{t('A vision to build, not to follow.')}</blockquote>
-            <p>{t('From a humble background and without a big name behind him, Manendra started India Sports Floorings in Chennai in 2017. He failed, learned and kept building, until the company was delivering BWF-certified badminton courts made in India.')}</p>
+            <p>{t('From a humble background and without a big name behind him, Manendra started India Sports Infra in Chennai in 2017. He failed, learned and kept building, until the company was delivering BWF-certified badminton courts made in India.')}</p>
             <p>{t('Today he leads the team that has built more than 700 courts, with the same belief he started with: players deserve floors that protect them.')}</p>
           </Reveal>
         </div>
@@ -850,7 +850,7 @@ export function Contact() {
           <Head label="Offices" title="Visit us." />
           <div className="visit">
             <div className="visit-map">
-              <iframe title="India Sports Floorings on Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              <iframe title="India Sports Infra on Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps?q=India+Sports+Floorings+Kundrathur+Chennai&output=embed" />
             </div>
             <div className="visit-side">
@@ -939,7 +939,7 @@ export function Footer() {
         </div>
 
         <div className="foot-bottom">
-          <span>{t('© 2026 India Sports Floorings. All rights reserved.')} <Link className="foot-priv" to="/privacy">{t('Privacy Policy')}</Link></span>
+          <span>{t('© 2026 India Sports Infra. All rights reserved.')} <Link className="foot-priv" to="/privacy">{t('Privacy Policy')}</Link></span>
           <button type="button" className="to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('Back to top')} <ArrowUp size={15} /></button>
         </div>
       </div>
