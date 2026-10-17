@@ -3152,3 +3152,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 .c-floor{height:60%}
 .c-floor::before{-webkit-mask-image:linear-gradient(180deg,transparent,#000 22%);mask-image:linear-gradient(180deg,transparent,#000 22%);transform:perspective(520px) rotateX(56deg) scale(1.6)}
 [data-theme=dark] .c-floor::before{filter:brightness(.62) saturate(.9)}
+
+/* phones: no wood floor behind the contact form */
+@media (max-width:680px){
+  .c-floor{display:none}
+}
