@@ -2986,3 +2986,11 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @media (max-width:680px){
   .foot-m{background:#070d18!important;animation:none!important;background-size:auto!important}
 }
+
+/* CTA band on phones: the two buttons are the same width, one on each side, so the zig-zag lines up */
+@media (max-width:680px){
+  .cta-actions{gap:.8rem}
+  .cta-main,.cta-call{width:min(300px,84%)!important;justify-content:space-between!important}
+  .cta-main{align-self:flex-start;margin-left:0}
+  .cta-call{align-self:flex-end;margin-left:auto;justify-content:flex-start!important}
+}
