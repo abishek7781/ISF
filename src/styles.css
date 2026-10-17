@@ -3025,3 +3025,23 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   :root:not([data-theme=dark]) .foot-m-word .g{color:transparent!important;-webkit-text-fill-color:transparent}
 }
 @media (prefers-reduced-motion:reduce){.foot-m-word .g::after{animation:none}}
+
+/* brochure on phones: three pages fanned out above centred text, then the form */
+.br-fan{display:none}
+@media (max-width:680px){
+  .bk-stage,.br-ball{display:none!important}
+  .brochure{grid-template-columns:1fr!important;justify-items:center;text-align:center;gap:.9rem;padding:1.2rem 1rem 1.3rem}
+  .br-fan{display:block;position:relative;width:100%;height:150px;margin-top:.2rem}
+  .br-fp{position:absolute;left:50%;top:6px;width:84px;aspect-ratio:3/4;margin-left:-42px;border-radius:8px;overflow:hidden;background:#0E2447;box-shadow:0 14px 26px -10px rgba(0,0,0,.8);border:2px solid rgba(255,255,255,.85);transform-origin:50% 130%;opacity:0;animation:br-fan-in .8s cubic-bezier(.2,.9,.3,1) forwards}
+  .br-fp img{width:100%;height:100%;object-fit:cover;display:block}
+  .br-fp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(8,20,38,.9))}
+  .br-fp b{position:absolute;left:6px;right:6px;bottom:6px;z-index:1;font-size:.52rem;line-height:1.1;letter-spacing:.04em;text-align:left}
+  .br-fp:nth-child(1){--r:-20deg;animation-delay:.1s}
+  .br-fp:nth-child(2){--r:0deg;animation-delay:.25s;z-index:2}
+  .br-fp:nth-child(3){--r:20deg;animation-delay:.4s}
+  @keyframes br-fan-in{from{opacity:0;transform:rotate(0) translateY(20px)}to{opacity:1;transform:rotate(var(--r)) translateY(0)}}
+  .br-main{width:100%;display:grid;justify-items:center}
+  .br-text h2{margin-top:.2rem}
+  .br-form{width:100%;max-width:380px;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){.br-fp{animation:none;opacity:1;transform:rotate(var(--r))}}
