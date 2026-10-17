@@ -135,6 +135,11 @@ export function Brochure() {
         <Reveal className="brochure">
           <div className="br-bg" aria-hidden="true"><i className="sp1" /><i className="sp2" /></div>
           <BrochureBook bookRef={bookRef} />
+          <div className="br-cover" aria-hidden="true">
+            <img src={A('entry-badminton.jpeg')} alt="" loading="lazy" />
+            <span className="br-cv-pdf">PDF</span>
+            <div className="br-cv-t"><small>{t('Brochure')}</small><b>India Sports<br />Infra</b></div>
+          </div>
           <div className="br-fan" aria-hidden="true">
             {[['tt1.webp', 'Turf and courts'], ['badminton4.jpg', 'Flooring systems'], ['track.webp', 'Running tracks']].map(([img, label]) => (
               <span className="br-fp" key={img}><img src={A(img)} alt="" loading="lazy" /><b>{t(label)}</b></span>
