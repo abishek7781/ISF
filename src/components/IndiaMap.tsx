@@ -1,6 +1,5 @@
 import { INDIA_PATH } from '../data/indiaPath'
-import { STATS } from '../data/content'
-import { Counter, Reveal } from './ui'
+import { Reveal } from './ui'
 import { useI18n } from '../i18n'
 
 const K = 10
@@ -18,7 +17,7 @@ const SITES: { name: string; lon: number; lat: number; dx: number; dy: number }[
   { name: 'Andaman', lon: 92.74, lat: 11.62, dx: -50, dy: -150 },
 ]
 
-/** "Where we have built": India's outline on a faint dot grid, glowing pins with white name tags, and the totals underneath. */
+/** "Where we have built": India's outline on a faint dot grid, with glowing pins and white name tags. */
 export default function IndiaMap() {
   const { t } = useI18n()
   return (
@@ -46,11 +45,6 @@ export default function IndiaMap() {
           )
         })}
       </div>
-      <dl className="imap2-stats">
-        <div><dt><Counter to={STATS[0].value} suffix="+" /></dt><dd>{t('Projects completed')}</dd></div>
-        <div><dt><Counter to={STATS[1].value} suffix="+" /></dt><dd>{t('Courts built')}</dd></div>
-        <div><dt><Counter to={STATS[2].value} /></dt><dd>{t('Countries')}</dd></div>
-      </dl>
     </Reveal>
   )
 }
