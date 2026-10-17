@@ -2971,3 +2971,13 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .bd-view .bd-toggle{left:16px!important;right:auto!important;top:12px!important;bottom:auto!important;z-index:3}
   .bd-view .bd-hint,.bd-screen.rev .bd-view .bd-hint,.bd-screen.wide .bd-view .bd-hint{top:16px!important;bottom:auto!important;right:16px!important;left:auto!important}
 }
+
+/* footer on phones: soft curved top (instead of the slant) and a row of page links */
+@media (max-width:680px){
+  .foot-m{clip-path:none!important;border-radius:50% 50% 0 0/34px 34px 0 0;margin-top:0}
+  .foot-m-tag{top:2.3rem}
+  .foot-m{padding-top:4.4rem}
+  .foot-m-nav{display:flex;flex-wrap:wrap;gap:.45rem 1.1rem;margin-top:1.1rem}
+  .foot-m-nav a{color:#fff;font-weight:600;font-size:.86rem;opacity:.92}
+  .foot-m-nav a:active{opacity:.6}
+}

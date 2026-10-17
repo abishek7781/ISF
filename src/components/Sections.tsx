@@ -897,6 +897,9 @@ export function Footer() {
           </div>
           <button type="button" className="foot-m-top" aria-label={t('Back to top')} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><ArrowUp size={18} /></button>
         </div>
+        <nav className="foot-m-nav" aria-label="Footer">
+          {NAV.map(([l, h]) => <Link key={h} to={h}>{t(l)}</Link>)}
+        </nav>
         <div className="foot-m-info">
           <div><a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a><small>{t('Chennai, India')}</small></div>
           <div className="r"><span>© 2026</span><Link to="/privacy">{t('Privacy Policy')}</Link></div>
