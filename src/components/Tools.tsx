@@ -59,7 +59,7 @@ function RealBook() {
         <div className="rb-rp">
           <h5>{t('Contents')}</h5>
           <img src={A('badminton4.jpg')} alt="" loading="lazy" />
-          <ul>{BOOK_PAGES.slice(0, 6).map((p) => <li key={p.head}>{t(p.head)}</li>)}</ul>
+          <ul>{BOOK_PAGES.slice(0, 5).map((p) => <li key={p.head}>{t(p.head)}</li>)}</ul>
         </div>
         <div className="rb-hg rb-flip">
           <div className="rb-face rb-f1"><img src={A(flip.img!)} alt="" loading="lazy" /><b>{t(flip.head)}</b></div>
