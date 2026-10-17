@@ -9,6 +9,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useI18n } from '../i18n'
 import { postLead } from '../lib/zoho'
 import { getConsent } from './CookieBanner'
+import IndiaMap from './IndiaMap'
 import { Facebook, Instagram, Linkedin, Youtube } from './Brand'
 import CallDatePicker, { iso } from './CallDatePicker'
 import { Counter, Reveal } from './ui'
@@ -378,6 +379,7 @@ export function Reach() {
               <div><dt>2</dt><dd>{t('Offices')}</dd></div>
             </dl>
           </div>
+          <IndiaMap />
           <div className="tickets">
             {PLACES.map((pl, i) => (
               <Reveal key={pl.name} delay={(i % 3) * 0.07} className={`ticket ${pl.origin ? 'origin' : ''}`}>
