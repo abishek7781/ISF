@@ -3230,23 +3230,24 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 @media (max-width:900px){.ab2-b1{padding:.8rem 1.3rem!important}.ab2-b2{padding:.3rem .2rem!important;font-size:.82rem}}
 
 /* "Where we have built": India map with glowing pins and glass stat cards */
-.imap{--h:clamp(340px,52vw,500px);position:relative;height:var(--h);margin:0 0 2.4rem;border-radius:22px;overflow:hidden;display:grid;place-items:center;
-  background:radial-gradient(ellipse 60% 70% at 50% 55%,#12305e,#07101f 75%);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 60px -34px rgba(0,0,0,.7)}
+.imap-persp{perspective:1100px;margin:0 0 2.4rem}
+.imap{--h:clamp(340px,52vw,500px);position:relative;height:var(--h);display:grid;place-items:center;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.imap-bgl{position:absolute;inset:0;border-radius:22px;overflow:hidden;background:radial-gradient(ellipse 60% 70% at 50% 55%,#12305e,#07101f 75%);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 60px -34px rgba(0,0,0,.7)}
 .imap-glow{position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(63,158,69,.22),transparent 45%)}
-.imap-svg{position:relative;height:calc(var(--h) - 30px);width:auto;aspect-ratio:290/312;max-width:92%;overflow:visible}
+.imap-svg{position:relative;transform:translateZ(34px);height:calc(var(--h) - 30px);width:auto;aspect-ratio:290/312;max-width:92%;overflow:visible}
 .imap-land{fill:#15335f;stroke:#3a74d0;stroke-width:.9;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 14px rgba(53,100,174,.45))}
 .imap-pin{fill:#7AD680;filter:drop-shadow(0 0 4px #7AD680)}
 .imap-ring{fill:none;stroke:#7AD680;stroke-width:1;animation:imap-ring 2.4s ease-out infinite}
 @keyframes imap-ring{0%{r:2;opacity:1}100%{r:15;opacity:0}}
 .imap-lab{font-size:8px;fill:#dbe8ff;font-weight:600}
-.imap-card{position:absolute;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:.8rem 1.1rem;color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 14px 30px -16px rgba(0,0,0,.8)}
+.imap-card{position:absolute;transform:translateZ(60px);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:.8rem 1.1rem;color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 14px 30px -16px rgba(0,0,0,.8)}
 .imap-card b{display:block;font:800 2rem/1 var(--head);letter-spacing:-.03em;color:#7AD680}
 .imap-card span{display:block;margin-top:.3rem;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#c8d6ee}
 .imap-card.c1{left:clamp(14px,5%,56px);top:clamp(14px,8%,40px)}
 .imap-card.c2{right:clamp(14px,5%,56px);top:34%}
 .imap-card.c3{left:clamp(14px,8%,90px);bottom:clamp(14px,9%,40px)}
 @media (max-width:680px){
-  .imap{--h:380px;margin-bottom:1.4rem;border-radius:18px}
+  .imap-persp{margin-bottom:1.4rem}.imap{--h:380px}.imap-bgl{border-radius:18px}
   .imap-card{padding:.55rem .8rem;border-radius:12px}.imap-card b{font-size:1.4rem}.imap-card span{font-size:.55rem}
   .imap-card.c2{top:46%}
 }

@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { INDIA_PATH } from '../data/indiaPath'
 import { STATS } from '../data/content'
 import { Counter, Reveal } from './ui'
@@ -20,9 +21,22 @@ const SITES: { name: string; lon: number; lat: number; left?: boolean }[] = [
 /** "Where we have built": India's outline with glowing pins, and glass stat cards floating over it. */
 export default function IndiaMap() {
   const { t } = useI18n()
+  const card = useRef<HTMLDivElement>(null)
+  // On a desktop mouse the card leans toward the cursor; touch screens and reduced-motion visitors get a still card.
+  const lean = (e: React.PointerEvent) => {
+    const el = card.current
+    if (!el || e.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const r = el.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width - 0.5
+    const y = (e.clientY - r.top) / r.height - 0.5
+    el.style.setProperty('--ry', `${(x * 12).toFixed(2)}deg`)
+    el.style.setProperty('--rx', `${(-y * 10).toFixed(2)}deg`)
+  }
+  const level = () => { card.current?.style.removeProperty('--ry'); card.current?.style.removeProperty('--rx') }
   return (
-    <Reveal className="imap" >
-      <div className="imap-glow" aria-hidden="true" />
+    <Reveal className="imap-persp">
+     <div className="imap" ref={card} onPointerMove={lean} onPointerLeave={level}>
+      <div className="imap-bgl" aria-hidden="true"><div className="imap-glow" /></div>
       <svg className="imap-svg" viewBox="-6 -4 290 312" role="img" aria-label={t('Map of India with our project locations')}>
         <path className="imap-land" d={INDIA_PATH} />
         {SITES.map((s) => {
@@ -39,6 +53,7 @@ export default function IndiaMap() {
       <div className="imap-card c1"><b><Counter to={STATS[0].value} suffix="+" /></b><span>{t('Projects completed')}</span></div>
       <div className="imap-card c2"><b><Counter to={STATS[1].value} suffix="+" /></b><span>{t('Courts built')}</span></div>
       <div className="imap-card c3"><b><Counter to={STATS[2].value} /></b><span>{t('Countries')}</span></div>
+     </div>
     </Reveal>
   )
 }
