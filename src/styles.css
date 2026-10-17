@@ -3012,3 +3012,16 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .foot-m-word .g{background:none!important;animation:none!important;-webkit-text-stroke:0!important;display:block;margin-top:.1rem;line-height:.9;font-size:clamp(2.3rem,12.5vw,3.1rem);color:#7AD680!important;-webkit-text-fill-color:#7AD680}
   :root:not([data-theme=dark]) .foot-m-word .g{color:#2F7F35!important;-webkit-text-fill-color:#2F7F35}
 }
+
+/* phone footer: INFRA as a wood floor with a moving shine and a polished-floor reflection */
+@media (max-width:680px){
+  .foot-m-word .g{display:block;width:max-content;position:relative;margin:.1rem 0 1.15rem;color:transparent!important;-webkit-text-fill-color:transparent;
+    background:repeating-linear-gradient(90deg,#d9a566 0 9px,#c28640 9px 10px),linear-gradient(#ffffff33,#00000033)!important;background-blend-mode:multiply;
+    -webkit-background-clip:text!important;background-clip:text!important;-webkit-box-reflect:below -4px linear-gradient(transparent 42%,rgba(255,255,255,.3))}
+  .foot-m-word .g::after{content:"INFRA";position:absolute;left:0;top:0;-webkit-text-fill-color:transparent;color:transparent;
+    background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 65%) -150% 0/60% 100% no-repeat;
+    -webkit-background-clip:text;background-clip:text;animation:foot-shine 3s ease-in-out infinite}
+  @keyframes foot-shine{to{background-position:260% 0}}
+  :root:not([data-theme=dark]) .foot-m-word .g{color:transparent!important;-webkit-text-fill-color:transparent}
+}
+@media (prefers-reduced-motion:reduce){.foot-m-word .g::after{animation:none}}
