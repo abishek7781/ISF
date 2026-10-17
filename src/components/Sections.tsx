@@ -9,6 +9,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useI18n } from '../i18n'
 import { postLead } from '../lib/zoho'
 import { getConsent } from './CookieBanner'
+import FooterWater from './FooterWater'
 import { Facebook, Instagram, Linkedin, Youtube } from './Brand'
 import CallDatePicker, { iso } from './CallDatePicker'
 import { Counter, Reveal } from './ui'
@@ -887,7 +888,7 @@ export function Footer() {
     <footer className="footer">
       <div className="foot-m">
         <div className="foot-m-tag"><i />{t('Chennai, India')} · 2017</div>
-        <div className="foot-m-word" aria-label="India Sports Infra"><span className="r1"><span className="in">INDIA</span><span>SPORTS</span></span><span className="g">INFRA</span></div>
+        <div className="foot-m-word" aria-label="India Sports Infra"><span className="r1"><span className="in">INDIA</span><span>SPORTS</span></span><span className="g"><FooterWater /></span></div>
         <div className="foot-m-row">
           <div className="foot-m-soc">
             {(Object.keys(soc) as (keyof typeof soc)[]).map((k) => {

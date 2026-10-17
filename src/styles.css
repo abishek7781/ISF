@@ -3001,3 +3001,21 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   :root:not([data-theme=dark]) .foot-m-nav a,:root:not([data-theme=dark]) .foot-m-info a{color:#0E2447}
   :root:not([data-theme=dark]) .foot-m-info{color:#4a5a78;border-top-color:rgba(14,36,71,.16)}
 }
+
+/* INDIA: the flag colours at full strength */
+@media (max-width:680px){
+  .foot-m-word .in{background:linear-gradient(180deg,#FF9933 0 34%,#FFFFFF 34% 66%,#138808 66% 100%)!important;-webkit-background-clip:text!important;background-clip:text!important}
+  :root:not([data-theme=dark]) .foot-m-word .in{background:linear-gradient(180deg,#FF9933 0 34%,#CDD5E3 34% 66%,#138808 66% 100%)!important;-webkit-background-clip:text!important;background-clip:text!important}
+}
+/* INFRA: letters half full of water that tilts and sloshes with the phone (see FooterWater.tsx) */
+@media (max-width:680px){
+  .foot-m-word .g{background:none!important;animation:none!important;-webkit-text-stroke:0!important;display:block;margin-top:.15rem;line-height:0;font-size:0}
+  .fw{display:block;width:clamp(8.6rem,46vw,11.5rem);height:auto;overflow:visible}
+  .fw text{font:900 60px var(--head)}
+  .fw-line{stroke:#7AD680;stroke-width:1.4}
+  :root:not([data-theme=dark]) .fw-line{stroke:#2F7F35}
+  .fw-tilt{transform-origin:116px 31px;transform:rotate(var(--a,0deg))}
+  .fw-wave{animation:fw-wave 2.6s linear infinite}
+  @keyframes fw-wave{to{transform:translateX(-46px)}}
+}
+@media (prefers-reduced-motion:reduce){.fw-wave{animation:none}}
