@@ -25,9 +25,11 @@ type Opts = {
 /** A WebGL stage with physically based rendering, image-based light, soft shadows and a render loop that sleeps off-screen. */
 export function createStage(host: HTMLElement, o: Opts): Stage {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5))
+  // phones and tablets draw fewer pixels and use cheaper shadows, which keeps the 3D views at a steady frame rate
+  const touch = window.matchMedia('(pointer: coarse)').matches
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, touch ? 1.25 : 1.5))
   renderer.shadowMap.enabled = true
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap
+  renderer.shadowMap.type = touch ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = o.exposure ?? 1
   renderer.outputColorSpace = THREE.SRGBColorSpace

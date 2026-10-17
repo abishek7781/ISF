@@ -1,0 +1,33 @@
+import { ZH_MORE } from '../translations'
+
+export const ZH_BASE: Record<string, string> = {
+  Home: '首页', Products: '产品', Portfolio: '项目案例', About: '关于我们', Contact: '联系我们',
+  'Language': '语言', 'Switch to light mode': '切换到浅色模式', 'Switch to dark mode': '切换到深色模式',
+  'Sports infrastructure, Chennai — since 2017': '体育基础设施 · 金奈 · 始于2017年',
+  'Get your players': '为您的运动员打造',
+  'a': '', 'great sports arena': '一流的运动场馆',
+  'Turnkey courts, turfs, tracks and training halls, built to global federation standards. Over 700 badminton courts delivered with BWF-approved wooden and synthetic flooring.': '交钥匙球场、草坪、跑道与训练馆，符合国际联合会标准。已交付700多块羽毛球场，采用BWF认可的木质与合成地板。',
+  'Request a site visit': '预约现场勘察', 'View our work': '查看我们的项目',
+  'Badminton courts': '羽毛球场', 'Players on ISF floors': '在ISF场地运动的人数', 'Approved systems': '认可系统',
+  'Projects in': '项目遍布', 'Talk to our sports infrastructure team': '联系我们的体育基础设施团队',
+  'Product guide': '产品指南', 'Everything a sports venue needs, from the floor up.': '体育场馆所需的一切，从地面开始。',
+  Flooring: '运动地板', Fabrication: '钢结构制作', Lighting: '照明',
+  'Sport surfaces for every discipline': '适用于各类运动的场地表面',
+  'Steel-framed net enclosures and court structures, fabricated and erected on site.': '钢结构围网与场地结构，现场制作并安装。',
+  'Lighting for indoor halls and outdoor turfs, planned with the court layout.': '室内场馆与室外球场照明，与场地布局统一规划。',
+  'BWF-approved badminton floors and surfaces for every major sport, supplied and installed by our team.': '符合BWF标准的羽毛球地板及各类运动场地表面，由我们团队供货并安装。',
+  'Learn more': '了解更多', 'Request a quote': '获取报价', 'Get a call back': '预约回电', 'products': '款产品',
+  'Badminton Wooden Flooring': '羽毛球木地板', 'Badminton Synthetic Flooring': '羽毛球合成地板', 'Tennis Court Flooring': '网球场地板',
+  'Pickleball Court': '匹克球场', 'Padel Court': '板式网球场', 'Basketball Flooring': '篮球场地板', 'Futsal Flooring': '五人制足球场地',
+  'Running Track': '跑道', 'Skating Rink': '溜冰场', 'Gym Flooring': '健身房地板', 'Archery Flooring': '射箭场地',
+  'Outdoor Sports Flooring': '室外运动地板', 'Swimming Pool': '游泳池', 'Cricket Net Enclosures': '板球训练围网',
+  'Court and Turf Enclosures': '球场与草坪围网', 'Indoor Court Lighting': '室内球场照明', 'Outdoor Turf Floodlighting': '室外球场泛光照明',
+  'Hear from the experts in badminton court flooring and construction.': '听听羽毛球场地板与施工专家的建议。',
+  'Planning a sports facility?': '正在规划体育设施？', 'Tell us what you are building and we will get back with a plan and a quote.': '告诉我们您的建设需求，我们将提供方案和报价。',
+  Company: '公司', Offices: '办事处', Phone: '电话', WhatsApp: 'WhatsApp', Email: '电子邮件',
+  'Who we are': '关于我们', 'Turnkey sports infrastructure built to global federation standards.': '符合国际联合会标准的交钥匙体育基础设施。',
+  'More about ISF': '更多关于ISF', 'Contact with us': '联系我们',
+  'Tell us about your court, turf or training facility. Our team will call you back at a time that suits you with a plan and a quote.': '请告诉我们您的球场、草坪或训练设施情况。我们的团队将在您方便的时间回电，并提供方案和报价。',
+  'Phone Number': '电话号码', 'Email Address': '电子邮箱',
+}
+export const ZH = { ...ZH_BASE, ...ZH_MORE }

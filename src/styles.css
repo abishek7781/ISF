@@ -3186,3 +3186,8 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .br-form{width:100%;max-width:440px;text-align:left}
   .br-form .br-dl{white-space:nowrap}
 }
+
+/* performance: looping animations stop while their section is off screen (see src/lib/perf.ts) */
+.offscreen,.offscreen *,.offscreen *::before,.offscreen *::after{animation-play-state:paused!important}
+/* phones and tablets: no live blur over the playing video */
+@media (max-width:1080px){.hero-bar{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(6,14,30,.88)}}
