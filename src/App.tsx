@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation, type Location } from 'react-router-dom'
 import Header from './components/Header'
 import { FloatingActions, Footer } from './components/Sections'
@@ -96,6 +97,7 @@ export default function App() {
       <FloatingActions />
       <EntryForm />
       <CookieBanner />
+      <Analytics />
     </BrowserRouter>
   )
 }
