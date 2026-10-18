@@ -3293,3 +3293,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .cb-acts>*{flex:1}
 }
 @media (prefers-reduced-motion:reduce){.cb,.cb.out{animation:none;transition:none}.cb-drawer{transition:none}}
+/* long translated labels wrap instead of running off the screen */
+.cb-acts{flex-wrap:wrap}
+.cb-manage,.cb-yes,.cb-save,.cb-no{white-space:normal;text-align:center;line-height:1.25}
+@media (max-width:760px){.cb-acts>*{flex:1 1 150px}}
