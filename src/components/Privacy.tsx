@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 import { CONTACT } from '../data/content'
 import { useI18n } from '../i18n'
 
-export const openCookieChoice = () => {
-  try { localStorage.removeItem('isf-consent') } catch { /* storage unavailable */ }
-  window.dispatchEvent(new Event('isf-open-consent'))
-}
+export const openCookieChoice = () => window.dispatchEvent(new Event('isf-open-consent'))
 
 export default function PrivacyPage() {
   const { t } = useI18n()
@@ -16,7 +13,7 @@ export default function PrivacyPage() {
     ['isf-theme', 'Remembers light or dark mode', 'Essential, stored in your browser'],
     ['isf-lang', 'Remembers your language', 'Essential, stored in your browser'],
     ['isf-consent', 'Remembers your cookie choice', 'Essential, stored in your browser'],
-    ['Zoho form analytics', 'Measures how the contact form is used', 'Only if you choose Accept all'],
+    ['Zoho form analytics', 'Measures how the contact form is used', 'Only if you allow Analytics'],
   ]
   return (
     <div className="dark-page">

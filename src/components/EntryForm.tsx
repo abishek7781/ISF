@@ -78,11 +78,12 @@ export default function EntryForm() {
   // Only on arriving at the site (a fresh load of the home page): never when moving around inside the site.
   useEffect(() => {
     if (window.location.pathname !== '/') return
-    const id = window.setTimeout(() => setOpen(true), window.matchMedia('(min-width: 1081px)').matches ? 1500 : 3200)
+    const id = window.setTimeout(() => { setOpen(true); window.dispatchEvent(new Event('isf-entry-open')) }, window.matchMedia('(min-width: 1081px)').matches ? 1500 : 3200)
     return () => clearTimeout(id)
   }, [])
   const finish = () => {
     setOpen(false); setLeaving(false)
+    window.dispatchEvent(new Event('isf-entry-closed'))   // the cookie bar waits for this
   }
   // Closing slides the card down off the screen while it fades out.
   const close = () => {

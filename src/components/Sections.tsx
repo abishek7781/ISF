@@ -8,7 +8,7 @@ import {
 import { Link, useSearchParams } from 'react-router-dom'
 import { useI18n } from '../i18n'
 import { postLead } from '../lib/zoho'
-import { getConsent } from './CookieBanner'
+import { getPrefs, openCookieSettings, useConsent } from '../lib/consent'
 import IndiaMap from './IndiaMap'
 import { Facebook, Instagram, Linkedin, Youtube } from './Brand'
 import CallDatePicker, { iso } from './CallDatePicker'
@@ -509,6 +509,7 @@ export function Certifications() {
 
 export function Videos() {
   const { t } = useI18n()
+  const { media } = useConsent()
   const [cur, setCur] = useState(0)
   const [playing, setPlaying] = useState(false)
   const v = VIDEOS[cur]
@@ -535,7 +536,9 @@ export function Videos() {
         </div>
         <div className="vd-stage">
           <div className="vd-frame">
-            {playing ? (
+            {playing && !media ? (
+              <div className="media-off"><p>{t('Videos need the Embedded media cookies.')}</p><button type="button" onClick={openCookieSettings}>{t('Change cookie settings')}</button></div>
+            ) : playing ? (
               <iframe key={v.id} src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0`} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
             ) : (
               <button onClick={() => setPlaying(true)} aria-label={`Play video: ${v.title}`}>
@@ -720,7 +723,7 @@ export function ContactForm() {
   const nowMins = new Date().getHours() * 60 + new Date().getMinutes()
 
   useEffect(() => {
-    // Zoho's form analytics script is only loaded once the visitor has accepted all cookies.
+    // Zoho's form analytics script is only loaded once the visitor has allowed Analytics.
     const load = () => {
       if (document.getElementById('wf_anal')) return
       const s = document.createElement('script')
@@ -729,8 +732,8 @@ export function ContactForm() {
       s.async = true
       document.body.appendChild(s)
     }
-    if (getConsent() === 'all') load()
-    const on = (e: Event) => { if ((e as CustomEvent).detail === 'all') load() }
+    if (getPrefs().analytics) load()
+    const on = () => { if (getPrefs().analytics) load() }
     window.addEventListener('isf-consent', on)
     return () => window.removeEventListener('isf-consent', on)
   }, [])
@@ -817,6 +820,7 @@ export function ContactForm() {
 
 export function Contact() {
   const { t } = useI18n()
+  const { media } = useConsent()
   const channels = [
     { icon: Phone, label: t('Phone Number'), value: CONTACT.phone, href: `tel:${CONTACT.phone}` },
     { icon: MessageCircle, label: 'WhatsApp', value: '+91 87545 52007', href: `https://api.whatsapp.com/send?phone=${CONTACT.whatsapp}` },
@@ -852,8 +856,12 @@ export function Contact() {
           <Head label="Offices" title="Visit us." />
           <div className="visit">
             <div className="visit-map">
-              <iframe title="India Sports Infra on Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=India+Sports+Floorings+Kundrathur+Chennai&output=embed" />
+              {media ? (
+                <iframe title="India Sports Infra on Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps?q=India+Sports+Floorings+Kundrathur+Chennai&output=embed" />
+              ) : (
+                <div className="media-off"><p>{t('The map needs the Embedded media cookies.')}</p><button type="button" onClick={openCookieSettings}>{t('Change cookie settings')}</button><a href={CONTACT.map} target="_blank" rel="noreferrer">{t('Open in Maps')}</a></div>
+              )}
             </div>
             <div className="visit-side">
               <div className="visit-card">

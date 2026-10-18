@@ -3,12 +3,14 @@ import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { A, CONTACT, COUNTRIES } from '../data/content'
 import { useI18n } from '../i18n'
+import { useConsent } from '../lib/consent'
 
 export default function Hero() {
   const { lang, t } = useI18n()
   const [playing, setPlaying] = useState(false)
   // The showreel starts loading just after the page itself has finished, so it never competes with the first paint.
   const [video, setVideo] = useState(false)
+  const { media } = useConsent()
   useEffect(() => {
     const nav = navigator as Navigator & { connection?: { saveData?: boolean } }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || nav.connection?.saveData) return
@@ -35,7 +37,7 @@ export default function Hero() {
     <section id="home" className="hero">
       <div className="hero-media" aria-hidden="true">
         <img src={A('skating.webp')} alt="" fetchPriority="high" />
-        {video && <iframe title="ISF showreel" tabIndex={-1} className={playing ? 'on' : ''}
+        {video && media && <iframe title="ISF showreel" tabIndex={-1} className={playing ? 'on' : ''}
           onLoad={(e) => e.currentTarget.contentWindow?.postMessage(JSON.stringify({ event: 'listening' }), '*')}
           src="https://www.youtube-nocookie.com/embed/QskICZm-AD0?autoplay=1&mute=1&loop=1&playlist=QskICZm-AD0&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1"
           allow="autoplay; encrypted-media" />}
