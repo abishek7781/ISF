@@ -3297,3 +3297,15 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 .cb-acts{flex-wrap:wrap}
 .cb-manage,.cb-yes,.cb-save,.cb-no{white-space:normal;text-align:center;line-height:1.25}
 @media (max-width:760px){.cb-acts>*{flex:1 1 150px}}
+
+/* hero buttons on every phone and tablet: always one row, same height, scaled to the screen width */
+@media (max-width:1080px){
+  .hero-cta{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;width:100%;gap:clamp(.4rem,2.2vw,.8rem)}
+  .hero-cta .visit-btn,.hero-cta .work-btn{flex:0 1 auto;min-width:0;height:clamp(40px,11.5vw,46px);white-space:nowrap;font-size:clamp(.72rem,3.7vw,.92rem)}
+  .hero-cta .visit-btn{padding:0 clamp(3px,1vw,4px) 0 clamp(.7rem,3.8vw,1.15rem);gap:clamp(.35rem,2vw,.7rem)}
+  .hero-cta .vb-ico{width:clamp(32px,9.5vw,38px);height:clamp(32px,9.5vw,38px);flex:none}
+  .hero-cta .vb-ico svg{width:clamp(16px,5vw,20px);height:auto}
+  .hero-cta .work-btn{padding:0 clamp(.7rem,4.4vw,1.25rem);justify-content:center}
+}
+/* longer translated labels may use two rows rather than overflow */
+@media (max-width:1080px){html:not([lang=en]) .hero-cta{flex-wrap:wrap}}
