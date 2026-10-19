@@ -229,9 +229,15 @@ export function About() {
             <span className="ab-kicker">{t('The founder')}</span>
             <h2 className="founder-name">Manendra</h2>
             <p className="founder-role">{t('Founder, India Sports Infra')}</p>
-            <blockquote className="founder-quote">{t('A vision to build, not to follow.')}</blockquote>
+            <blockquote className="founder-quote">{t('Elevating the standards of sports infrastructure, execution and athlete development in India.')}</blockquote>
+            <p>{t('Before flooring, Manendra worked on the courts themselves. He managed venue operations at the BWF World Championships and the Thomas & Uber Cup, and was Total Event Organizer for Setup of the Tamil Nadu Badminton League, working closely with players such as Lin Dan, P.V. Sindhu and Kidambi Srikanth.')}</p>
             <p>{t('From a humble background and without a big name behind him, Manendra started India Sports Infra in Chennai in 2017. He failed, learned and kept building, until the company was delivering BWF-certified badminton courts made in India.')}</p>
             <p>{t('Today he leads the team that has built more than 700 courts, with the same belief he started with: players deserve floors that protect them.')}</p>
+            <ul className="founder-facts">
+              {([['Events', 'Total Event Organizer for Setup, Tamil Nadu Badminton League. Venue operations at the BWF World Championships and the Thomas & Uber Cup.'], ['Broadcast', 'Worked with Star Sports and DD Sports so venues met international broadcast requirements.'], ['Infrastructure', 'BWF-certified flooring systems, designed for athlete safety and for Indian climate conditions.'], ['Administration', 'Secretary, Chennai District Pickleball Association, for over two years.']] as const).map(([h, b]) => (
+                <li key={h}><b>{t(h)}</b><span>{t(b)}</span></li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>
