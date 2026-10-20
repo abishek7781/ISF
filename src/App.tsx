@@ -39,8 +39,8 @@ function Preloader() {
     if (gone) return
     document.body.style.overflow = 'hidden'
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const t1 = window.setTimeout(() => { setOpen(true); document.body.style.overflow = '' }, 2000)
-    const t2 = window.setTimeout(() => setGone(true), reduce ? 2100 : 2650)
+    const t1 = window.setTimeout(() => { setOpen(true); document.body.style.overflow = '' }, 1200)
+    const t2 = window.setTimeout(() => setGone(true), reduce ? 1300 : 1850)
     return () => { clearTimeout(t1); clearTimeout(t2); document.body.style.overflow = '' }
   }, [])
   if (gone) return null
