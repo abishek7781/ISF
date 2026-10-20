@@ -126,10 +126,22 @@ export function ProductsPage() {
 }
 
 export function PortfolioPage() {
+  // The 3D builds start a moment after the page has loaded (or at the first scroll or tap), so the page itself appears and responds first.
+  const [ready3d, setReady3d] = useState(false)
+  useEffect(() => {
+    let t = 0
+    const go = () => { clearTimeout(t); setReady3d(true); void import('./three/warm').then((m) => m.warm3D()); off() }
+    const evs = ['scroll', 'pointerdown', 'touchstart', 'keydown'] as const
+    const off = () => evs.forEach((e) => window.removeEventListener(e, go))
+    evs.forEach((e) => window.addEventListener(e, go, { once: true, passive: true }))
+    const arm = () => { t = window.setTimeout(go, 2500) }
+    if (document.readyState === 'complete') arm(); else window.addEventListener('load', arm, { once: true })
+    return () => { clearTimeout(t); off(); window.removeEventListener('load', arm) }
+  }, [])
   return (
     <div className="dark-page">
       <PageHeader title="Portfolio" />
-      <Suspense fallback={<div style={{ minHeight: '100svh' }} />}><PortfolioBuilds /></Suspense>
+      {ready3d ? <Suspense fallback={<div style={{ minHeight: '100svh' }} />}><PortfolioBuilds /></Suspense> : <div style={{ minHeight: '100svh' }} aria-hidden="true" />}
       <Reach />
       <CtaBand />
     </div>

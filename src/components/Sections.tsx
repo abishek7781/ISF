@@ -925,7 +925,7 @@ export function Footer() {
       <div className="container foot-desk">
         <div className="foot-grid">
           <div className="foot-brand">
-            <img src={A('logo-dark.webp')} alt="India Sports Infra" width="900" height="344" />
+            <img src={A('logo-dark-480.webp')} alt="India Sports Infra" width="480" height="183" loading="lazy" />
             <div className="foot-soc">
               {(Object.keys(soc) as (keyof typeof soc)[]).map((k) => {
                 const I = soc[k]

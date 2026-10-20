@@ -25,6 +25,17 @@ const LOADERS: Record<Exclude<Lang, 'en'>, () => Promise<Record<string, string>>
   ml: () => import('./langs/ml').then((m) => ({ ...m.ML, ...COOKIE_STR.ml, ...FOUNDER_STR.ml })),
   ms: () => import('./langs/ms').then((m) => ({ ...m.MS, ...COOKIE_STR.ms, ...FOUNDER_STR.ms })),
 }
+// Indian-script fonts are fetched only for visitors who pick that language.
+const INDIC_FONT: Partial<Record<Lang, string>> = { hi: 'Devanagari', ta: 'Tamil', te: 'Telugu', ml: 'Malayalam' }
+function loadIndicFont(lang: Lang) {
+  const name = INDIC_FONT[lang]
+  if (!name || document.getElementById(`font-${lang}`)) return
+  const l = document.createElement('link')
+  l.id = `font-${lang}`
+  l.rel = 'stylesheet'
+  l.href = `https://fonts.googleapis.com/css2?family=Noto+Sans+${name}:wght@400;600;800&display=swap`
+  document.head.appendChild(l)
+}
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (s: string) => string }
 const I18n = createContext<Ctx>({ lang: 'en', setLang: () => {}, t: (s) => s })
 
@@ -34,6 +45,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     return 'en'
   })
   useEffect(() => {
+    loadIndicFont(lang)
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ms' ? 'ms-MY' : lang
     try { localStorage.setItem('isf-lang', lang) } catch { /* storage unavailable */ }
   }, [lang])

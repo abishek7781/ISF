@@ -10,7 +10,6 @@ import PrivacyPage from './components/Privacy'
 import { AboutPage, ContactPage, HomePage, PortfolioPage, ProductsPage, ScrollToTop } from './pages'
 
 import { NotFound } from './components/Tools'
-import { warm3D } from './three/warm'
 
 function PreLogo() {
   return (
@@ -22,12 +21,21 @@ function PreLogo() {
   )
 }
 
+/** After the page has settled, quietly fetch the 3D code so the Portfolio page opens fast. Skipped on slow or data-saving connections. */
+function prefetch3D() {
+  const c = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection
+  if (c?.saveData || /(^|-)2g$|3g/.test(c?.effectiveType || '')) return
+  const go = () => { const ric = (window as Window & { requestIdleCallback?: (f: () => void, o?: { timeout: number }) => void }).requestIdleCallback; (ric ?? ((f: () => void) => setTimeout(f, 1500)))(() => void import('./components/PortfolioBuilds'), { timeout: 6000 }) }
+  if (document.readyState === 'complete') window.setTimeout(go, 5000)
+  else window.addEventListener('load', () => window.setTimeout(go, 5000), { once: true })
+}
+
 function Preloader() {
   const [open, setOpen] = useState(false)
   // The intro animation is for phones and tablets only; laptops and desktops go straight in.
   const [gone, setGone] = useState(() => window.matchMedia('(min-width: 1081px)').matches)
   useEffect(() => {
-    warm3D()
+    prefetch3D()
     if (gone) return
     document.body.style.overflow = 'hidden'
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches

@@ -57,7 +57,7 @@ export default function Header({ theme, toggle }: { theme: string; toggle: () =>
     <header className={`header ${scrolled || (pathname !== '/' && !(wide && theme === 'dark')) ? 'scrolled' : ''}`}>
       <div className="container header-in">
         <Link to="/" className="brand" aria-label="India Sports Infra home">
-          <img src={A(theme === 'dark' ? 'logo-dark.webp' : 'logo.webp')} alt="India Sports Infra" width="900" height="344" />
+          <img src={A(theme === 'dark' ? 'logo-dark-480.webp' : 'logo-480.webp')} alt="India Sports Infra" width="480" height="183" fetchPriority="high" />
         </Link>
         <nav className="nav" aria-label="Primary">
           {NAV.map(([l, h]) => <NavLink key={h} to={h} end>{t(l)}</NavLink>)}
