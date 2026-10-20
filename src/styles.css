@@ -397,7 +397,7 @@ h3{font-size:1.25rem;letter-spacing:-.01em}
 .filters button{padding:.6rem 1.1rem;border:1px solid var(--line);font-size:.88rem;font-weight:500;color:var(--muted);transition:.2s}
 .filters button:hover{color:var(--text);border-color:var(--text)}
 .filters button.on{background:var(--navy);border-color:var(--navy);color:#fff}
-[data-theme=dark] .filters button.on{background:var(--green);border-color:var(--green)}
+[data-theme=dark] .filters button.on{background:#2F7F35;border-color:#2F7F35}
 .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:10px}
 .bt{position:relative;overflow:hidden;background:var(--navy);animation:riseIn .5s cubic-bezier(.22,1,.36,1) both}
 .bt:first-child{grid-column:span 2;grid-row:span 2}
@@ -1620,7 +1620,7 @@ h3{font-size:1.25rem;letter-spacing:-.01em}
 .tm-title p{color:var(--muted);font-size:1.02rem;margin:0;padding-left:1rem;border-left:3px solid var(--green)}
 .tm-sum{justify-self:end;width:min(100%,360px);padding:1.2rem 1.4rem;border:1px solid var(--line);border-radius:18px;background:var(--card);display:grid;grid-template-columns:auto 1fr;grid-template-areas:"avs tot" "split split" "key key";gap:.9rem 1rem;align-items:center}
 .tm-avs{grid-area:avs;display:flex}
-.tm-avs span{width:34px;height:34px;margin-left:-9px;border-radius:50%;display:grid;place-items:center;font-size:.64rem;font-weight:700;color:#fff;background:var(--green);border:2px solid var(--card)}
+.tm-avs span{width:34px;height:34px;margin-left:-9px;border-radius:50%;display:grid;place-items:center;font-size:.64rem;font-weight:700;color:#fff;background:#2F7F35;border:2px solid var(--card)}
 .tm-avs span:first-child{margin-left:0}
 .tm-avs span.c{background:#3564AE}
 .tm-tot{grid-area:tot;text-align:right;display:flex;align-items:baseline;justify-content:flex-end;gap:.45rem}
