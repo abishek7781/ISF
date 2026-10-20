@@ -38,7 +38,10 @@ export function applyConsent() {
     s.id = 'pagesense'
     s.src = PAGESENSE
     s.async = true
-    document.body.appendChild(s)
+    // load it when the browser is idle, so it never competes with the page itself
+    const add = () => document.body.appendChild(s)
+    const ric = (window as Window & { requestIdleCallback?: (f: () => void, o?: { timeout: number }) => void }).requestIdleCallback
+    if (ric) ric(add, { timeout: 4000 }); else window.setTimeout(add, 2500)
   }
 }
 
