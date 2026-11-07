@@ -106,7 +106,12 @@ export default function App() {
     const y = origin?.y ?? 36
     document.documentElement.style.setProperty('--theme-x', `${x}px`)
     document.documentElement.style.setProperty('--theme-y', `${y}px`)
-    transition(() => flushSync(() => setTheme(next)))
+    try {
+      transition(() => flushSync(() => setTheme(next)))
+    } catch {
+      // A browser or extension can reject the transition; never block the theme toggle.
+      setTheme(next)
+    }
   }
   return (
     <BrowserRouter>
