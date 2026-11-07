@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { Analytics } from '@vercel/analytics/react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation, type Location } from 'react-router-dom'
 import Header from './components/Header'
@@ -105,7 +106,7 @@ export default function App() {
     const y = origin?.y ?? 36
     document.documentElement.style.setProperty('--theme-x', `${x}px`)
     document.documentElement.style.setProperty('--theme-y', `${y}px`)
-    transition(() => setTheme(next))
+    transition(() => flushSync(() => setTheme(next)))
   }
   return (
     <BrowserRouter>
