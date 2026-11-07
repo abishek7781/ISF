@@ -10,7 +10,7 @@ function LangMark({ l }: { l: (typeof LANGS)[number] }) {
   return l.code === 'en' ? <Globe size={17} /> : <img className="lang-cur" src={A(`flags/${l.flag}.svg`)} alt="" width="20" height="14" />
 }
 
-export default function Header({ theme, toggle }: { theme: string; toggle: () => void }) {
+export default function Header({ theme, toggle }: { theme: string; toggle: (origin?: { x: number; y: number }) => void }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [langOpen, setLangOpen] = useState(false)
@@ -75,7 +75,7 @@ export default function Header({ theme, toggle }: { theme: string; toggle: () =>
               </ul>
             )}
           </div>
-          <button className="icon-btn theme-btn" onClick={toggle} aria-label={t(theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')}>
+          <button className="icon-btn theme-btn" onClick={(e) => toggle({ x: e.clientX, y: e.clientY })} aria-label={t(theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')}>
             <span className="tg"><Sun size={19} className="tg-sun" /><Moon size={19} className="tg-moon" /></span>
           </button>
           <button className="icon-btn menu-btn" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open}>

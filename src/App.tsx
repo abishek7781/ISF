@@ -93,11 +93,25 @@ export default function App() {
     document.documentElement.dataset.theme = theme
     try { localStorage.setItem('isf-theme', theme) } catch { /* storage unavailable */ }
   }, [theme])
+  const toggleTheme = (origin?: { x: number; y: number }) => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const transition = (document as Document & { startViewTransition?: (update: () => void) => unknown }).startViewTransition
+    if (!transition || reduce) {
+      setTheme(next)
+      return
+    }
+    const x = origin?.x ?? window.innerWidth / 2
+    const y = origin?.y ?? 36
+    document.documentElement.style.setProperty('--theme-x', `${x}px`)
+    document.documentElement.style.setProperty('--theme-y', `${y}px`)
+    transition(() => setTheme(next))
+  }
   return (
     <BrowserRouter>
       <Preloader />
       <ScrollToTop />
-      <Header theme={theme} toggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
+      <Header theme={theme} toggle={toggleTheme} />
       <main>
         <AnimatedRoutes />
       </main>

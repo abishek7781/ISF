@@ -12,6 +12,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
 body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:16px;overflow-x:hidden;transition:background .25s,color .25s}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){animation:theme-reveal .65s cubic-bezier(.22,1,.36,1) both;z-index:2}
+::view-transition-old(root){z-index:1}
+@keyframes theme-reveal{from{clip-path:circle(0 at var(--theme-x) var(--theme-y))}to{clip-path:circle(150vmax at var(--theme-x) var(--theme-y))}}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
