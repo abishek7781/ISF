@@ -24,7 +24,7 @@ const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
 <polygon class="hx-floor" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="243.2,153.9 440.5,267.8 364.2,311.8 167.0,197.9"/><line class="hx-line" x1="337.5" y1="200.5" x2="247.6" y2="252.3"/><line class="hx-line" x1="359.8" y1="213.4" x2="270.0" y2="265.3"/><line class="hx-line" x1="312.7" y1="194.0" x2="236.5" y2="238.1"/><line class="hx-line" x1="371.0" y1="227.7" x2="294.8" y2="271.7"/><line class="hx-line" x1="348.6" y1="206.9" x2="258.8" y2="258.8"/><line class="hx-net" x1="354.5" y1="203.5" x2="252.9" y2="262.2"/><line class="hx-net-top" x1="354.5" y1="165.5" x2="252.9" y2="224.2"/><line class="hx-post" x1="354.5" y1="203.5" x2="354.5" y2="163.5"/><line class="hx-post" x1="252.9" y1="262.2" x2="252.9" y2="222.2"/>
 <line class="hx-dim" x1="146.9" y1="209.5" x2="344.2" y2="323.4"/><text class="hx-dimt" x="245.55" y="284.45" text-anchor="middle">13.40 m</text><line class="hx-dim" x1="460.5" y1="271.6" x2="370.7" y2="323.4"/><text class="hx-dimt" x="421.6" y="311.5" text-anchor="middle">6.10 m</text>
 <circle class="hx-pulse" cx="303.7" cy="232.9" r="6"/><circle class="hx-dotc" cx="303.7" cy="232.9" r="3"/>
-</svg><figcaption><span>Live sample</span> Badminton · indoor · 1 court</figcaption></figure>
+</svg></figure>
   </div>
   <div class="cd-hx-facts">
     <div><strong>700+</strong><span>Badminton courts built</span></div>
@@ -378,7 +378,7 @@ function mountCourtDesigner(root: HTMLElement): () => void {
       else{const w=LIGHT_IND[S.light.type]||1500;L.push(`<div><b>Lighting:</b> ${S.light.type} · ${w*S.courts} W total for ${S.courts} court(s)</div>`);}
     }
     if(S.parts.acc){const a=Object.keys(S.accs).filter(k=>S.accs[k]);L.push(`<div><b>Accessories:</b> ${a.length?a.join(', '):'None'}</div>`);}
-    $('sum').innerHTML=(L.length?L.join(''):'<div>Start with your sport on the left.</div>')+'<div class="cd-fine">Stylised preview. Dimensions and wattages are indicative; confirm before quoting.</div>';
+    $('sum').innerHTML=(L.length?L.join(''):'<b>Your court preview</b><div>Choose a sport to begin. Your court, its size and its choices appear here as you go.</div>')+'<div class="cd-fine">Stylised preview. Dimensions and wattages are indicative; confirm before quoting.</div>';
   }
   
   // ---------- wizard panel ----------
@@ -442,14 +442,12 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     part('fab','Fabrication (frame, walls, roof)',()=>{
       const out=[];
       if(S.cat==='indoor'){
-        out.push(h('h4',{},'Closed hall'),h('div',{cls:'cd-note'},'Indoor halls are closed with roofing sheets on the top and the sides, with louvres for air flow.'));
         out.push(h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:S.fab.louvers,onchange:e=>{S.fab.louvers=e.target.checked;build();}}),' Louvres'));
         out.push(h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:S.fab.roof,onchange:e=>{S.fab.roof=e.target.checked;build();}}),' Roofing sheets (top and sides)'));
       } else if(S.cat==='semi'){
         out.push(h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:S.fab.roof,onchange:e=>{S.fab.roof=e.target.checked;build();}}),' Roof'));
         out.push(h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:S.fab.louvers,onchange:e=>{S.fab.louvers=e.target.checked;build();}}),' Louvre screens to 3 m'));
       } else {
-        out.push(h('h4',{},'Outdoor cage'),h('div',{cls:'cd-note'},'Net on poles every 10 ft, 20 ft high, with a 10 ft clearance around the court.'));
         out.push(h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:S.fab.side,onchange:e=>{S.fab.side=e.target.checked;build();}}),' Side netting'));
         out.push(h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:S.fab.top,onchange:e=>{S.fab.top=e.target.checked;build();}}),' Top netting'));
       }
@@ -464,11 +462,11 @@ function mountCourtDesigner(root: HTMLElement): () => void {
       ];
     });
     part('light','Lighting',()=>{
-      if(S.cat==='outdoor')return [h('h4',{},'Per light post'),choice(Object.keys(LIGHT_OUT),S.light.type,v=>{S.light.type=v;render();build();}),h('div',{cls:'cd-note'},'One light post every 10 ft around the court.')];
+      if(S.cat==='outdoor')return [h('h4',{},'Per light post'),choice(Object.keys(LIGHT_OUT),S.light.type,v=>{S.light.type=v;render();build();})];
       if(S.light.type&&!LIGHT_IND[S.light.type])S.light.type=Object.keys(LIGHT_IND)[0];
       return [h('h4',{},'Per court'),choice(Object.keys(LIGHT_IND),S.light.type,v=>{S.light.type=v;render();build();})];
     });
-    const accSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'4'),'Accessories'),h('div',{cls:'cd-q'},'Add what the court needs'),h('div',{cls:'cd-accs'},...ACC.map(a=>h('label',{cls:'cd-acc'+(S.accs[a]?' cd-on':'')},h('input',{type:'checkbox',checked:!!S.accs[a],onchange:e=>{S.accs[a]=e.target.checked;render();build();}}),a))));
+    const accSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'4'),'Accessories'),h('div',{cls:'cd-accs'},...ACC.map(a=>h('label',{cls:'cd-acc'+(S.accs[a]?' cd-on':'')},h('input',{type:'checkbox',checked:!!S.accs[a],onchange:e=>{S.accs[a]=e.target.checked;render();build();}}),a))));
     card.append(accSec);
     panel.append(h('div',{cls:'cd-cta'},h('div',{},h('b',{},'Happy with the design?'),h('span',{},'We will turn these choices into a quote.')),h('a',{cls:'cd-pill',href:'/contact'},'Request a quote')));
     build();

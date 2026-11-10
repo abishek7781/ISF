@@ -3374,3 +3374,11 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 :root:not([data-theme=dark]) .foot-m-soc a{border-color:rgba(228,236,247,.45)!important}
 :root:not([data-theme=dark]) .foot-m-tag i{background:#7BD383!important}
 :root:not([data-theme=dark]) .foot-m-word{-webkit-text-stroke-color:#E4ECF7}
+
+/* designer page: the header sits transparent over the hero in light mode too, with dark text and logo */
+:root:not([data-theme=dark]) .header.designer:not(.scrolled) .nav a,
+:root:not([data-theme=dark]) .header.designer:not(.scrolled) .icon-btn,
+:root:not([data-theme=dark]) .header.designer:not(.scrolled) .lang-btn{color:var(--text)}
+:root:not([data-theme=dark]) .header.designer:not(.scrolled) .icon-btn{border-color:rgba(14,36,71,.22)}
+:root:not([data-theme=dark]) .header.designer:not(.scrolled) .brand img{filter:none}
+:root:not([data-theme=dark]) .header.designer:not(.scrolled) .nav a.active{color:var(--text)}
