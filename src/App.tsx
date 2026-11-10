@@ -9,6 +9,7 @@ import CookieBanner from './components/CookieBanner'
 import EntryForm from './components/EntryForm'
 import PrivacyPage from './components/Privacy'
 import { AboutPage, ContactPage, HomePage, PortfolioPage, ProductsPage, ScrollToTop } from './pages'
+import { CourtDesignerPage } from './components/CourtDesigner'
 
 import { NotFound } from './components/Tools'
 
@@ -72,6 +73,7 @@ function PageRoutes({ location }: { location: Location }) {
       <Route path="/portfolio" element={<PortfolioPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/designer" element={<CourtDesignerPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
