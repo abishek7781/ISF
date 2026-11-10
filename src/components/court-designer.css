@@ -137,3 +137,6 @@
 @media (max-width:900px){.cd-page .cd-hx-in{grid-template-columns:1fr}.cd-page .cd-hx-facts{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.cd-page .cd-hx{padding-top:96px}.cd-page .cd-hx-in{padding:0 18px}.cd-page .cd-hx-facts{padding:0 18px}.cd-page .cd-hx-steps{max-width:none}.cd-page .cd-hx-steps span{font-size:13px}.cd-page .cd-hx-fig{padding:12px}.cd-page .cd-hx-actions a{flex:1}}
 @media (prefers-reduced-motion:reduce){.cd-page .cd-hx-tag i,.cd-page .hx-pulse{animation:none}}
+
+/* phones: keep the WhatsApp button clear of the view switch on this page */
+@media (max-width:600px){ body:has(.cd-page) .wa-fab{bottom:96px} }
