@@ -366,6 +366,7 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   
   // ---------- summary ----------
   function summary(sp){
+    if(!S.sport){ $('sum').innerHTML='<b>Your court preview</b><div>Choose a sport to begin. Your court, its size and its choices appear here as you go.</div>'; return; }
     const L=[];
     if(S.sport)L.push(`<div><b>Sport:</b> ${SPORTS[S.sport].n}</div>`);
     if(S.cat)L.push(`<div><b>Category:</b> ${CATS[S.cat]}</div>`);
