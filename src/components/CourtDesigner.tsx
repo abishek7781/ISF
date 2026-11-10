@@ -526,13 +526,11 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     semi:'<svg viewBox="0 0 48 40" aria-hidden="true"><path d="M6 12 H42"/><line x1="10" y1="12" x2="10" y2="34"/><line x1="38" y1="12" x2="38" y2="34"/><path d="M14 22 H34 M14 27 H34"/></svg>'
   };
   const CAT_TEXT={indoor:'Closed hall with louvres and roofing',outdoor:'Open turf with side and top netting',semi:'Roof and louvre screens, open sides'};
-  function tiles(list,current,onpick,meta){
+  function tiles(list,current,onpick,meta?:any){
     return h('div',{cls:'cd-tiles'},...list.map(k=>{
-      const m=meta(k);
+      const label=meta?meta(k).title:k;
       return h('button',{cls:'cd-tile'+(current===k?' cd-on':''),on:()=>onpick(k),'aria-pressed':current===k?'true':'false'},
-        h('span',{cls:'cd-tile-ic',html:m.icon}),
-        h('span',{cls:'cd-tile-t'},m.title),
-        h('span',{cls:'cd-tile-s'},m.sub));
+        h('span',{cls:'cd-tile-t'},label));
     }));
   }
   function choice(list,current,onpick,labelFn=x=>x){return h('div',{cls:'cd-opts'},...list.map(x=>h('button',{cls:'cd-opt'+(current===x?' cd-on':''),on:()=>onpick(x)},labelFn(x))));}
@@ -553,18 +551,18 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     if(S.sport&&S.open!=='sport'){
       card.append(collapsed('1','Sport',SPORTS[S.sport].n+' · '+SPORTS[S.sport].L+' × '+SPORTS[S.sport].W+' m',()=>{S.open='sport';render();}));
     } else {
-      card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;S.open='category';render();build();frame(SPORTS[v]);},k=>({icon:SPORT_ICON(SPORTS[k].L/SPORTS[k].W),title:SPORTS[k].n,sub:SPORTS[k].L+' × '+SPORTS[k].W+' m'}))));
+      card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;S.open='category';render();build();frame(SPORTS[v]);},k=>({title:SPORTS[k].n}))));
     }
     if(!S.sport){build();return;}
     // Q2 category: collapses to one line once chosen
     if(S.cat&&S.open!=='category'){
       card.append(collapsed('2','Category',CATS[S.cat]+' · '+CAT_TEXT[S.cat],()=>{S.open='category';render();}));
     } else {
-      card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;S.open=null;render();build();frame(SPORTS[S.sport]);},k=>({icon:CAT_ICON[k],title:CATS[k],sub:CAT_TEXT[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
+      card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;S.open=null;render();build();frame(SPORTS[S.sport]);},k=>({title:CATS[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
     }
     if(!S.cat){build();return;}
     // Step 3 parts
-    const partsSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'3'),'Parts'),h('div',{cls:'cd-q'},'What do you want to include?'));
+    const partsSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'3'),'Parts'));
     card.append(partsSec);
     const part=(key,label,body)=>{
       const blk=h('div',{cls:'cd-part'});
