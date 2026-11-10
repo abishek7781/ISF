@@ -8,6 +8,13 @@ import { A } from '../data/content'
 import './court-designer.css'
 
 const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
+  <div class="cd-hx-bubbles" aria-hidden="true">
+    <span class="cd-b cd-b1"></span>
+    <span class="cd-b cd-b2"></span>
+    <span class="cd-b cd-b3"></span>
+    <span class="cd-b cd-b4"></span>
+    <span class="cd-b cd-b5"></span>
+  </div>
   <div class="cd-hx-in">
     <div class="cd-hx-copy">
       <span class="cd-hx-tag"><i></i>Court designer · Chennai</span>
