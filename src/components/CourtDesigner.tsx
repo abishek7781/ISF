@@ -7,7 +7,32 @@ import { useEffect, useRef } from 'react'
 import { A } from '../data/content'
 import './court-designer.css'
 
-const MARKUP = `<section class="cd-hero" id="top"><img src="__HERO__" alt=""><div class="cd-hero-in"><span class="cd-eyebrow">Court designer · Chennai</span><h1>Design your court in <span>3D</span>.</h1><p>Pick your sport, choose indoor, outdoor or semi-indoor, then build the fabrication, flooring, lighting and accessories. See it from above or from inside the court before you ask for a quote.</p><div class="cd-btns"><a class="cd-btn-l" href="#designer">Start designing</a><a class="cd-btn-g" href="/contact">Talk to our team</a></div><div class="cd-stats"><div><strong>700+</strong><span>Badminton courts built</span></div><div><strong>50+</strong><span>Pickleball courts</span></div><div><strong>10,000+</strong><span>Players on our floors</span></div><div><strong>BWF</strong><span>Approved systems</span></div></div></div></section>
+const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
+  <div class="cd-hx-grid"></div>
+  <div class="cd-hx-in">
+    <div class="cd-hx-copy">
+      <span class="cd-hx-tag"><i></i>Court designer · Chennai</span>
+      <h1>Design it <em>before</em> you build it.</h1>
+      <p>Choose the sport, the setting and the parts. See your court from above or from inside, then request a quote built from the same choices.</p>
+      <div class="cd-hx-actions"><a class="cd-hx-cta" href="#designer">Start designing</a><a class="cd-hx-alt" href="/contact">Talk to our team</a></div>
+      <ol class="cd-hx-steps">
+        <li><b>01</b><span>Sport</span></li><li><b>02</b><span>Setting</span></li><li><b>03</b><span>Parts</span></li>
+      </ol>
+    </div>
+    <figure class="cd-hx-fig"><svg class="hx-iso" viewBox="120 120 360 250" role="img" aria-label="Isometric badminton court with its dimensions">
+<g class="hx-grid" transform="translate(-120 -120)"><line x1="0" y1="0" x2="500" y2="0"/><line x1="0" y1="20" x2="500" y2="20"/><line x1="0" y1="40" x2="500" y2="40"/><line x1="0" y1="60" x2="500" y2="60"/><line x1="0" y1="80" x2="500" y2="80"/><line x1="0" y1="100" x2="500" y2="100"/><line x1="0" y1="120" x2="500" y2="120"/><line x1="0" y1="140" x2="500" y2="140"/><line x1="0" y1="160" x2="500" y2="160"/><line x1="0" y1="180" x2="500" y2="180"/><line x1="0" y1="200" x2="500" y2="200"/><line x1="0" y1="220" x2="500" y2="220"/><line x1="0" y1="240" x2="500" y2="240"/><line x1="0" y1="260" x2="500" y2="260"/><line x1="0" y1="280" x2="500" y2="280"/><line x1="0" y1="300" x2="500" y2="300"/><line x1="0" y1="320" x2="500" y2="320"/><line x1="0" y1="340" x2="500" y2="340"/><line x1="0" y1="360" x2="500" y2="360"/></g>
+<polygon class="hx-floor" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="243.2,153.9 440.5,267.8 364.2,311.8 167.0,197.9"/><line class="hx-line" x1="337.5" y1="200.5" x2="247.6" y2="252.3"/><line class="hx-line" x1="359.8" y1="213.4" x2="270.0" y2="265.3"/><line class="hx-line" x1="312.7" y1="194.0" x2="236.5" y2="238.1"/><line class="hx-line" x1="371.0" y1="227.7" x2="294.8" y2="271.7"/><line class="hx-line" x1="348.6" y1="206.9" x2="258.8" y2="258.8"/><line class="hx-net" x1="354.5" y1="203.5" x2="252.9" y2="262.2"/><line class="hx-net-top" x1="354.5" y1="165.5" x2="252.9" y2="224.2"/><line class="hx-post" x1="354.5" y1="203.5" x2="354.5" y2="163.5"/><line class="hx-post" x1="252.9" y1="262.2" x2="252.9" y2="222.2"/>
+<line class="hx-dim" x1="146.9" y1="209.5" x2="344.2" y2="323.4"/><text class="hx-dimt" x="245.55" y="284.45" text-anchor="middle">13.40 m</text><line class="hx-dim" x1="460.5" y1="271.6" x2="370.7" y2="323.4"/><text class="hx-dimt" x="421.6" y="311.5" text-anchor="middle">6.10 m</text>
+<circle class="hx-pulse" cx="303.7" cy="232.9" r="6"/><circle class="hx-dotc" cx="303.7" cy="232.9" r="3"/>
+</svg><figcaption><span>Live sample</span> Badminton · indoor · 1 court</figcaption></figure>
+  </div>
+  <div class="cd-hx-facts">
+    <div><strong>700+</strong><span>Badminton courts built</span></div>
+    <div><strong>BWF</strong><span>Approved systems</span></div>
+    <div><strong>10 ft</strong><span>Pole spacing for netting</span></div>
+    <div><strong>2 views</strong><span>Bird and inside court</span></div>
+  </div>
+</section>
 <section id="designer"></section>
 <div class="cd-wrap"><div class="cd-sec-h"><div><div class="cd-eyebrow" style="color:var(--green)">Step by step</div><h2>Your court</h2><p>Answer the questions on the left. Your court, its netting and its lights appear on the right.</p></div><div class="cd-seg"><button id="vBird" class="cd-on">Bird view</button><button id="vInside">Inside court view</button></div></div>
 <aside class="cd-panel" id="panel"></aside>
@@ -15,7 +40,7 @@ const MARKUP = `<section class="cd-hero" id="top"><img src="__HERO__" alt=""><di
 `
 
 function mountCourtDesigner(root: HTMLElement): () => void {
-  root.innerHTML = MARKUP.replace('__HERO__', A('badminton4.jpg'))
+  root.innerHTML = MARKUP
   const $ = (id: string): any => root.querySelector('#' + id)
   
   
