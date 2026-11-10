@@ -3328,3 +3328,29 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 
 /* speed: sections far below the first screen on the home page are only laid out and painted when they are about to be seen */
 #testimonials,#videos,#faq,.network,#certifications{content-visibility:auto;contain-intrinsic-size:auto 800px}
+
+/* foldable covers and narrow phones: a compact cookie bar so the hero stays visible */
+@media (max-width:420px){
+  .cb-in{padding:.6rem .8rem .7rem}
+  .cb-ico{display:none}
+  .cb-top{gap:0}
+  .cb-top p{font-size:.76rem;line-height:1.42}
+  .cb-acts{gap:.45rem;padding-top:.6rem}
+  .cb-manage,.cb-yes,.cb-save,.cb-no{padding:.5rem .7rem;font-size:.78rem}
+}
+/* touch screens (including foldables unfolded): chips and small buttons meet the 44px target size */
+@media (pointer:coarse){
+  .filters button{min-height:44px;display:inline-flex;align-items:center}
+  .lang-btn{min-height:44px;min-width:44px}
+}
+
+/* foldable and narrow screens: keep the WhatsApp button from covering hero text, and keep the video label readable */
+@media (max-width:420px){
+  .wa-fab{width:44px;height:44px;right:14px}
+}
+@media (pointer:coarse){
+  .cb-manage,.cb-yes,.cb-save,.cb-no{min-height:44px}
+  .cb-sw{min-width:44px;min-height:44px;width:44px;height:44px;background-clip:content-box}
+  .to-top,.back-top{min-width:44px;min-height:44px}
+}
+@media (max-width:1080px){.vd-copy .vd-kicker{font-size:.76rem}}
