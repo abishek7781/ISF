@@ -3354,3 +3354,9 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .to-top,.back-top{min-width:44px;min-height:44px}
 }
 @media (max-width:1080px){.vd-copy .vd-kicker{font-size:.76rem}}
+
+/* foldable covers and narrow phones: contact form fields stack, so the country code, date and time are never cut off */
+@media (max-width:420px){
+  .cform .phone-field,.contact-sec .cform .phone-field,#contact .cform .phone-field{grid-template-columns:1fr}
+  .cform .row,.contact-sec .cform .row,#contact .cform .row{grid-template-columns:1fr}
+}
