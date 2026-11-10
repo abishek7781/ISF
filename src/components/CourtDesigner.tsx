@@ -341,7 +341,7 @@ function mountCourtDesigner(root: HTMLElement): () => void {
       else{const w=LIGHT_IND[S.light.type]||1500;L.push(`<div><b>Lighting:</b> ${S.light.type} · ${w*S.courts} W total for ${S.courts} court(s)</div>`);}
     }
     if(S.parts.acc){const a=Object.keys(S.accs).filter(k=>S.accs[k]);L.push(`<div><b>Accessories:</b> ${a.length?a.join(', '):'None'}</div>`);}
-    $('sum').innerHTML=(L.length?L.join(''):'<div>Start with your sport on the left.</div>')+'<div style="margin-top:8px;font-size:12px">Stylised preview. Dimensions and wattages are indicative; confirm before quoting.</div>';
+    $('sum').innerHTML=(L.length?L.join(''):'<div>Start with your sport on the left.</div>')+'<div class="cd-fine">Stylised preview. Dimensions and wattages are indicative; confirm before quoting.</div>';
   }
   
   // ---------- wizard panel ----------
@@ -421,6 +421,7 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   }
   let raf=0;(function loop(){controls.update();clampInside();renderer.render(scene,camera);raf=requestAnimationFrame(loop);})();
   
+  $('sum').onclick = () => $('sum').classList.toggle('cd-open')
   const themeObs = new MutationObserver(() => build())
   themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
   return () => {
