@@ -401,22 +401,31 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     }));
   }
   function choice(list,current,onpick,labelFn=x=>x){return h('div',{cls:'cd-opts'},...list.map(x=>h('button',{cls:'cd-opt'+(current===x?' cd-on':''),on:()=>onpick(x)},labelFn(x))));}
+  function pipeline(){
+    const cur=!S.sport?0:!S.cat?1:2;
+    const names=['Sport','Category','Parts'];
+    return h('div',{cls:'cd-pipe','aria-label':'Progress'},...names.map((n,i)=>h('div',{cls:'cd-pn'+(i<cur?' cd-done':'')+(i===cur?' cd-now':'')},h('span',{cls:'cd-dot'},String(i+1)),h('span',{cls:'cd-pl'},n))));
+  }
   function render(){
     panel.innerHTML='';
+    const card=h('div',{cls:'cd-card-s cd-flowcard'});
+    panel.append(card);
+    card.append(pipeline());
     // Q1 sport
-    panel.append(h('div',{cls:'cd-card-s'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;render();build();frame(SPORTS[v]);},k=>({icon:SPORT_ICON(SPORTS[k].L/SPORTS[k].W),title:SPORTS[k].n,sub:SPORTS[k].L+' × '+SPORTS[k].W+' m'}))));
+    card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;render();build();frame(SPORTS[v]);},k=>({icon:SPORT_ICON(SPORTS[k].L/SPORTS[k].W),title:SPORTS[k].n,sub:SPORTS[k].L+' × '+SPORTS[k].W+' m'}))));
     if(!S.sport){build();return;}
     // Q2 category
-    panel.append(h('div',{cls:'cd-card-s'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;render();build();frame(SPORTS[S.sport]);},k=>({icon:CAT_ICON[k],title:CATS[k],sub:CAT_TEXT[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
+    card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;render();build();frame(SPORTS[S.sport]);},k=>({icon:CAT_ICON[k],title:CATS[k],sub:CAT_TEXT[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
     if(!S.cat){build();return;}
     // Step 3 parts
-    panel.append(h('div',{cls:'cd-step'},h('b',{},'3'),'Parts'),h('div',{cls:'cd-q'},'What do you want to include?'));
+    const partsSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'3'),'Parts'),h('div',{cls:'cd-q'},'What do you want to include?'));
+    card.append(partsSec);
     const part=(key,label,body)=>{
-      const card=h('div',{cls:'cd-card-s'});
+      const blk=h('div',{cls:'cd-part'});
       const cb=h('input',{type:'checkbox',checked:S.parts[key],onchange:e=>{S.parts[key]=e.target.checked;render();build();}});
-      card.append(h('label',{cls:'cd-ck'},cb,label));
-      if(S.parts[key]&&body)card.append(h('div',{cls:'cd-sub'},body()));
-      panel.append(card);
+      blk.append(h('label',{cls:'cd-ck'},cb,label));
+      if(S.parts[key]&&body)blk.append(h('div',{cls:'cd-sub'},body()));
+      partsSec.append(blk);
     };
     part('fab','Fabrication (frame, walls, roof)',()=>{
       const out=[];
