@@ -250,7 +250,9 @@ h3{font-size:1.25rem;letter-spacing:-.01em}
 .faq-item button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding:1.2rem 0;text-align:left;font-size:1.03rem;font-weight:600}
 .faq-n{color:var(--green);font-family:var(--head);margin-right:1rem}
 .pm{width:30px;height:30px;flex:none;display:grid;place-items:center;border:1px solid var(--line);transition:transform .3s,background .3s,color .3s}
-.faq-item.open .pm{background:var(--navy);border-color:var(--navy);color:#fff;transform:rotate(45deg)}
+.faq-item.open .pm{background:var(--navy);border-color:var(--navy);color:#fff}
+.pm svg{transition:transform .3s}
+.faq-item.open .pm svg{transform:rotate(45deg)}
 [data-theme=dark] .faq-item.open .pm{background:var(--green);border-color:var(--green)}
 .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
 .faq-item.open .faq-a{grid-template-rows:1fr}
@@ -3360,3 +3362,6 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .cform .phone-field,.contact-sec .cform .phone-field,#contact .cform .phone-field{grid-template-columns:1fr}
   .cform .row,.contact-sec .cform .row,#contact .cform .row{grid-template-columns:1fr}
 }
+
+/* About: the "Talk to our team" button stays on one line on narrow screens */
+.ab2-b1{white-space:nowrap}
