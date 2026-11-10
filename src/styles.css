@@ -2999,7 +2999,7 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
   .footer{background:var(--navy)}
   [data-theme=dark] .footer{background:var(--dark-2)}
   .foot-m{background:#0f2243!important}
-  :root:not([data-theme=dark]) .foot-m{background:#eef2f9!important;color:#0E2447}
+  :root:not([data-theme=dark]) .foot-m{background:#0F3B3A!important;color:#D4ECEA}
   :root:not([data-theme=dark]) .foot-m-tag{color:#2F7F35}
   :root:not([data-theme=dark]) .foot-m-word{-webkit-text-stroke-color:rgba(14,36,71,.75)}
   :root:not([data-theme=dark]) .foot-m-word .g{-webkit-text-stroke-color:#2F7F35}
@@ -3365,3 +3365,12 @@ html:not([lang=en]) .contact-side,html:not([lang=en]) .contact-side h2{min-width
 
 /* About: the "Talk to our team" button stays on one line on narrow screens */
 .ab2-b1{white-space:nowrap}
+
+/* light theme phone footer on midnight teal: text, links and social icons read clearly on the dark teal */
+:root:not([data-theme=dark]) .foot-m a,
+:root:not([data-theme=dark]) .foot-m-tag,
+:root:not([data-theme=dark]) .foot-m p,
+:root:not([data-theme=dark]) .foot-m small{color:#D4ECEA!important}
+:root:not([data-theme=dark]) .foot-m-soc a{border-color:rgba(212,236,234,.45)!important}
+:root:not([data-theme=dark]) .foot-m-tag i{background:#7BD383!important}
+:root:not([data-theme=dark]) .foot-m-word{-webkit-text-stroke-color:#D4ECEA}
