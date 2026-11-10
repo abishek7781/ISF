@@ -8,7 +8,6 @@ import { A } from '../data/content'
 import './court-designer.css'
 
 const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
-  <div class="cd-hx-grid"></div>
   <div class="cd-hx-in">
     <div class="cd-hx-copy">
       <span class="cd-hx-tag"><i></i>Court designer · Chennai</span>
@@ -20,17 +19,10 @@ const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
       </ol>
     </div>
     <figure class="cd-hx-fig"><svg class="hx-iso" viewBox="120 120 360 250" role="img" aria-label="Isometric badminton court with its dimensions">
-<g class="hx-grid" transform="translate(-120 -120)"><line x1="0" y1="0" x2="500" y2="0"/><line x1="0" y1="20" x2="500" y2="20"/><line x1="0" y1="40" x2="500" y2="40"/><line x1="0" y1="60" x2="500" y2="60"/><line x1="0" y1="80" x2="500" y2="80"/><line x1="0" y1="100" x2="500" y2="100"/><line x1="0" y1="120" x2="500" y2="120"/><line x1="0" y1="140" x2="500" y2="140"/><line x1="0" y1="160" x2="500" y2="160"/><line x1="0" y1="180" x2="500" y2="180"/><line x1="0" y1="200" x2="500" y2="200"/><line x1="0" y1="220" x2="500" y2="220"/><line x1="0" y1="240" x2="500" y2="240"/><line x1="0" y1="260" x2="500" y2="260"/><line x1="0" y1="280" x2="500" y2="280"/><line x1="0" y1="300" x2="500" y2="300"/><line x1="0" y1="320" x2="500" y2="320"/><line x1="0" y1="340" x2="500" y2="340"/><line x1="0" y1="360" x2="500" y2="360"/></g>
 <polygon class="hx-floor" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="243.2,153.9 440.5,267.8 364.2,311.8 167.0,197.9"/><line class="hx-line" x1="337.5" y1="200.5" x2="247.6" y2="252.3"/><line class="hx-line" x1="359.8" y1="213.4" x2="270.0" y2="265.3"/><line class="hx-line" x1="312.7" y1="194.0" x2="236.5" y2="238.1"/><line class="hx-line" x1="371.0" y1="227.7" x2="294.8" y2="271.7"/><line class="hx-line" x1="348.6" y1="206.9" x2="258.8" y2="258.8"/><line class="hx-net" x1="354.5" y1="203.5" x2="252.9" y2="262.2"/><line class="hx-net-top" x1="354.5" y1="165.5" x2="252.9" y2="224.2"/><line class="hx-post" x1="354.5" y1="203.5" x2="354.5" y2="163.5"/><line class="hx-post" x1="252.9" y1="262.2" x2="252.9" y2="222.2"/>
 <line class="hx-dim" x1="146.9" y1="209.5" x2="344.2" y2="323.4"/><text class="hx-dimt" x="245.55" y="284.45" text-anchor="middle">13.40 m</text><line class="hx-dim" x1="460.5" y1="271.6" x2="370.7" y2="323.4"/><text class="hx-dimt" x="421.6" y="311.5" text-anchor="middle">6.10 m</text>
 <circle class="hx-pulse" cx="303.7" cy="232.9" r="6"/><circle class="hx-dotc" cx="303.7" cy="232.9" r="3"/>
 </svg></figure>
-  </div>
-  <div class="cd-hx-facts">
-    <div><strong>700+</strong><span>Badminton courts built</span></div>
-    <div><strong>BWF</strong><span>Approved systems</span></div>
-    <div><strong>10 ft</strong><span>Pole spacing for netting</span></div>
-    <div><strong>2 views</strong><span>Bird and inside court</span></div>
   </div>
 </section>
 <section id="designer"></section>
@@ -87,28 +79,102 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   const sun=new THREE.DirectionalLight('#ffffff',0.7);sun.position.set(-12,24,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
   Object.assign(sun.shadow.camera,{left:-40,right:40,top:40,bottom:-40,far:150});scene.add(sun);
   const G=Object.fromEntries(['ground','court','shell','roof','lights','net','enc','acc','city'].map(k=>{const g=new THREE.Group();scene.add(g);return [k,g];}));
-  const postMat=new THREE.MeshStandardMaterial({color:'#2A3140',metalness:0.5,roughness:0.4});
-  const steelMat=new THREE.MeshStandardMaterial({color:'#9AA3AE',metalness:0.6,roughness:0.4});
-  const louverMat=new THREE.MeshStandardMaterial({color:'#C9D0DA',metalness:0.4,roughness:0.5});
-  const roofSheetMat=new THREE.MeshStandardMaterial({color:'#8E97A3',metalness:0.35,roughness:0.55,side:THREE.DoubleSide,transparent:true,opacity:1,depthWrite:false});
-  const wallMat=new THREE.MeshStandardMaterial({color:'#D5DAE1',roughness:0.85});
-  const ledMat=new THREE.MeshStandardMaterial({color:'#FFFFFF',emissive:'#F4F9FF',emissiveIntensity:1.6});
+  const postMat=new THREE.MeshStandardMaterial({color:'#28303E',metalness:0.75,roughness:0.25});
+  const steelMat=new THREE.MeshStandardMaterial({color:'#8A939E',metalness:0.78,roughness:0.22});
+  const louverMat=new THREE.MeshStandardMaterial({color:'#B8C4CE',metalness:0.55,roughness:0.35});
+  const roofSheetMat=new THREE.MeshStandardMaterial({color:'#7A8591',metalness:0.45,roughness:0.45,side:THREE.DoubleSide,transparent:true,opacity:1,depthWrite:false});
+  const wallMat=new THREE.MeshStandardMaterial({color:'#DDE2E9',roughness:0.88,metalness:0.04});
+  const ledMat=new THREE.MeshStandardMaterial({color:'#FFFFFF',emissive:'#E8F4FF',emissiveIntensity:2.2,metalness:0.1,roughness:0.2});
   const floorMat=new THREE.MeshStandardMaterial({roughness:0.6});
   const nonPlayMat=new THREE.MeshStandardMaterial({roughness:0.8});
-  const tex=document.createElement('canvas');const floorTex=new THREE.CanvasTexture(tex);floorTex.colorSpace=THREE.SRGBColorSpace;floorTex.anisotropy=8;
+  const tex=document.createElement('canvas');const floorTex=new THREE.CanvasTexture(tex);floorTex.colorSpace=THREE.SRGBColorSpace;floorTex.anisotropy=16;
   floorMat.map=floorTex;
   const courtLight=new THREE.PointLight('#fff8e8',0,120,1.1);scene.add(courtLight);
   const add=(g,geo,mat,x,y,z,rx=0,ry=0,rz=0)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.rotation.set(rx,ry,rz);m.castShadow=m.receiveShadow=true;g.add(m);return m;};
   const FT=0.3048;
   
-  function drawPlay(sp,colour){
+  // realistic floor texture generator
+  function makeFloorTex(floorType:string,baseColor:string){
+    const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d')!;
+    const ft=floorType||'';
+    if(ft.includes('Wooden')||ft.includes('Wood')){
+      // wood grain: plank rows with grain lines
+      const plankW=512,plankH=36;
+      const woodBases=['#C4894E','#B87940','#D4985C','#BF8448'];
+      for(let y=0;y<512;y+=plankH){
+        const bi=Math.floor(y/plankH)%woodBases.length;
+        g.fillStyle=woodBases[bi];g.fillRect(0,y,512,plankH);
+        // grain lines
+        for(let i=0;i<22;i++){
+          const gx=Math.random()*512,gy=y+Math.random()*plankH;
+          g.strokeStyle=`rgba(80,45,10,${0.08+Math.random()*0.12})`;
+          g.lineWidth=0.5+Math.random()*1.2;
+          g.beginPath();g.moveTo(gx,gy);g.bezierCurveTo(gx+40,gy+(Math.random()-0.5)*6,gx+80,gy+(Math.random()-0.5)*6,gx+120,gy+(Math.random()-0.5)*4);g.stroke();
+        }
+        // knot occasionally
+        if(Math.random()<0.15){const kx=Math.random()*480+16,ky=y+plankH/2;g.strokeStyle='rgba(90,50,15,0.18)';g.lineWidth=2;g.beginPath();g.ellipse(kx,ky,8,5,0,0,Math.PI*2);g.stroke();}
+        // plank gap
+        g.fillStyle='rgba(60,35,10,0.35)';g.fillRect(0,y,512,1.5);
+      }
+      // subtle sheen
+      const sh=g.createLinearGradient(0,0,512,0);sh.addColorStop(0,'rgba(255,230,180,0.08)');sh.addColorStop(0.5,'rgba(255,230,180,0.18)');sh.addColorStop(1,'rgba(255,230,180,0.05)');
+      g.fillStyle=sh;g.fillRect(0,0,512,512);
+    } else if(ft.includes('Interlocking')){
+      // interlocking rubber tiles: 64×64 squares with bevelled edges
+      const tileS=64;
+      const col1=baseColor,col2=shadeHex(baseColor,-20);
+      for(let ty=0;ty<512;ty+=tileS)for(let tx=0;tx<512;tx+=tileS){
+        const even=((tx/tileS)+(ty/tileS))%2===0;
+        g.fillStyle=even?col1:col2;g.fillRect(tx,ty,tileS,tileS);
+        // bevel highlight
+        g.strokeStyle='rgba(255,255,255,0.15)';g.lineWidth=2;
+        g.beginPath();g.moveTo(tx+2,ty+tileS-2);g.lineTo(tx+2,ty+2);g.lineTo(tx+tileS-2,ty+2);g.stroke();
+        // bevel shadow
+        g.strokeStyle='rgba(0,0,0,0.25)';g.lineWidth=2;
+        g.beginPath();g.moveTo(tx+tileS-2,ty+2);g.lineTo(tx+tileS-2,ty+tileS-2);g.lineTo(tx+2,ty+tileS-2);g.stroke();
+        // gap
+        g.fillStyle='rgba(0,0,0,0.3)';g.fillRect(tx,ty,2,tileS);g.fillRect(tx,ty,tileS,2);
+      }
+    } else if(ft.includes('Acrylic')){
+      // acrylic: smooth coloured surface with faint texture
+      g.fillStyle=baseColor;g.fillRect(0,0,512,512);
+      for(let i=0;i<800;i++){g.fillStyle=`rgba(255,255,255,${0.015+Math.random()*0.025})`;g.fillRect(Math.random()*512,Math.random()*512,2,2);}
+      const sh2=g.createLinearGradient(0,0,0,512);sh2.addColorStop(0,'rgba(255,255,255,0.12)');sh2.addColorStop(1,'rgba(0,0,0,0.08)');g.fillStyle=sh2;g.fillRect(0,0,512,512);
+    } else if(ft.includes('Vinyl')){
+      // vinyl: subtle diagonal grain
+      g.fillStyle=baseColor;g.fillRect(0,0,512,512);
+      g.strokeStyle='rgba(0,0,0,0.06)';g.lineWidth=1;
+      for(let i=-512;i<1024;i+=8){g.beginPath();g.moveTo(i,0);g.lineTo(i+512,512);g.stroke();}
+    } else {
+      // PVC / rubber: subtle stipple
+      g.fillStyle=baseColor;g.fillRect(0,0,512,512);
+      for(let i=0;i<2000;i++){const r=Math.random();g.fillStyle=`rgba(0,0,0,${0.02+r*0.04})`;g.beginPath();g.arc(Math.random()*512,Math.random()*512,0.6+r*1.2,0,Math.PI*2);g.fill();}
+      // subtle grid sheen for PVC
+      if(ft.includes('PVC')){g.strokeStyle='rgba(255,255,255,0.08)';g.lineWidth=1;for(let x=0;x<512;x+=32){g.beginPath();g.moveTo(x,0);g.lineTo(x,512);g.stroke();}for(let y=0;y<512;y+=32){g.beginPath();g.moveTo(0,y);g.lineTo(512,y);g.stroke();}}
+    }
+    const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=16;return t;
+  }
+  function shadeHex(hex:string,amt:number){const n=parseInt(hex.replace('#',''),16);const r=Math.max(0,Math.min(255,((n>>16)&255)+amt));const g2=Math.max(0,Math.min(255,((n>>8)&255)+amt));const b=Math.max(0,Math.min(255,(n&255)+amt));return '#'+[r,g2,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
+  function floorProps(floorType:string):{roughness:number,metalness:number}{
+    if(floorType.includes('Wooden')||floorType.includes('Wood'))return{roughness:0.55,metalness:0.03};
+    if(floorType.includes('Acrylic'))return{roughness:0.3,metalness:0.05};
+    if(floorType.includes('Vinyl'))return{roughness:0.5,metalness:0.02};
+    if(floorType.includes('Interlocking'))return{roughness:0.75,metalness:0.0};
+    return{roughness:0.65,metalness:0.0};
+  }
+  function drawPlay(sp:any,colour:string,floorType:string){
     const k=60,pad=3*k,W=sp.W*k,L=sp.L*k;
-    tex.width=W+pad*2;tex.height=L+pad*2;const g=tex.getContext('2d');
-    const P=(x,z)=>[pad+(x+sp.W/2)*k,pad+(z+sp.L/2)*k];
-    const rect=(x1,z1,x2,z2)=>{const a=P(x1,z1),b=P(x2,z2);g.strokeRect(a[0],a[1],b[0]-a[0],b[1]-a[1]);};
-    const line=(a,b)=>{const p=P(...a),q=P(...b);g.beginPath();g.moveTo(...p);g.lineTo(...q);g.stroke();};
-    g.fillStyle=colour;g.fillRect(0,0,tex.width,tex.height);
-    g.strokeStyle='#FFFFFF';g.lineWidth=Math.max(3,k*0.05);
+    tex.width=W+pad*2;tex.height=L+pad*2;const g=tex.getContext('2d')!;
+    const P=(x:number,z:number)=>[pad+(x+sp.W/2)*k,pad+(z+sp.L/2)*k];
+    const rect=(x1:number,z1:number,x2:number,z2:number)=>{const a=P(x1,z1),b=P(x2,z2);g.strokeRect(a[0],a[1],b[0]-a[0],b[1]-a[1]);};
+    const line=(a:[number,number],b:[number,number])=>{const p=P(...a),q=P(...b);g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(q[0],q[1]);g.stroke();};
+    // fill with floor texture
+    const ftx=makeFloorTex(floorType,colour);
+    const pattern=g.createPattern(ftx.image as HTMLCanvasElement,'repeat');
+    if(pattern){g.fillStyle=pattern;}else{g.fillStyle=colour;}
+    g.fillRect(0,0,tex.width,tex.height);
+    // court lines - bright white
+    g.strokeStyle='rgba(255,255,255,0.95)';g.lineWidth=Math.max(3,k*0.055);
     const hw=sp.W/2,hl=sp.L/2;
     if(sp.id==='badminton'||sp.id==='pickleball'){rect(-hw,-hl,hw,hl);rect(-2.59,-hl,2.59,hl);line([-hw,-5.94],[hw,-5.94]);line([-hw,5.94],[hw,5.94]);line([-2.59,-1.98],[2.59,-1.98]);line([-2.59,1.98],[2.59,1.98]);line([0,-hl],[0,-1.98]);line([0,1.98],[0,hl]);}
     else if(sp.id==='tennis'){rect(-hw,-hl,hw,hl);rect(-4.115,-hl,4.115,hl);line([-4.115,-6.4],[4.115,-6.4]);line([-4.115,6.4],[4.115,6.4]);line([0,-6.4],[0,6.4]);}
@@ -117,7 +183,9 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     else {rect(-hw,-hl,hw,hl);line([-hw,0],[hw,0]);}
     floorTex.needsUpdate=true;
   }
-  function gridTex(color,op){const c=document.createElement('canvas');c.width=256;c.height=256;const g=c.getContext('2d');g.strokeStyle=color;g.lineWidth=5;for(let x=0;x<=256;x+=16){g.beginPath();g.moveTo(x,0);g.lineTo(x,256);g.stroke();}for(let y=0;y<=256;y+=16){g.beginPath();g.moveTo(0,y);g.lineTo(256,y);g.stroke();}const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;return t;}
+  // realistic netting texture: fine hexagonal mesh
+  function netTex(color:string,alpha:number){const c=document.createElement('canvas');c.width=128;c.height=128;const g=c.getContext('2d')!;g.clearRect(0,0,128,128);const cell=12;g.strokeStyle=color;g.lineWidth=1.2;for(let y=0;y<128+cell;y+=cell){for(let x=0;x<128+cell;x+=cell){g.beginPath();g.moveTo(x,y);g.lineTo(x+cell/2,y+cell);g.stroke();g.beginPath();g.moveTo(x+cell,y);g.lineTo(x+cell/2,y+cell);g.stroke();}}for(let y=0;y<128+cell;y+=cell){g.beginPath();g.moveTo(0,y);g.lineTo(128,y);g.stroke();}const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;return t;}
+  function gridTex(color:string){const c=document.createElement('canvas');c.width=128;c.height=128;const g=c.getContext('2d')!;g.clearRect(0,0,128,128);g.strokeStyle=color;g.lineWidth=1.5;const cell=10;for(let y=0;y<128+cell;y+=cell){for(let x=0;x<128+cell;x+=cell){g.beginPath();g.moveTo(x,y);g.lineTo(x+cell,y+cell);g.stroke();g.beginPath();g.moveTo(x+cell,y);g.lineTo(x,y+cell);g.stroke();}}const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;return t;}
   
   let curSp=null;
   let curEnc=null;
@@ -225,15 +293,21 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     const runoff=indoor?3.5:6;
     const RW=sp.W+runoff*2,RL=sp.L+runoff*2;
     // play area and non-play area flooring
-    const playCol=PLAY_COLOR[S.floor.play]||'#2E7D41';
-    drawPlay(sp,playCol);
+    const playFloor=S.parts.floor?S.floor.play:'PVC Synthetic Mat';
+    const playCol=PLAY_COLOR[playFloor]||'#2E7D41';
+    drawPlay(sp,playCol,playFloor);
+    const fp=floorProps(playFloor);
+    floorMat.roughness=fp.roughness;floorMat.metalness=fp.metalness;
     const playMat=floorMat;
     add(G.court,new THREE.PlaneGeometry(sp.W+6,sp.L+6),playMat,0,0.005,0,-Math.PI/2);
     // non-play area (surround) if ticked
+    const npFloor=S.parts.floor&&S.floor.nonplayOn?S.floor.nonplay:'-None-';
     const npCol=S.parts.floor&&S.floor.nonplayOn?(NONPLAY_COLOR[S.floor.nonplay]||'#B9BDC4'):(indoor?'#B9BDC4':'#6DAA5B');
-    add(G.ground,new THREE.PlaneGeometry(RW,RL),new THREE.MeshStandardMaterial({color:npCol,roughness:0.9}),0,-0.01,0,-Math.PI/2);
-    if(!S.parts.floor||!S.floor.nonplayOn){/* default surround */}
-    if(!indoor) add(G.ground,new THREE.PlaneGeometry(400,400),new THREE.MeshStandardMaterial({color:'#6DAA5B',roughness:1}),0,-0.02,0,-Math.PI/2);
+    const npFp=floorProps(npFloor);
+    const npTex=makeFloorTex(npFloor,npCol);npTex.repeat.set(RW/4,RL/4);npTex.needsUpdate=true;
+    const npMat=new THREE.MeshStandardMaterial({map:npTex,roughness:npFp.roughness,metalness:npFp.metalness});
+    add(G.ground,new THREE.PlaneGeometry(RW,RL),npMat,0,-0.01,0,-Math.PI/2);
+    if(!indoor) add(G.ground,new THREE.PlaneGeometry(400,400),new THREE.MeshStandardMaterial({color:'#5A9448',roughness:1}),0,-0.02,0,-Math.PI/2);
     const dk=document.documentElement.dataset.theme==='dark';
     const sky=dk?(indoor?'#0E1A2E':'#0C1F36'):(indoor?'#E9EEF6':'#BFD9F2');
     scene.background=new THREE.Color(sky);
@@ -292,14 +366,14 @@ function mountCourtDesigner(root: HTMLElement): () => void {
         const rail=(ax,az,bx,bz)=>{const len=Math.hypot(bx-ax,bz-az);const m=new THREE.Mesh(new THREE.BoxGeometry(len,0.06,0.06),steelMat);m.position.set((ax+bx)/2,PH,(az+bz)/2);m.rotation.y=-Math.atan2(bz-az,bx-ax);G.shell.add(m);};
         rail(-fx,-fz,fx,-fz);rail(fx,-fz,fx,fz);rail(fx,fz,-fx,fz);rail(-fx,fz,-fx,-fz);
         if(S.fab.side){
-          const grid=gridTex('#2B3A4E');grid.repeat.set(1,1);
-          const sm=new THREE.MeshBasicMaterial({map:grid,transparent:true,opacity:0.5,side:THREE.DoubleSide,depthWrite:false});
-          const wall=(ax,az,bx,bz)=>{const len=Math.hypot(bx-ax,bz-az);const g=new THREE.PlaneGeometry(len,PH);const m=new THREE.Mesh(g,sm.clone());m.material.map=grid.clone();m.material.map.repeat.set(len/0.8,PH/0.8);m.material.map.needsUpdate=true;m.position.set((ax+bx)/2,PH/2,(az+bz)/2);m.rotation.y=-Math.atan2(bz-az,bx-ax);G.net.add(m);};
+          const nt=netTex('rgba(30,45,65,0.9)',0.5);
+          const sm=new THREE.MeshBasicMaterial({map:nt,transparent:true,opacity:0.55,side:THREE.DoubleSide,depthWrite:false});
+          const wall=(ax:number,az:number,bx:number,bz:number)=>{const len=Math.hypot(bx-ax,bz-az);const g=new THREE.PlaneGeometry(len,PH);const mat=sm.clone() as any;mat.map=nt.clone();mat.map.repeat.set(len/0.3,PH/0.3);mat.map.needsUpdate=true;const m=new THREE.Mesh(g,mat);m.position.set((ax+bx)/2,PH/2,(az+bz)/2);m.rotation.y=-Math.atan2(bz-az,bx-ax);G.net.add(m);};
           wall(-fx,-fz,fx,-fz);wall(fx,-fz,fx,fz);wall(fx,fz,-fx,fz);wall(-fx,fz,-fx,-fz);
         }
         if(S.fab.top){
-          const grid=gridTex('#2B3A4E');grid.repeat.set((fx*2)/0.8,(fz*2)/0.8);
-          const tm=new THREE.Mesh(new THREE.PlaneGeometry(fx*2,fz*2),new THREE.MeshBasicMaterial({map:grid,transparent:true,opacity:0.4,side:THREE.DoubleSide,depthWrite:false}));
+          const nt=netTex('rgba(30,45,65,0.9)',0.4);nt.repeat.set((fx*2)/0.3,(fz*2)/0.3);nt.needsUpdate=true;
+          const tm=new THREE.Mesh(new THREE.PlaneGeometry(fx*2,fz*2),new THREE.MeshBasicMaterial({map:nt,transparent:true,opacity:0.45,side:THREE.DoubleSide,depthWrite:false}));
           tm.rotation.x=-Math.PI/2;tm.position.y=PH;G.net.add(tm);
         }
         // numbers for the summary
@@ -309,32 +383,87 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     // lighting
     if(S.parts.light){
       if(indoor||semi){
-        const W=LIGHT_IND[S.light.type]||1500;const count=Math.max(1,S.courts);
-        const H=8;const per=Math.min(count,6);
-        for(let i=0;i<per;i++){add(G.lights,new THREE.BoxGeometry(0.12,0.12,Math.min(5.2,sp.L)),ledMat,(i-(per-1)/2)*(sp.W+1),H-0.6,0);}
-        courtLight.position.set(0,H-1,0);courtLight.intensity=60;
+        const count=Math.max(1,S.courts);
+        const H=8.2;const per=Math.min(count*2,6);
+        const ledLen=Math.min(5.5,sp.L*0.7);
+        const houseMat=new THREE.MeshStandardMaterial({color:'#C8CDD5',metalness:0.5,roughness:0.4});
+        for(let i=0;i<per;i++){
+          const lx=(i-(per-1)/2)*(sp.W/(per-1||1)*0.85);
+          // housing
+          add(G.lights,new THREE.BoxGeometry(0.22,0.1,ledLen),houseMat,lx,H,0);
+          // LED panel strip inside housing
+          add(G.lights,new THREE.BoxGeometry(0.17,0.04,ledLen*0.9),ledMat,lx,H-0.07,0);
+          // mount bracket
+          add(G.lights,new THREE.CylinderGeometry(0.015,0.015,0.35,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.8,roughness:0.2}),lx,H+0.17,0);
+        }
+        courtLight.position.set(0,H-0.5,0);courtLight.intensity=70;
       } else {
         // one light post every 10 ft (3.05 m) along the perimeter
         const wattage=LIGHT_OUT[S.light.type]||100;
         const x=sp.W/2+4, z=sp.L/2+4;
-        const pts=[];
+        const pts:number[][]=[];
         for(let t=-z;t<=z;t+=10*FT){pts.push([-x,t]);pts.push([x,t]);}
         for(let t=-x;t<=x;t+=10*FT){pts.push([t,-z]);pts.push([t,z]);}
-        const seen=new Set();
-        pts.forEach(([px,pz])=>{const key=px.toFixed(2)+','+pz.toFixed(2);if(seen.has(key))return;seen.add(key);add(G.lights,new THREE.CylinderGeometry(0.12,0.16,8,12),postMat,px,4,pz);add(G.lights,new THREE.BoxGeometry(0.8,0.3,0.4),new THREE.MeshStandardMaterial({color:'#D8DDE5',emissive:'#FFF6DA',emissiveIntensity:1.2}),px,8.1,pz);});
-        courtLight.position.set(0,12,0);courtLight.intensity=wattage/3;
+        const seen=new Set<string>();
+        const floodMat=new THREE.MeshStandardMaterial({color:'#D0D6DE',metalness:0.5,roughness:0.4});
+        const floodLedMat=new THREE.MeshStandardMaterial({color:'#FFF8E8',emissive:'#FFF4D0',emissiveIntensity:2.0,roughness:0.1});
+        pts.forEach(([px,pz])=>{const key=px.toFixed(2)+','+pz.toFixed(2);if(seen.has(key))return;seen.add(key);
+          // tapered pole
+          add(G.lights,new THREE.CylinderGeometry(0.09,0.14,8.5,12),postMat,px,4.25,pz);
+          // crossarm
+          add(G.lights,new THREE.CylinderGeometry(0.025,0.025,1.1,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.75,roughness:0.25}),px,8.6,pz,0,0,Math.PI/2);
+          // flood housing
+          add(G.lights,new THREE.BoxGeometry(0.55,0.12,0.32),floodMat,px,8.52,pz);
+          // LED emitter face
+          add(G.lights,new THREE.BoxGeometry(0.42,0.06,0.24),floodLedMat,px,8.46,pz);
+        });
+        courtLight.position.set(0,12,0);courtLight.intensity=wattage/2.5;
       }
     } else { courtLight.intensity=0; }
     if(!indoor&&!semi) buildCity(sp);
     // play-area court net
-    if(sp.net==='net'){[-(sp.W/2+0.9),sp.W/2+0.9].forEach(x=>add(G.net,new THREE.CylinderGeometry(0.05,0.05,sp.netH+0.15,12),postMat,x,(sp.netH+0.15)/2,0));
-      const net=new THREE.Mesh(new THREE.PlaneGeometry(sp.W+1.8,sp.netH),new THREE.MeshBasicMaterial({map:gridTex('#EEF1F5'),transparent:true,side:THREE.DoubleSide,alphaTest:0.05}));net.position.set(0,sp.netH/2+0.1,0);G.net.add(net);}
-    else if(sp.net==='goal'){[-1,1].forEach(s=>add(G.net,new THREE.BoxGeometry(7.32,2.44,0.1),new THREE.MeshStandardMaterial({color:'#FFFFFF'}),0,1.22,s*(sp.L/2)));}
+    if(sp.net==='net'){
+      // net posts - polished steel
+      [-(sp.W/2+0.9),sp.W/2+0.9].forEach(x=>{add(G.net,new THREE.CylinderGeometry(0.04,0.045,sp.netH+0.3,16),new THREE.MeshStandardMaterial({color:'#8A939E',metalness:0.85,roughness:0.15}),x,(sp.netH+0.3)/2,0);});
+      // top cable
+      add(G.net,new THREE.CylinderGeometry(0.012,0.012,sp.W+1.8,8),new THREE.MeshStandardMaterial({color:'#C0C8D0',metalness:0.9,roughness:0.1}),0,sp.netH+0.12,0,0,0,Math.PI/2);
+      // net mesh
+      const nt=netTex('rgba(230,235,245,0.9)',0.85);nt.repeat.set((sp.W+1.8)/0.3,sp.netH/0.3);
+      const net=new THREE.Mesh(new THREE.PlaneGeometry(sp.W+1.8,sp.netH),new THREE.MeshBasicMaterial({map:nt,transparent:true,side:THREE.DoubleSide,alphaTest:0.08,depthWrite:false}));net.position.set(0,sp.netH/2+0.1,0);G.net.add(net);}
+    else if(sp.net==='goal'){
+      // goal frames with crossbar, posts, netting
+      [-1,1].forEach(s=>{
+        const gw=7.32,gh=2.44;
+        add(G.net,new THREE.CylinderGeometry(0.055,0.055,gh,10),new THREE.MeshStandardMaterial({color:'#E8E8E8',metalness:0.7,roughness:0.2}),-gw/2,gh/2,s*(sp.L/2));
+        add(G.net,new THREE.CylinderGeometry(0.055,0.055,gh,10),new THREE.MeshStandardMaterial({color:'#E8E8E8',metalness:0.7,roughness:0.2}),gw/2,gh/2,s*(sp.L/2));
+        add(G.net,new THREE.CylinderGeometry(0.055,0.055,gw,10),new THREE.MeshStandardMaterial({color:'#E8E8E8',metalness:0.7,roughness:0.2}),0,gh,s*(sp.L/2),0,0,Math.PI/2);
+        const gt=netTex('rgba(255,255,255,0.7)',0.7);gt.repeat.set(gw/0.25,gh/0.25);
+        const gnet=new THREE.Mesh(new THREE.PlaneGeometry(gw,gh),new THREE.MeshBasicMaterial({map:gt,transparent:true,side:THREE.DoubleSide,alphaTest:0.05,depthWrite:false}));gnet.position.set(0,gh/2,s*(sp.L/2));G.net.add(gnet);
+      });
+    }
     // accessories
     if(S.parts.acc){
-      if(S.accs['Scoreboard']&&indoor){const b=new THREE.Mesh(new THREE.BoxGeometry(2.6,1.2,0.12),new THREE.MeshStandardMaterial({color:'#0C0F14'}));b.position.set(0,3.2,-(RL/2)+0.4);G.acc.add(b);}
-      if(S.accs['Player benches']){[-sp.W/2-1.2,sp.W/2+1.2].forEach(x=>add(G.acc,new THREE.BoxGeometry(0.5,0.45,3),new THREE.MeshStandardMaterial({color:'#2F5C94'}),x,0.25,-sp.L/4));}
-      if(S.accs['Umpire chair']&&sp.net==='net'){add(G.acc,new THREE.BoxGeometry(0.6,1.6,0.6),new THREE.MeshStandardMaterial({color:'#2F7F35'}),-sp.W/2-2,0.8,0);}
+      if(S.accs['Scoreboard']&&indoor){
+        // scoreboard: dark panel with LED segments
+        add(G.acc,new THREE.BoxGeometry(2.8,1.4,0.15),new THREE.MeshStandardMaterial({color:'#0C0F14',metalness:0.3,roughness:0.6}),0,3.4,-(RL/2)+0.5);
+        add(G.acc,new THREE.BoxGeometry(2.4,1.0,0.05),new THREE.MeshStandardMaterial({color:'#0A1520',emissive:'#001833',emissiveIntensity:0.8}),0,3.4,-(RL/2)+0.43);
+        // mounting bracket
+        add(G.acc,new THREE.BoxGeometry(0.08,0.6,0.08),new THREE.MeshStandardMaterial({color:'#444950',metalness:0.8,roughness:0.3}),0,2.7,-(RL/2)+0.4);
+      }
+      if(S.accs['Player benches']){
+        [-sp.W/2-1.2,sp.W/2+1.2].forEach(x=>{
+          // bench seat
+          add(G.acc,new THREE.BoxGeometry(0.4,0.04,3.0),new THREE.MeshStandardMaterial({color:'#C88040',roughness:0.6,metalness:0.0}),x,0.46,-sp.L/4);
+          // legs
+          [[-1.3,-1.3],[1.3,-1.3],[1.3,1.3],[-1.3,1.3]].forEach(([dz])=>add(G.acc,new THREE.CylinderGeometry(0.025,0.025,0.46,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.7,roughness:0.3}),x,0.23,-sp.L/4+dz));
+        });
+      }
+      if(S.accs['Umpire chair']&&sp.net==='net'){
+        // umpire chair: legs, seat, backrest
+        add(G.acc,new THREE.BoxGeometry(0.55,0.04,0.55),new THREE.MeshStandardMaterial({color:'#C88040',roughness:0.6}),-sp.W/2-2,1.5,0);
+        add(G.acc,new THREE.BoxGeometry(0.5,1.5,0.06),new THREE.MeshStandardMaterial({color:'#2F7F35',roughness:0.7}),-sp.W/2-2,0.8,0.25);
+        [[-0.22,-0.22],[0.22,-0.22],[0.22,0.22],[-0.22,0.22]].forEach(([dx,dz])=>add(G.acc,new THREE.CylinderGeometry(0.025,0.025,1.5,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.7,roughness:0.3}),-sp.W/2-2+dx,0.75,dz));
+      }
     }
     G.roof.visible=S.view!=='inside';
     roofSheetMat.opacity=S.view==='bird'?0.28:1;
