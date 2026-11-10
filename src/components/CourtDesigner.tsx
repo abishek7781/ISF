@@ -14,9 +14,6 @@ const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
       <h1>Design it <em>before</em> you build it.</h1>
       <p>Choose the sport, the setting and the parts. See your court from above or from inside, then request a quote built from the same choices.</p>
       <div class="cd-hx-actions"><a class="cd-hx-cta" href="#designer">Start designing</a><a class="cd-hx-alt" href="/contact">Talk to our team</a></div>
-      <ol class="cd-hx-steps">
-        <li><b>01</b><span>Sport</span></li><li><b>02</b><span>Setting</span></li><li><b>03</b><span>Parts</span></li>
-      </ol>
     </div>
     <figure class="cd-hx-fig"><svg class="hx-iso" viewBox="120 120 360 250" role="img" aria-label="Isometric badminton court with its dimensions">
 <polygon class="hx-floor" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="243.2,153.9 440.5,267.8 364.2,311.8 167.0,197.9"/><line class="hx-line" x1="337.5" y1="200.5" x2="247.6" y2="252.3"/><line class="hx-line" x1="359.8" y1="213.4" x2="270.0" y2="265.3"/><line class="hx-line" x1="312.7" y1="194.0" x2="236.5" y2="238.1"/><line class="hx-line" x1="371.0" y1="227.7" x2="294.8" y2="271.7"/><line class="hx-line" x1="348.6" y1="206.9" x2="258.8" y2="258.8"/><line class="hx-net" x1="354.5" y1="203.5" x2="252.9" y2="262.2"/><line class="hx-net-top" x1="354.5" y1="165.5" x2="252.9" y2="224.2"/><line class="hx-post" x1="354.5" y1="203.5" x2="354.5" y2="163.5"/><line class="hx-post" x1="252.9" y1="262.2" x2="252.9" y2="222.2"/>
