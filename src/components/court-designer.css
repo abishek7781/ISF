@@ -185,3 +185,19 @@
 .cd-page .cd-part{padding:14px 0;border-top:1px dashed var(--line)}
 .cd-page .cd-part:first-of-type{border-top:0;padding-top:4px}
 @media (max-width:560px){.cd-page .cd-pipe{padding:12px 12px}.cd-page .cd-pl{font-size:12px}.cd-page .cd-sec{padding:16px 14px}}
+
+/* ---- step flow: finished steps collapse to one line, accessories are their own step ---- */
+.cd-page .cd-coll{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--card)}
+.cd-page .cd-coll .cd-dot{background:var(--green2);border-color:var(--green2);color:#fff}
+.cd-page .cd-coll-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.cd-page .cd-coll-t b{font-family:Archivo,sans-serif;font-size:14px;color:var(--ink)}
+.cd-page .cd-coll-t span{font-size:12.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cd-page .cd-change{flex:none;border:1px solid var(--chipline);background:var(--chip);color:var(--ink);border-radius:999px;padding:7px 14px;font:600 12.5px Inter,sans-serif;cursor:pointer}
+.cd-page .cd-change:hover{border-color:var(--green2);color:var(--green2)}
+.cd-page .cd-accs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.cd-page .cd-acc{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--chipline);border-radius:12px;background:var(--chip);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+.cd-page .cd-acc input{width:18px;height:18px;accent-color:var(--green2);flex:none}
+.cd-page .cd-acc.cd-on{border-color:var(--green2);background:var(--card)}
+@media (max-width:560px){.cd-page .cd-accs{grid-template-columns:1fr}.cd-page .cd-coll{padding:12px 14px}}
+/* phones: four steps do not fit with labels, so only the current step is named */
+@media (max-width:560px){.cd-page .cd-pl{display:none}.cd-page .cd-pn.cd-now .cd-pl{display:inline;font-size:12px}.cd-page .cd-pn{gap:6px}.cd-page .cd-pn+.cd-pn::before{min-width:6px}}

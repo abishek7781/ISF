@@ -68,7 +68,8 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   const ACC=['Scoreboard','Player benches','Court numbers','Umpire chair','Seating (spectator)','Water station'];
   
   const S={sport:null,cat:null,courts:1,view:'bird',
-   parts:{fab:false,floor:false,light:false,acc:false},
+   parts:{fab:false,floor:false,light:false,acc:true},
+  open:'sport',
    fab:{louvers:true,roof:true,walls:'Closed',side:true,top:true},
    floor:{play:'PVC Synthetic Mat',nonplay:'-None-',nonplayOn:false},
    light:{type:'100 W'},
@@ -401,9 +402,12 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     }));
   }
   function choice(list,current,onpick,labelFn=x=>x){return h('div',{cls:'cd-opts'},...list.map(x=>h('button',{cls:'cd-opt'+(current===x?' cd-on':''),on:()=>onpick(x)},labelFn(x))));}
+  function collapsed(n,title,text,onChange){
+    return h('div',{cls:'cd-coll'},h('span',{cls:'cd-dot cd-done'},n),h('div',{cls:'cd-coll-t'},h('b',{},title),h('span',{},text)),h('button',{cls:'cd-change',on:onChange},'Change'));
+  }
   function pipeline(){
     const cur=!S.sport?0:!S.cat?1:2;
-    const names=['Sport','Category','Parts'];
+    const names=['Sport','Category','Parts','Accessories'];
     return h('div',{cls:'cd-pipe','aria-label':'Progress'},...names.map((n,i)=>h('div',{cls:'cd-pn'+(i<cur?' cd-done':'')+(i===cur?' cd-now':'')},h('span',{cls:'cd-dot'},String(i+1)),h('span',{cls:'cd-pl'},n))));
   }
   function render(){
@@ -411,11 +415,19 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     const card=h('div',{cls:'cd-card-s cd-flowcard'});
     panel.append(card);
     card.append(pipeline());
-    // Q1 sport
-    card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;render();build();frame(SPORTS[v]);},k=>({icon:SPORT_ICON(SPORTS[k].L/SPORTS[k].W),title:SPORTS[k].n,sub:SPORTS[k].L+' × '+SPORTS[k].W+' m'}))));
+    // Q1 sport: collapses to one line once chosen
+    if(S.sport&&S.open!=='sport'){
+      card.append(collapsed('1','Sport',SPORTS[S.sport].n+' · '+SPORTS[S.sport].L+' × '+SPORTS[S.sport].W+' m',()=>{S.open='sport';render();}));
+    } else {
+      card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;S.open='category';render();build();frame(SPORTS[v]);},k=>({icon:SPORT_ICON(SPORTS[k].L/SPORTS[k].W),title:SPORTS[k].n,sub:SPORTS[k].L+' × '+SPORTS[k].W+' m'}))));
+    }
     if(!S.sport){build();return;}
-    // Q2 category
-    card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;render();build();frame(SPORTS[S.sport]);},k=>({icon:CAT_ICON[k],title:CATS[k],sub:CAT_TEXT[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
+    // Q2 category: collapses to one line once chosen
+    if(S.cat&&S.open!=='category'){
+      card.append(collapsed('2','Category',CATS[S.cat]+' · '+CAT_TEXT[S.cat],()=>{S.open='category';render();}));
+    } else {
+      card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;S.open=null;render();build();frame(SPORTS[S.sport]);},k=>({icon:CAT_ICON[k],title:CATS[k],sub:CAT_TEXT[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
+    }
     if(!S.cat){build();return;}
     // Step 3 parts
     const partsSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'3'),'Parts'),h('div',{cls:'cd-q'},'What do you want to include?'));
@@ -456,7 +468,8 @@ function mountCourtDesigner(root: HTMLElement): () => void {
       if(S.light.type&&!LIGHT_IND[S.light.type])S.light.type=Object.keys(LIGHT_IND)[0];
       return [h('h4',{},'Per court'),choice(Object.keys(LIGHT_IND),S.light.type,v=>{S.light.type=v;render();build();})];
     });
-    part('acc','Accessories',()=>ACC.map(a=>h('label',{cls:'cd-row'},h('input',{type:'checkbox',checked:!!S.accs[a],onchange:e=>{S.accs[a]=e.target.checked;build();}}),' '+a)));
+    const accSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'4'),'Accessories'),h('div',{cls:'cd-q'},'Add what the court needs'),h('div',{cls:'cd-accs'},...ACC.map(a=>h('label',{cls:'cd-acc'+(S.accs[a]?' cd-on':'')},h('input',{type:'checkbox',checked:!!S.accs[a],onchange:e=>{S.accs[a]=e.target.checked;render();build();}}),a))));
+    card.append(accSec);
     panel.append(h('div',{cls:'cd-cta'},h('div',{},h('b',{},'Happy with the design?'),h('span',{},'We will turn these choices into a quote.')),h('a',{cls:'cd-pill',href:'/contact'},'Request a quote')));
     build();
   }
