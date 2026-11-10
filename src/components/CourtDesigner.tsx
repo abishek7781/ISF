@@ -126,58 +126,94 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   
   function windowTex(){const c=document.createElement('canvas');c.width=128;c.height=256;const g=c.getContext('2d');g.fillStyle='#8FA3B8';g.fillRect(0,0,128,256);for(let y=0;y<256;y+=32)for(let x=0;x<128;x+=24){g.fillStyle=Math.random()<0.25?'#FFE9A8':'#2C3E55';g.fillRect(x+6,y+8,14,18);}const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;return t;}
   function buildCity(sp){
-    const R=rng(11);
-    const wTex=windowTex();
-    // roads around the site, with kerbs
-    const road=new THREE.MeshStandardMaterial({color:'#4A4F57',roughness:0.95});
-    const kerb=new THREE.MeshStandardMaterial({color:'#C9CED6',roughness:0.9});
-    const hw=sp.W/2+6, hl=sp.L/2+6;
-    add(G.city,new THREE.PlaneGeometry(18,400),road,-(hw+12),-0.03,0,-Math.PI/2).rotation.z=0;
-    add(G.city,new THREE.PlaneGeometry(18,400),road,(hw+12),-0.03,0,-Math.PI/2).rotation.z=0;
-    add(G.city,new THREE.PlaneGeometry(400,18),road,0,-0.03,-(hl+12),-Math.PI/2);
-    add(G.city,new THREE.PlaneGeometry(400,18),road,0,-0.03,(hl+12),-Math.PI/2);
-    // lane markings
-    const dash=new THREE.MeshStandardMaterial({color:'#F4F4F4'});
-    for(let t=-190;t<190;t+=6){add(G.city,new THREE.PlaneGeometry(0.2,3),dash,-(hw+12),-0.02,t,-Math.PI/2);add(G.city,new THREE.PlaneGeometry(3,0.2),dash,t,-0.02,-(hl+12),-Math.PI/2);}
-    // pavements
-    add(G.city,new THREE.BoxGeometry(3,0.15,400),kerb,-(hw+21.5),0.07,0);add(G.city,new THREE.BoxGeometry(3,0.15,400),kerb,(hw+21.5),0.07,0);
-    add(G.city,new THREE.BoxGeometry(400,0.15,3),kerb,0,0.07,-(hl+21.5));add(G.city,new THREE.BoxGeometry(400,0.15,3),kerb,0,0.07,(hl+21.5));
-    // buildings around the block
-    const cols=['#D9CFC1','#C4B8A6','#B9C3CF','#E4DDD0','#9FB0C2','#CDBBA4','#A7B5A0'];
-    for(let i=0;i<70;i++){
-      const a=R()*Math.PI*2, r=45+R()*90;
-      const x=Math.cos(a)*r, z=Math.sin(a)*r;
-      if(Math.abs(x)<hw+24 && Math.abs(z)<hl+24) continue;
-      const bw=8+R()*14, bd=8+R()*14, bh=10+Math.floor(R()*7)*5+R()*6;
-      const m=new THREE.MeshStandardMaterial({color:cols[Math.floor(R()*cols.length)],map:wTex.clone(),roughness:0.7});
-      m.map.repeat.set(Math.max(1,Math.round(bw/3)),Math.max(1,Math.round(bh/3)));m.map.needsUpdate=true;
-      add(G.city,new THREE.BoxGeometry(bw,bh,bd),m,x,bh/2,z);
+    // a neighbourhood around the pitch: street grid, pavements, blocks of buildings, trees, lamps and parked cars
+    const R=rng(23);
+    const hw=sp.W/2+6, hl=sp.L/2+6;           // pitch edge incl. run-off
+    const PAVE=4, ROAD=14;
+    const roadZ=hl+PAVE+ROAD/2, roadX=hw+PAVE+ROAD/2;
+    const asphalt=new THREE.MeshStandardMaterial({color:'#3A3F47',roughness:.95});
+    const pave=new THREE.MeshStandardMaterial({color:'#CDD2D9',roughness:.92});
+    const kerb=new THREE.MeshStandardMaterial({color:'#EEF1F5',roughness:.9});
+    const paint=new THREE.MeshStandardMaterial({color:'#F7F7F2',roughness:.8});
+    const lawn=new THREE.MeshStandardMaterial({color:'#7DB06A',roughness:1});
+    const EXT=420;
+    // lawn and roads
+    add(G.city,new THREE.PlaneGeometry(EXT,EXT),lawn,0,-0.03,0,-Math.PI/2);
+    [-1,1].forEach(sz=>add(G.city,new THREE.PlaneGeometry(EXT,ROAD),asphalt,0,-0.02,sz*roadZ,-Math.PI/2));
+    [-1,1].forEach(sx=>add(G.city,new THREE.PlaneGeometry(ROAD,EXT),asphalt,sx*roadX,-0.02,0,-Math.PI/2));
+    // pavements and kerbs
+    [-1,1].forEach(sz=>add(G.city,new THREE.BoxGeometry(EXT,0.12,PAVE),pave,0,0.06,sz*(hl+PAVE/2)));
+    [-1,1].forEach(sx=>add(G.city,new THREE.BoxGeometry(PAVE,0.12,EXT),pave,sx*(hw+PAVE/2),0.06,0));
+    [-1,1].forEach(sz=>add(G.city,new THREE.BoxGeometry(EXT,0.16,0.25),kerb,0,0.08,sz*(hl+PAVE)));
+    [-1,1].forEach(sx=>add(G.city,new THREE.BoxGeometry(0.25,0.16,EXT),kerb,sx*(hw+PAVE),0.08,0));
+    // centre dashes and edge lines
+    for(let t=-EXT/2+4;t<EXT/2;t+=8){
+      [-1,1].forEach(sz=>add(G.city,new THREE.PlaneGeometry(3.2,0.22),paint,t,-0.01,sz*roadZ,-Math.PI/2));
+      [-1,1].forEach(sx=>add(G.city,new THREE.PlaneGeometry(0.22,3.2),paint,sx*roadX,-0.01,t,-Math.PI/2));
     }
-    // trees along the pavements and in the park
-    const trunk=new THREE.MeshStandardMaterial({color:'#6B4F34'});
-    const leaf=new THREE.MeshStandardMaterial({color:'#3C7A3E',roughness:0.9});
-    for(let i=0;i<60;i++){
-      const side=R()<0.5?-1:1; const x=(R()<0.5?-1:1)*(hw+19+R()*60*0.5)*(R()<0.5?1:0.3), z=(R()*2-1)*90;
-      const tx=R()<0.5?side*(hw+20):x, tz=R()<0.5?z:(R()*2-1)*(hl+20);
-      if(Math.abs(tx)<hw+17&&Math.abs(tz)<hl+17)continue;
-      add(G.city,new THREE.CylinderGeometry(0.15,0.2,2.6,8),trunk,tx,1.3,tz);
-      add(G.city,new THREE.SphereGeometry(1.6+R()*0.6,12,10),leaf,tx,3.4,tz);
+    // zebra crossings where each road meets the pavement, near the pitch
+    for(let k=-3;k<=3;k++){
+      [-1,1].forEach(sz=>add(G.city,new THREE.PlaneGeometry(0.6,ROAD*0.6),paint,k*1.6-0.8+(k*0),-0.01,sz*(hl+PAVE+ROAD*0.3),-Math.PI/2));
     }
-    // street lights along the roads
-    for(let t=-180;t<=180;t+=25){
-      add(G.city,new THREE.CylinderGeometry(0.1,0.12,7,8),postMat,-(hw+18),3.5,t);add(G.city,new THREE.CylinderGeometry(0.1,0.12,7,8),postMat,(hw+18),3.5,t);
+    // blocks of buildings
+    const cols=['#E4DCCD','#D2C6B2','#BFCAD6','#EFE9DE','#A9B9C9','#CBB8A0','#B3C4B0','#D9D2C6'];
+    const roofM=new THREE.MeshStandardMaterial({color:'#7B8491',roughness:.8});
+    const win=windowTex();
+    for(let i=-7;i<=7;i++)for(let j=-7;j<=7;j++){
+      const cx=i*48, cz=j*48;
+      if(Math.abs(cx)<roadX+18 && Math.abs(cz)<roadZ+18) continue;     // keep the streets and the pitch clear
+      const n=2+Math.floor(R()*2);
+      for(let k=0;k<n;k++){
+        const bw=11+R()*11, bd=11+R()*11, bh=12+Math.floor(R()*10)*4+R()*3;
+        const x=cx+(R()*2-1)*8, z=cz+(R()*2-1)*8;
+        const m=new THREE.MeshStandardMaterial({color:cols[Math.floor(R()*cols.length)],roughness:.75});
+        const t=win.clone();t.repeat.set(Math.max(1,Math.round(bw/3.2)),Math.max(1,Math.round(bh/3.2)));t.needsUpdate=true;
+        m.map=t;
+        add(G.city,new THREE.BoxGeometry(bw,bh,bd),m,x,bh/2,z);
+        add(G.city,new THREE.BoxGeometry(bw+0.6,0.8,bd+0.6),roofM,x,bh+0.4,z);
+      }
     }
-    // parked and passing cars
-    const carCols=['#C0392B','#F4F4F4','#2C3E50','#E0B000','#2E86AB'];
-    for(let i=0;i<14;i++){
-      const onX=R()<0.5; const c=new THREE.MeshStandardMaterial({color:carCols[Math.floor(R()*carCols.length)],metalness:0.4,roughness:0.4});
-      const p=(R()*2-1)*120, lane=(R()<0.5?-1:1)*(R()*3+1);
-      if(onX){add(G.city,new THREE.BoxGeometry(4.2,1.4,1.8),c,(hw+12)+lane,0.8,p);}
-      else{add(G.city,new THREE.BoxGeometry(1.8,1.4,4.2),c,p,0.8,(hl+12)+lane);}
+    // trees along the pavements and in the park strips
+    const trunk=new THREE.MeshStandardMaterial({color:'#5B4330',roughness:1});
+    const leaf=new THREE.MeshStandardMaterial({color:'#3F7D3F',roughness:.95});
+    const leaf2=new THREE.MeshStandardMaterial({color:'#4E8F48',roughness:.95});
+    const treeAt=(x,z)=>{
+      add(G.city,new THREE.CylinderGeometry(0.16,0.22,2.8,8),trunk,x,1.4,z);
+      const r=1.7+R()*0.5;
+      add(G.city,new THREE.SphereGeometry(r,10,8),R()<0.5?leaf:leaf2,x,3.6,z);
+      add(G.city,new THREE.SphereGeometry(r*0.7,8,6),leaf2,x+0.5,4.9,z-0.3);
+    };
+    for(let t=-EXT/2+6;t<EXT/2-6;t+=9){
+      if(Math.abs(t)>roadX+PAVE+2 || true){
+        [-1,1].forEach(sz=>{ if(R()<0.85) treeAt(t+(R()-0.5)*2, sz*(hl+PAVE+1.2)); });
+        [-1,1].forEach(sx=>{ if(R()<0.85) treeAt(sx*(hw+PAVE+1.2), t+(R()-0.5)*2); });
+      }
     }
-    // sky-line haze colour is handled by fog in build()
+    // street lamps with arms
+    const pole=new THREE.MeshStandardMaterial({color:'#4A5160',metalness:.5,roughness:.5});
+    const lampHead=new THREE.MeshStandardMaterial({color:'#FFF6DA',emissive:'#FFF2C7',emissiveIntensity:1.1});
+    for(let t=-EXT/2+10;t<EXT/2-10;t+=24){
+      [-1,1].forEach(sz=>{const z=sz*(hl+PAVE*0.5);add(G.city,new THREE.CylinderGeometry(0.1,0.13,8,8),pole,t,4,z);add(G.city,new THREE.BoxGeometry(1.4,0.1,0.1),pole,t+0.7,7.9,z);add(G.city,new THREE.BoxGeometry(0.9,0.22,0.4),lampHead,t+1.3,7.8,z);});
+      [-1,1].forEach(sx=>{const x=sx*(hw+PAVE*0.5);add(G.city,new THREE.CylinderGeometry(0.1,0.13,8,8),pole,x,4,t);add(G.city,new THREE.BoxGeometry(0.1,0.1,1.4),pole,x,7.9,t+0.7);add(G.city,new THREE.BoxGeometry(0.4,0.22,0.9),lampHead,x,7.8,t+1.3);});
+    }
+    // parked cars on the kerb and a few driving in the lanes
+    const carCols=['#B3261E','#F2F2F2','#23324A','#D9A21B','#2F6FA8','#3C8D5A','#7D8794'];
+    const glass=new THREE.MeshStandardMaterial({color:'#1B2430',roughness:.2,metalness:.3});
+    const car=(x,z,rot)=>{
+      const c=new THREE.MeshStandardMaterial({color:carCols[Math.floor(R()*carCols.length)],metalness:.45,roughness:.35});
+      const g=new THREE.Group();
+      const body=new THREE.Mesh(new THREE.BoxGeometry(4.2,0.95,1.9),c);body.position.y=0.7;g.add(body);
+      const cab=new THREE.Mesh(new THREE.BoxGeometry(2.3,0.7,1.7),glass);cab.position.set(-0.1,1.45,0);g.add(cab);
+      g.traverse(o=>{o.castShadow=o.receiveShadow=true;});
+      g.position.set(x,0,z);g.rotation.y=rot;G.city.add(g);
+    };
+    for(let t=-EXT/2+20;t<EXT/2-20;t+=11){
+      if(R()<0.55) car(t, roadZ+(R()<0.5?-4.4:4.4), 0);
+      if(R()<0.55) car(roadX+(R()<0.5?-4.4:4.4), t, Math.PI/2);
+    }
+    for(let t=-120;t<120;t+=36){ if(R()<0.7) car(t,roadZ+(R()<0.5?-2.6:2.6)*0+3.4*(R()<0.5?-1:1),0); }
   }
-  
+
   function build(){
     Object.values(G).forEach(g=>{while(g.children.length){const c=g.children.pop();c.geometry&&c.geometry.dispose();}});
     if(!S.sport||!S.cat){scene.background=new THREE.Color(document.documentElement.dataset.theme==='dark'?'#0E1A2E':'#E9EEF6');summary();return;}
@@ -346,15 +382,32 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   
   // ---------- wizard panel ----------
   const panel=$('panel');
-  function h(tag,attrs={},...kids){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>{if(k==='on')e.onclick=v;else if(k==='cls')e.className=v;else e[k]=v;});kids.flat().forEach(c=>e.append(c));return e;}
+  function h(tag,attrs={},...kids){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>{if(k==='on')e.onclick=v;else if(k==='cls')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.includes('-'))e.setAttribute(k,v);else e[k]=v;});kids.flat().forEach(c=>e.append(c));return e;}
+  // simple line icons for the tiles
+  const SPORT_ICON=(ratio)=>{const w=44,hh=Math.max(20,Math.min(34,44/ratio));const x0=(48-w)/2,y0=(40-hh)/2;return `<svg viewBox="0 0 48 40" aria-hidden="true"><rect x="${x0}" y="${y0}" width="${w}" height="${hh}" rx="2"/><line x1="24" y1="${y0}" x2="24" y2="${y0+hh}"/><line x1="${x0+w*0.2}" y1="${y0}" x2="${x0+w*0.2}" y2="${y0+hh}"/><line x1="${x0+w*0.8}" y1="${y0}" x2="${x0+w*0.8}" y2="${y0+hh}"/></svg>`;};
+  const CAT_ICON={
+    indoor:'<svg viewBox="0 0 48 40" aria-hidden="true"><path d="M8 20 L24 7 L40 20 V34 H8 Z"/><path d="M20 34 V25 H28 V34"/></svg>',
+    outdoor:'<svg viewBox="0 0 48 40" aria-hidden="true"><circle cx="24" cy="18" r="7"/><line x1="6" y1="32" x2="42" y2="32"/><line x1="12" y1="37" x2="36" y2="37"/></svg>',
+    semi:'<svg viewBox="0 0 48 40" aria-hidden="true"><path d="M6 12 H42"/><line x1="10" y1="12" x2="10" y2="34"/><line x1="38" y1="12" x2="38" y2="34"/><path d="M14 22 H34 M14 27 H34"/></svg>'
+  };
+  const CAT_TEXT={indoor:'Closed hall with louvres and roofing',outdoor:'Open turf with side and top netting',semi:'Roof and louvre screens, open sides'};
+  function tiles(list,current,onpick,meta){
+    return h('div',{cls:'cd-tiles'},...list.map(k=>{
+      const m=meta(k);
+      return h('button',{cls:'cd-tile'+(current===k?' cd-on':''),on:()=>onpick(k),'aria-pressed':current===k?'true':'false'},
+        h('span',{cls:'cd-tile-ic',html:m.icon}),
+        h('span',{cls:'cd-tile-t'},m.title),
+        h('span',{cls:'cd-tile-s'},m.sub));
+    }));
+  }
   function choice(list,current,onpick,labelFn=x=>x){return h('div',{cls:'cd-opts'},...list.map(x=>h('button',{cls:'cd-opt'+(current===x?' cd-on':''),on:()=>onpick(x)},labelFn(x))));}
   function render(){
     panel.innerHTML='';
     // Q1 sport
-    panel.append(h('div',{cls:'cd-card-s'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),choice(Object.keys(SPORTS),S.sport,v=>{S.sport=v;render();build();frame(SPORTS[v]);},k=>SPORTS[k].n)));
+    panel.append(h('div',{cls:'cd-card-s'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),h('div',{cls:'cd-q'},'Which sport?'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;render();build();frame(SPORTS[v]);},k=>({icon:SPORT_ICON(SPORTS[k].L/SPORTS[k].W),title:SPORTS[k].n,sub:SPORTS[k].L+' × '+SPORTS[k].W+' m'}))));
     if(!S.sport){build();return;}
     // Q2 category
-    panel.append(h('div',{cls:'cd-card-s'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),choice(Object.keys(CATS),S.cat,v=>{S.cat=v;render();build();frame(SPORTS[S.sport]);},k=>CATS[k]),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
+    panel.append(h('div',{cls:'cd-card-s'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),h('div',{cls:'cd-q'},'Where will it be built?'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;render();build();frame(SPORTS[S.sport]);},k=>({icon:CAT_ICON[k],title:CATS[k],sub:CAT_TEXT[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
     if(!S.cat){build();return;}
     // Step 3 parts
     panel.append(h('div',{cls:'cd-step'},h('b',{},'3'),'Parts'),h('div',{cls:'cd-q'},'What do you want to include?'));
