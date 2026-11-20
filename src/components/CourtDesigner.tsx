@@ -4,40 +4,140 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useEffect, useRef } from 'react'
+import { useI18n } from '../i18n'
 import { A } from '../data/content'
 import './court-designer.css'
 
 const MARKUP = `<section class="cd-hx" aria-label="Court designer introduction">
-  <div class="cd-hx-bubbles" aria-hidden="true">
-    <span class="cd-b cd-b1"></span>
-    <span class="cd-b cd-b2"></span>
-    <span class="cd-b cd-b3"></span>
-    <span class="cd-b cd-b4"></span>
-    <span class="cd-b cd-b5"></span>
+  <div class="cd-hx-bg" aria-hidden="true">
+    <div class="cd-hx-glow cd-hx-glow1"></div>
+    <div class="cd-hx-glow cd-hx-glow2"></div>
+    <div class="cd-hx-glow cd-hx-glow3"></div>
+    <div class="cd-hx-grid-lines"></div>
+    <div class="cd-hx-curve cd-hx-curve-tl"></div>
+    <div class="cd-hx-curve cd-hx-curve-br"></div>
   </div>
+  <div class="cd-hx-3d" id="hx3d" aria-hidden="true"></div>
   <div class="cd-hx-in">
     <div class="cd-hx-copy">
-      <span class="cd-hx-tag"><i></i>Court designer · Chennai</span>
-      <h1>Design it <em>before</em> you build it.</h1>
-      <p>Choose the sport, the setting and the parts. See your court from above or from inside, then request a quote built from the same choices.</p>
-      <div class="cd-hx-actions"><a class="cd-hx-cta" href="#designer">Start designing</a><a class="cd-hx-alt" href="/contact">Talk to our team</a></div>
+      <span class="cd-hx-tag"><i></i>Sports Infrastructure &bull; India</span>
+      <h1>Craft Your <span class="cd-hx-out">Court</span></h1>
+      <p>Choose the sport, the setting and the parts. Visualize your court from above or from inside, then request a quote built from the same choices.</p>
+      <div class="cd-hx-actions">
+        <a class="cd-hx-cta" href="#designer">Start Designing <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="cd-hx-alt" href="/contact"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/><polygon points="6.5,5.5 11,8 6.5,10.5" fill="currentColor"/></svg> Talk to Our Team</a>
+      </div>
     </div>
-    <figure class="cd-hx-fig"><svg class="hx-iso" viewBox="120 120 360 250" role="img" aria-label="Isometric badminton court with its dimensions">
-<polygon class="hx-floor" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="250.0,150.0 447.3,263.9 357.5,315.8 160.2,201.8"/><polygon class="hx-line" fill="none" points="243.2,153.9 440.5,267.8 364.2,311.8 167.0,197.9"/><line class="hx-line" x1="337.5" y1="200.5" x2="247.6" y2="252.3"/><line class="hx-line" x1="359.8" y1="213.4" x2="270.0" y2="265.3"/><line class="hx-line" x1="312.7" y1="194.0" x2="236.5" y2="238.1"/><line class="hx-line" x1="371.0" y1="227.7" x2="294.8" y2="271.7"/><line class="hx-line" x1="348.6" y1="206.9" x2="258.8" y2="258.8"/><line class="hx-net" x1="354.5" y1="203.5" x2="252.9" y2="262.2"/><line class="hx-net-top" x1="354.5" y1="165.5" x2="252.9" y2="224.2"/><line class="hx-post" x1="354.5" y1="203.5" x2="354.5" y2="163.5"/><line class="hx-post" x1="252.9" y1="262.2" x2="252.9" y2="222.2"/>
-<line class="hx-dim" x1="146.9" y1="209.5" x2="344.2" y2="323.4"/><text class="hx-dimt" x="245.55" y="284.45" text-anchor="middle">13.40 m</text><line class="hx-dim" x1="460.5" y1="271.6" x2="370.7" y2="323.4"/><text class="hx-dimt" x="421.6" y="311.5" text-anchor="middle">6.10 m</text>
-<circle class="hx-pulse" cx="303.7" cy="232.9" r="6"/><circle class="hx-dotc" cx="303.7" cy="232.9" r="3"/>
-</svg></figure>
+  </div>
+  <!-- Feature strip -->
+  <div class="cd-hx-strip">
+    <div class="cd-hx-strip-in">
+      <div class="cd-hx-feat">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="6" width="18" height="13" rx="1.5" stroke="#39ff14" stroke-width="1.5"/><line x1="2" y1="10" x2="20" y2="10" stroke="#39ff14" stroke-width="1.2"/><line x1="11" y1="6" x2="11" y2="19" stroke="#39ff14" stroke-width="1.2"/></svg>
+        <span>Craft Your Court</span>
+      </div>
+      <div class="cd-hx-feat-div"></div>
+      <div class="cd-hx-feat">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M11 2L3 7v8l8 5 8-5V7L11 2z" stroke="#39ff14" stroke-width="1.5" stroke-linejoin="round"/><line x1="11" y1="2" x2="11" y2="20" stroke="#39ff14" stroke-width="1.2"/></svg>
+        <span>Premium Materials</span>
+      </div>
+      <div class="cd-hx-feat-div"></div>
+      <div class="cd-hx-feat">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="8.5" stroke="#39ff14" stroke-width="1.5"/><path d="M8 11l2 2 4-4" stroke="#39ff14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Expert Installation</span>
+      </div>
+      <div class="cd-hx-feat-div"></div>
+      <div class="cd-hx-feat">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M11 3l2.2 6.6H20l-5.6 4.1 2.2 6.6L11 16.2l-5.6 4.1 2.2-6.6L2 9.6h6.8L11 3z" stroke="#39ff14" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>World-Class Sports Infra</span>
+      </div>
+      <div class="cd-hx-feat-tagline">BUILD &bull; PLAY &bull; EXCEL</div>
+    </div>
   </div>
 </section>
 <section id="designer"></section>
-<div class="cd-wrap"><div class="cd-sec-h"><div><div class="cd-eyebrow" style="color:var(--green)">Step by step</div><h2>Your court</h2><p>Answer the questions on the left. Your court, its netting and its lights appear on the right.</p></div><div class="cd-seg"><button id="vBird" class="cd-on">Bird view</button><button id="vInside">Inside court view</button></div></div>
+<div class="cd-wrap"><div class="cd-sec-h"><div><div class="cd-eyebrow" style="color:var(--green)">Step by step</div><h2>Craft Your Court</h2><p>Answer the questions on the left. Your court, its netting and its lights appear on the right.</p></div><div class="cd-seg"><button id="vBird" class="cd-on">Bird view</button><button id="vInside">Inside court view</button></div></div>
 <aside class="cd-panel" id="panel"></aside>
-<section class="cd-stage"><div id="c"></div><div class="cd-toolbar"><span></span><div style="display:flex;gap:8px"><button class="cd-iconbtn" id="reset">Reset view</button><button class="cd-iconbtn" id="snap">Download image</button></div></div><div class="cd-sum" id="sum"></div></section></div>
+<section class="cd-stage"><div id="c"></div><div class="cd-empty" id="cdEmpty" aria-live="polite"></div><div class="cd-toolbar"><span></span><div style="display:flex;gap:8px"><button class="cd-iconbtn" id="startFresh">Start fresh</button><button class="cd-iconbtn" id="reset">Reset view</button><button class="cd-iconbtn" id="snap">Download image</button></div></div><div class="cd-sum" id="sum"><button class="cd-sum-toggle" id="sumToggle" aria-label="Toggle details">i</button><div class="cd-sum-body" id="sumBody"></div></div></section></div>
 `
 
-function mountCourtDesigner(root: HTMLElement): () => void {
+
+function mountHero3D(el: HTMLElement): () => void {
+  const r=new THREE.WebGLRenderer({antialias:true,alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,2));r.shadowMap.enabled=true;r.shadowMap.type=THREE.PCFSoftShadowMap;
+  r.toneMapping=THREE.ACESFilmicToneMapping;r.outputColorSpace=THREE.SRGBColorSpace;
+  el.appendChild(r.domElement);
+  const sc=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(32,1,0.1,100);cam.position.set(17,11,20);cam.lookAt(0,0.9,0);
+  sc.add(new THREE.HemisphereLight('#cfe3ff','#1a2a44',1.1));
+  const sun=new THREE.DirectionalLight('#fff3e0',2.4);sun.position.set(-6,12,7);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+  Object.assign(sun.shadow.camera,{left:-9,right:9,top:9,bottom:-9,far:40});sc.add(sun);
+  const rim=new THREE.DirectionalLight('#39ff14',0.8);rim.position.set(8,3,-8);sc.add(rim);
+  const root=new THREE.Group();root.scale.setScalar(1);sc.add(root);
+  const W=6.1,L=13.4,sx=0.46;
+  // court texture with BWF markings
+  const k=60,cv=document.createElement('canvas');cv.width=W*k;cv.height=L*k;const g=cv.getContext('2d')!;
+  g.fillStyle='#1c6b3f';g.fillRect(0,0,cv.width,cv.height);
+  for(let i=0;i<9000;i++){g.fillStyle=`rgba(0,0,0,${Math.random()*0.07})`;g.fillRect(Math.random()*cv.width,Math.random()*cv.height,2,2);}
+  g.strokeStyle='#f4f6f8';g.lineWidth=4;
+  const X=(x:number)=>(x+W/2)*k,Z=(z:number)=>(z+L/2)*k;
+  const ln=(a:number,b:number,c:number,d:number)=>{g.beginPath();g.moveTo(X(a),Z(b));g.lineTo(X(c),Z(d));g.stroke();};
+  g.strokeRect(2,2,cv.width-4,cv.height-4);ln(-2.59,-L/2,-2.59,L/2);ln(2.59,-L/2,2.59,L/2);
+  ln(-W/2,-5.94,W/2,-5.94);ln(-W/2,5.94,W/2,5.94);ln(-2.59,-1.98,2.59,-1.98);ln(-2.59,1.98,2.59,1.98);ln(0,-L/2,0,-1.98);ln(0,1.98,0,L/2);
+  const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;tx.anisotropy=16;
+  // wood grain for the sub-floor
+  const wc=document.createElement('canvas');wc.width=512;wc.height=512;const w=wc.getContext('2d')!;
+  for(let y=0;y<512;y+=32){w.fillStyle=['#c99a5b','#bd8b4c','#d3a566','#c4944f'][(y/32)%4];w.fillRect(0,y,512,32);for(let i=0;i<14;i++){w.strokeStyle=`rgba(90,55,20,${0.1+Math.random()*0.15})`;w.beginPath();const gy=y+Math.random()*32;w.moveTo(0,gy);w.bezierCurveTo(150,gy+4,330,gy-4,512,gy+2);w.stroke();}w.fillStyle='rgba(50,28,8,.4)';w.fillRect(0,y,512,2);}
+  const wt=new THREE.CanvasTexture(wc);wt.wrapS=wt.wrapT=THREE.RepeatWrapping;wt.repeat.set(2,3);wt.colorSpace=THREE.SRGBColorSpace;wt.anisotropy=8;
+  const slab=(w2:number,l2:number,h:number,y:number,mat:any)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w2,h,l2),mat);m.position.y=y;m.castShadow=m.receiveShadow=true;root.add(m);return m;};
+  const std=(o:any)=>new THREE.MeshStandardMaterial(o);
+  slab(W+1.2,L+1.2,0.5,-0.55,std({color:'#8d9298',roughness:0.95}));              // concrete base
+  slab(W+0.6,L+0.6,0.14,-0.21,std({color:'#1d1f24',roughness:0.9}));               // shock-pad foam
+  slab(W+0.3,L+0.3,0.16,-0.06,std({map:wt,roughness:0.55}));                       // sprung wood
+  const top=std({map:tx,roughness:0.42,metalness:0.02});
+  const t=new THREE.Mesh(new THREE.BoxGeometry(W,0.07,L),[std({color:'#1c6b3f'}),std({color:'#1c6b3f'}),top,std({color:'#145230'}),std({color:'#1c6b3f'}),std({color:'#1c6b3f'})]);
+  t.position.y=0.055;t.castShadow=t.receiveShadow=true;root.add(t);
+  // net + posts
+  const steel=std({color:'#2b323d',metalness:0.8,roughness:0.28});
+  [-1,1].forEach(s2=>{const p=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.06,1.65,16),steel);p.position.set(s2*(W/2+0.35),0.9,0);p.castShadow=true;root.add(p);});
+  const nc=document.createElement('canvas');nc.width=nc.height=32;const n=nc.getContext('2d')!;n.strokeStyle='rgba(240,244,250,.95)';n.lineWidth=3;n.strokeRect(0,0,32,32);
+  const nt=new THREE.CanvasTexture(nc);nt.wrapS=nt.wrapT=THREE.RepeatWrapping;nt.repeat.set(W/0.05*0.5,15);
+  const net=new THREE.Mesh(new THREE.PlaneGeometry(W+0.7,0.76),new THREE.MeshBasicMaterial({map:nt,transparent:true,side:THREE.DoubleSide,alphaTest:0.1}));net.position.set(0,1.27,0);net.rotation.y=Math.PI/2;net.rotation.set(0,0,0);root.add(net);
+  const tape=new THREE.Mesh(new THREE.BoxGeometry(W+0.7,0.08,0.02),std({color:'#f5f5f5',roughness:0.6}));tape.position.set(0,1.65,0);root.add(tape);
+  // shuttlecock
+  const sh=new THREE.Group();
+  const cork=new THREE.Mesh(new THREE.SphereGeometry(0.13,32,24),std({color:'#e8d2a6',roughness:0.7}));sh.add(cork);
+  const cap=new THREE.Mesh(new THREE.SphereGeometry(0.135,32,12,0,Math.PI*2,0,Math.PI*0.42),std({color:'#b8892f',roughness:0.45}));cap.rotation.x=Math.PI;cap.position.y=0;sh.add(cap);
+  const fe=std({color:'#fbfbf6',roughness:0.55,side:THREE.DoubleSide,transparent:true,opacity:0.96});
+  for(let i=0;i<16;i++){const a=i/16*Math.PI*2;const geo=new THREE.PlaneGeometry(0.2,0.62,1,4);const pos=geo.attributes.position;for(let v=0;v<pos.count;v++){const yy=pos.getY(v)+0.31;pos.setX(v,pos.getX(v)*(0.35+yy*1.1));}geo.computeVertexNormals();const f=new THREE.Mesh(geo,fe);f.position.set(Math.cos(a)*0.12,0.38,Math.sin(a)*0.12);f.rotation.set(0,-a+Math.PI/2,0);f.rotateX(0.0);const pv=new THREE.Group();pv.rotation.y=a;const fm=new THREE.Mesh(geo,fe);fm.position.set(0.15,0.4,0);fm.rotation.y=Math.PI/2;fm.rotation.z=-0.0;fm.rotateX(0);const t2=new THREE.Group();t2.add(fm);t2.rotation.z=-0.22;pv.add(t2);sh.add(pv);}
+  [0.34,0.62].forEach((y,i)=>{const rg=new THREE.Mesh(new THREE.TorusGeometry(0.12+y*0.38,0.006,6,48),std({color:'#e9e2cf',roughness:0.5}));rg.rotation.x=Math.PI/2;rg.position.y=y+0.06;sh.add(rg);});
+  sh.scale.setScalar(1.5);sh.rotation.z=0;sh.position.set(-0.8,3.1,-1.5);
+  root.rotation.y=-0.6;
+  const ctl=new OrbitControls(cam,r.domElement);ctl.target.set(0,0.5,0);ctl.enableZoom=false;ctl.enablePan=false;ctl.enableDamping=true;ctl.minPolarAngle=0.3;ctl.maxPolarAngle=Math.PI*0.48;ctl.update();
+  const size=()=>{const w2=el.clientWidth,h2=el.clientHeight;if(!w2||!h2)return;r.setSize(w2,h2);cam.aspect=w2/h2;cam.updateProjectionMatrix();};
+  size();addEventListener('resize',size);
+  let raf=0,t0=performance.now();
+  (function loop(){const tt=(performance.now()-t0)/1000;ctl.update();r.render(sc,cam);raf=requestAnimationFrame(loop);})();
+  return ()=>{cancelAnimationFrame(raf);removeEventListener('resize',size);ctl.dispose();r.dispose();el.innerHTML='';};
+}
+
+function mountCourtDesigner(root: HTMLElement, tr: (s: string) => string): { dispose: () => void; relocalize: () => void } {
   root.innerHTML = MARKUP
+  const hero3dOff = mountHero3D(root.querySelector('#hx3d') as HTMLElement)
   const $ = (id: string): any => root.querySelector('#' + id)
+  const T = (s: string) => tr(s)
+  // Translates every text node under `el`. The English original is remembered on the node, so it can be re-translated when the language changes.
+  function localize(el: Node) {
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
+    let n: any
+    while ((n = w.nextNode())) {
+      if (n.__en === undefined) n.__en = n.nodeValue
+      const en = n.__en.trim()
+      if (!en) continue
+      const out = T(en)
+      n.nodeValue = n.__en.match(/^\s*/)[0] + out + (/[\u3000-\u9fff]$/.test(out) ? '' : n.__en.match(/\s*$/)[0])
+    }
+  }
   
   
   
@@ -46,19 +146,21 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   const SPORTS={
    badminton:{n:'Badminton',L:13.4,W:6.1,net:'net',netH:1.55},
    pickleball:{n:'Pickleball',L:13.41,W:6.1,net:'net',netH:0.91},
-   volleyball:{n:'Volleyball',L:18,W:9,net:'net',netH:2.43},
    tennis:{n:'Tennis',L:23.77,W:10.97,net:'net',netH:0.91},
    basketball:{n:'Basketball',L:28,W:15,net:'hoop'},
-   futsal:{n:'Futsal',L:40,W:20,net:'goal'},
-   turf:{n:'Turf football (5-a-side)',L:40,W:20,net:'goal'},
-   cricket:{n:'Cricket nets',L:20,W:3.05,net:null}
   };
   const CATS={indoor:'Indoor',outdoor:'Outdoor',semi:'Semi-indoor'};
-  // flooring lists copied from the client's system (play area and non-play area)
-  const PLAY_FLOORS=['Rubber with PVC Synthetic Mat','PVC Synthetic Mat','Wooden with PVC Synthetic Mat','Wooden Flooring','Interlocking Tiles with PVC Synthetic Mat'];
-  const NONPLAY_FLOORS=['-None-','Acrylic Flooring','Interlocking Tile','Vinyl with Rubber','Wood with Mat'];
-  const PLAY_COLOR={'Rubber with PVC Synthetic Mat':'#2E7D41','PVC Synthetic Mat':'#2E7D41','Wooden with PVC Synthetic Mat':'#B58A57','Wooden Flooring':'#B58A57','Interlocking Tiles with PVC Synthetic Mat':'#2B5FA8'};
-  const NONPLAY_COLOR={'-None-':'#B9BDC4','Acrylic Flooring':'#3E9A4A','Interlocking Tile':'#2B5FA8','Vinyl with Rubber':'#7A4A3A','Wood with Mat':'#B58A57'};
+  // flooring lists
+  const PLAY_FLOORS=['Rubber with PVC Synthetic Mat','PVC Synthetic Mat','Wooden with PVC Synthetic Mat','Wooden Flooring','Interlocking Tiles with PVC Synthetic Mat','Acrylic Flooring'];
+  const PLAY_COLOR={'Rubber with PVC Synthetic Mat':'#2E7D41','PVC Synthetic Mat':'#1A6EC4','Wooden with PVC Synthetic Mat':'#B58A57','Wooden Flooring':'#B58A57','Interlocking Tiles with PVC Synthetic Mat':'#2B5FA8','Acrylic Flooring':'#F4A7B9'};
+  // mat-type play floors that cover the whole slab (no concrete surround needed)
+  const MAT_FLOORS=new Set([]);
+  const NONPLAY_COLOR={'Acrylic (Concrete)':'#8A9BAA','Interlocking Tile':'#D4849A','Wood with Mat':'#B58A57','-None-':'#B9BDC4'};
+  // which play floors support NPA, and what NPA they map to
+  const NPA_MAP={'Wooden Flooring':'Wood with Mat','Wooden with PVC Synthetic Mat':'Wood with Mat','Interlocking Tiles with PVC Synthetic Mat':'Interlocking Tile','Acrylic Flooring':'Acrylic (Concrete)'};
+  function npaFor(playFloor:string):string|null{return NPA_MAP[playFloor]||null;}
+  // floors where NPA is always shown (no toggle)
+  const NPA_ALWAYS=new Set(['Interlocking Tiles with PVC Synthetic Mat','Wooden with PVC Synthetic Mat']);
   const LIGHT_OUT={'100 W':100,'150 W':150,'200 W':200};   // per light post, one post every 10 ft
   const LIGHT_IND={'Basic (1500 W per court)':1500,'Advanced (2000 W per court)':2000};
   const ACC=['Scoreboard','Player benches','Court numbers','Umpire chair','Seating (spectator)','Water station'];
@@ -67,13 +169,13 @@ function mountCourtDesigner(root: HTMLElement): () => void {
    parts:{fab:false,floor:false,light:false,acc:true},
   open:'sport',
    fab:{louvers:true,roof:true,walls:'Closed',side:true,top:true},
-   floor:{play:'PVC Synthetic Mat',nonplay:'-None-',nonplayOn:false},
+   floor:{play:'PVC Synthetic Mat',nonplay:'-None-',nonplayOn:true},
    light:{type:'100 W'},
    accs:{}};
   
   // ---------- 3D ----------
   const host=$('c');
-  const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   host.appendChild(renderer.domElement);
   const scene=new THREE.Scene();
@@ -101,6 +203,16 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   function makeFloorTex(floorType:string,baseColor:string){
     const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d')!;
     const ft=floorType||'';
+    if(ft==='Acrylic (Concrete)'){
+      // grey concrete base with acrylic topcoat sheen
+      g.fillStyle='#8A9BAA';g.fillRect(0,0,512,512);
+      for(let i=0;i<2000;i++){const r=Math.random();g.fillStyle=`rgba(0,0,0,${0.01+r*0.025})`;g.beginPath();g.arc(Math.random()*512,Math.random()*512,0.5+r,0,Math.PI*2);g.fill();}
+      g.strokeStyle='rgba(0,0,0,0.07)';g.lineWidth=1;
+      for(let x=0;x<512;x+=48){g.beginPath();g.moveTo(x,0);g.lineTo(x,512);g.stroke();}
+      for(let y=0;y<512;y+=48){g.beginPath();g.moveTo(0,y);g.lineTo(512,y);g.stroke();}
+      const sh=g.createLinearGradient(0,0,512,512);sh.addColorStop(0,'rgba(255,255,255,0.08)');sh.addColorStop(1,'rgba(0,0,0,0.04)');g.fillStyle=sh;g.fillRect(0,0,512,512);
+      const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=16;return t;
+    }
     if(ft.includes('Wooden')||ft.includes('Wood')){
       // wood grain: plank rows with grain lines
       const plankW=512,plankH=36;
@@ -166,29 +278,96 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     if(floorType.includes('Interlocking'))return{roughness:0.75,metalness:0.0};
     return{roughness:0.65,metalness:0.0};
   }
-  function drawPlay(sp:any,colour:string,floorType:string){
+  function drawPlay(sp:any,colour:string,floorType:string,npaFloor:string,npaCol:string){
     const k=60,pad=3*k,W=sp.W*k,L=sp.L*k;
     tex.width=W+pad*2;tex.height=L+pad*2;const g=tex.getContext('2d')!;
     const P=(x:number,z:number)=>[pad+(x+sp.W/2)*k,pad+(z+sp.L/2)*k];
     const rect=(x1:number,z1:number,x2:number,z2:number)=>{const a=P(x1,z1),b=P(x2,z2);g.strokeRect(a[0],a[1],b[0]-a[0],b[1]-a[1]);};
     const line=(a:[number,number],b:[number,number])=>{const p=P(...a),q=P(...b);g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(q[0],q[1]);g.stroke();};
-    // fill with floor texture
-    const ftx=makeFloorTex(floorType,colour);
-    const pattern=g.createPattern(ftx.image as HTMLCanvasElement,'repeat');
-    if(pattern){g.fillStyle=pattern;}else{g.fillStyle=colour;}
-    g.fillRect(0,0,tex.width,tex.height);
-    // court lines - bright white
-    g.strokeStyle='rgba(255,255,255,0.95)';g.lineWidth=Math.max(3,k*0.055);
     const hw=sp.W/2,hl=sp.L/2;
-    if(sp.id==='badminton'||sp.id==='pickleball'){rect(-hw,-hl,hw,hl);rect(-2.59,-hl,2.59,hl);line([-hw,-5.94],[hw,-5.94]);line([-hw,5.94],[hw,5.94]);line([-2.59,-1.98],[2.59,-1.98]);line([-2.59,1.98],[2.59,1.98]);line([0,-hl],[0,-1.98]);line([0,1.98],[0,hl]);}
-    else if(sp.id==='tennis'){rect(-hw,-hl,hw,hl);rect(-4.115,-hl,4.115,hl);line([-4.115,-6.4],[4.115,-6.4]);line([-4.115,6.4],[4.115,6.4]);line([0,-6.4],[0,6.4]);}
+    const isMat=MAT_FLOORS.has(floorType);
+    const ftx=makeFloorTex(floorType,colour);
+    const fPat=g.createPattern(ftx.image as HTMLCanvasElement,'repeat');
+    if(isMat){
+      // ── Mat floor: same surface covers the whole slab, no surround split ───
+      if(fPat){g.fillStyle=fPat;}else{g.fillStyle=colour;}
+      g.fillRect(0,0,tex.width,tex.height);
+    } else {
+      // ── Non-play area ──────────────────────────────────────────────────────
+      if(npaFloor&&npaFloor!=='-None-'){
+        const nftx=makeFloorTex(npaFloor,npaCol);
+        const npat=g.createPattern(nftx.image as HTMLCanvasElement,'repeat');
+        if(npat){g.fillStyle=npat;}else{g.fillStyle=npaCol;}
+        g.fillRect(0,0,tex.width,tex.height);
+      } else {
+        // plain concrete when no NPA selected
+        g.fillStyle='#A8A39A';g.fillRect(0,0,tex.width,tex.height);
+        for(let i=0;i<4000;i++){const r=Math.random();g.fillStyle=`rgba(0,0,0,${0.015+r*0.03})`;g.beginPath();g.arc(Math.random()*tex.width,Math.random()*tex.height,0.5+r,0,Math.PI*2);g.fill();}
+        g.strokeStyle='rgba(0,0,0,0.08)';g.lineWidth=1;
+        for(let x=0;x<tex.width;x+=k*2){g.beginPath();g.moveTo(x,0);g.lineTo(x,tex.height);g.stroke();}
+        for(let y=0;y<tex.height;y+=k*2){g.beginPath();g.moveTo(0,y);g.lineTo(tex.width,y);g.stroke();}
+      }
+      // ── Play area: sport surface clipped to court boundary ─────────────────
+      const tl=P(-hw,-hl),courtW=(sp.W)*k,courtH=(sp.L)*k;
+      g.save();g.beginPath();g.rect(tl[0],tl[1],courtW,courtH);g.clip();
+      if(fPat){g.fillStyle=fPat;}else{g.fillStyle=colour;}
+      g.fillRect(tl[0],tl[1],courtW,courtH);
+      g.restore();
+    }
+    // ── Court lines ──────────────────────────────────────────────────────────
+    g.strokeStyle='rgba(255,255,255,0.95)';g.lineWidth=Math.max(3,k*0.055);
+    if(sp.id==='badminton'){rect(-hw,-hl,hw,hl);rect(-2.59,-hl,2.59,hl);line([-hw,-5.94],[hw,-5.94]);line([-hw,5.94],[hw,5.94]);line([-2.59,-1.98],[2.59,-1.98]);line([-2.59,1.98],[2.59,1.98]);line([0,-hl],[0,-1.98]);line([0,1.98],[0,hl]);}
+    else if(sp.id==='pickleball'){
+      // outer boundary
+      rect(-hw,-hl,hw,hl);
+      // kitchen (non-volley zone) line - 2.235m from net each side
+      line([-hw,-2.235],[hw,-2.235]);line([-hw,2.235],[hw,2.235]);
+      // centre service line from kitchen line to baseline (each half)
+      line([0,-hl],[0,-2.235]);line([0,2.235],[0,hl]);
+    }
+    else if(sp.id==='tennis'){
+      // outer doubles boundary
+      rect(-hw,-hl,hw,hl);
+      // singles sidelines (vertical only — no extra baseline overlap)
+      line([-4.115,-hl],[-4.115,hl]);line([4.115,-hl],[4.115,hl]);
+      // service lines (run full singles width)
+      line([-4.115,-6.4],[4.115,-6.4]);line([-4.115,6.4],[4.115,6.4]);
+      // centre service line (between the two service lines, through the net)
+      line([0,-6.4],[0,6.4]);
+      // centre marks on baseline (0.3m to be visible)
+      line([0,-hl],[0,-hl+0.3]);line([0,hl],[0,hl-0.3]);
+    }
     else if(sp.id==='volleyball'){rect(-hw,-hl,hw,hl);line([-hw,-3],[hw,-3]);line([-hw,3],[hw,3]);}
-    else if(sp.id==='basketball'){rect(-hw,-hl,hw,hl);line([-hw,0],[hw,0]);}
-    else {rect(-hw,-hl,hw,hl);line([-hw,0],[hw,0]);}
-    floorTex.needsUpdate=true;
+    else if(sp.id==='basketball'){
+      // outer boundary + half-court line
+      rect(-hw,-hl,hw,hl);line([-hw,0],[hw,0]);
+      // key/paint areas — FIBA: 4.9m wide × 5.8m long
+      const kw=4.9,kl=5.8;
+      rect(-kw/2,-hl,kw/2,-hl+kl);rect(-kw/2,hl-kl,kw/2,hl);
+      // darc: draw arc using native canvas g.arc (canvas coords: z maps to y, same angle convention)
+      const darc=(cx:number,cz:number,r:number,a0:number,a1:number,ccw=false)=>{const[pcx,pcy]=P(cx,cz);g.beginPath();g.arc(pcx,pcy,r*k,a0,a1,ccw);g.stroke();};
+      // free throw semicircles (r=1.8m); canvas bottom half = toward mid-court
+      darc(0,-hl+kl,1.8,0,Math.PI);darc(0,hl-kl,1.8,Math.PI,Math.PI*2);
+      // restricted area arcs (r=1.25m from basket)
+      darc(0,-hl+1.575,1.25,0,Math.PI);darc(0,hl-1.575,1.25,Math.PI,Math.PI*2);
+      // 3-point: FIBA r=6.75m from basket; straight lines at 0.9m from sideline
+      const cr=6.75,sx=hw-0.9;
+      const dz=Math.sqrt(cr*cr-sx*sx);
+      const bz=-hl+1.575;
+      line([-sx,-hl],[-sx,bz+dz]);line([sx,-hl],[sx,bz+dz]);
+      line([-sx,hl],[-sx,-bz-dz]);line([sx,hl],[sx,-bz-dz]);
+      const ab=Math.atan2(dz,sx);
+      darc(0,bz,cr,ab,Math.PI-ab);           // bottom basket arc (clockwise through 90°=mid-court)
+      darc(0,-bz,cr,-ab,Math.PI+ab,true);    // top basket arc (anticlockwise through 270°=mid-court)
+      // centre circles
+      darc(0,0,1.8,0,Math.PI*2);darc(0,0,0.45,0,Math.PI*2);
+    }
+    else{rect(-hw,-hl,hw,hl);line([-hw,0],[hw,0]);}
+    floorTex.dispose();floorTex.needsUpdate=true;
   }
   // realistic netting texture: fine hexagonal mesh
   function netTex(color:string,alpha:number){const c=document.createElement('canvas');c.width=128;c.height=128;const g=c.getContext('2d')!;g.clearRect(0,0,128,128);const cell=12;g.strokeStyle=color;g.lineWidth=1.2;for(let y=0;y<128+cell;y+=cell){for(let x=0;x<128+cell;x+=cell){g.beginPath();g.moveTo(x,y);g.lineTo(x+cell/2,y+cell);g.stroke();g.beginPath();g.moveTo(x+cell,y);g.lineTo(x+cell/2,y+cell);g.stroke();}}for(let y=0;y<128+cell;y+=cell){g.beginPath();g.moveTo(0,y);g.lineTo(128,y);g.stroke();}const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;return t;}
+  function boxNetTex(color:string){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d')!;g.clearRect(0,0,64,64);g.fillStyle=color;g.fillRect(0,0,64,6);g.fillRect(0,0,6,64);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=16;return t;}
   function gridTex(color:string){const c=document.createElement('canvas');c.width=128;c.height=128;const g=c.getContext('2d')!;g.clearRect(0,0,128,128);g.strokeStyle=color;g.lineWidth=1.5;const cell=10;for(let y=0;y<128+cell;y+=cell){for(let x=0;x<128+cell;x+=cell){g.beginPath();g.moveTo(x,y);g.lineTo(x+cell,y+cell);g.stroke();g.beginPath();g.moveTo(x+cell,y);g.lineTo(x,y+cell);g.stroke();}}const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;return t;}
   
   let curSp=null;
@@ -287,9 +466,30 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     for(let t=-120;t<120;t+=36){ if(R()<0.7) car(t,roadZ+(R()<0.5?-2.6:2.6)*0+3.4*(R()<0.5?-1:1),0); }
   }
 
+  const COURT_SVG={
+    badminton:'<rect x="4" y="4" width="52" height="92"/><line x1="4" y1="50" x2="56" y2="50"/><line x1="10" y1="4" x2="10" y2="96"/><line x1="50" y1="4" x2="50" y2="96"/><line x1="4" y1="30" x2="56" y2="30"/><line x1="4" y1="70" x2="56" y2="70"/><line x1="30" y1="4" x2="30" y2="30"/><line x1="30" y1="70" x2="30" y2="96"/>',
+    pickleball:'<rect x="4" y="4" width="52" height="92"/><line x1="4" y1="50" x2="56" y2="50" stroke-dasharray="3 3"/><line x1="4" y1="34" x2="56" y2="34"/><line x1="4" y1="66" x2="56" y2="66"/><line x1="30" y1="4" x2="30" y2="34"/><line x1="30" y1="66" x2="30" y2="96"/>',
+    tennis:'<rect x="4" y="4" width="52" height="92"/><line x1="11" y1="4" x2="11" y2="96"/><line x1="49" y1="4" x2="49" y2="96"/><line x1="11" y1="27" x2="49" y2="27"/><line x1="11" y1="73" x2="49" y2="73"/><line x1="30" y1="27" x2="30" y2="73"/><line x1="4" y1="50" x2="56" y2="50" stroke-dasharray="3 3"/>',
+    basketball:'<rect x="4" y="4" width="52" height="92"/><line x1="4" y1="50" x2="56" y2="50"/><circle cx="30" cy="50" r="8"/><rect x="21" y="4" width="18" height="22"/><rect x="21" y="74" width="18" height="22"/><path d="M12 4V18A18 18 0 0 0 48 18V4"/><path d="M12 96V82A18 18 0 0 1 48 82V96"/>'
+  };
+  const SET_SVG={
+    indoor:'<path d="M6 24 L30 6 L54 24 V54 H6 Z"/><path d="M23 54 V36 H37 V54"/>',
+    outdoor:'<circle cx="30" cy="22" r="10"/><line x1="6" y1="48" x2="54" y2="48"/><line x1="14" y1="56" x2="46" y2="56"/>',
+    semi:'<path d="M6 16 H54"/><line x1="12" y1="16" x2="12" y2="54"/><line x1="48" y1="16" x2="48" y2="54"/><path d="M18 30 H42 M18 38 H42"/>'
+  };
+  function paintEmpty(em){
+    const sportStep=!S.sport;
+    const cards=sportStep
+      ?Object.keys(SPORTS).map(k=>`<button class="cd-ecard" data-pick="${k}"><svg viewBox="0 0 60 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${COURT_SVG[k]}</svg><b>${SPORTS[k].n}</b><i>${SPORTS[k].L} × ${SPORTS[k].W} m</i></button>`).join('')
+      :Object.keys(CATS).map(k=>`<button class="cd-ecard cd-ecard-w" data-pick="${k}"><svg viewBox="0 0 60 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SET_SVG[k]}</svg><b>${CATS[k]}</b><i>${CAT_TEXT[k]}</i></button>`).join('');
+    em.innerHTML=`<div class="cd-estep"><span>Step ${sportStep?1:2} of 3</span></div><h3>${sportStep?'Choose your sport':T('Choose the setting for {sport}').replace('{sport}',T(SPORTS[S.sport].n))}</h3><p>${sportStep?'Pick a court to start. Your design builds here in 3D as you answer each step.':'Indoor, outdoor or semi-indoor decides the structure built around your court.'}</p><div class="cd-egrid ${sportStep?'':'cd-egrid-3'}">${cards}</div>`;
+    em.querySelectorAll('[data-pick]').forEach(btn=>btn.onclick=()=>{(panel.querySelector('.cd-tile[data-k="'+btn.dataset.pick+'"]') as HTMLElement|null)?.click();});localize(em);
+  }
+
   function build(){
     Object.values(G).forEach(g=>{while(g.children.length){const c=g.children.pop();c.geometry&&c.geometry.dispose();}});
-    if(!S.sport||!S.cat){scene.background=new THREE.Color(document.documentElement.dataset.theme==='dark'?'#0E1A2E':'#E9EEF6');summary();return;}
+    const em=$('cdEmpty');if(em){const idle=!S.sport||!S.cat;em.classList.toggle('cd-show',idle);if(idle)paintEmpty(em);}
+    if(!S.sport||!S.cat){scene.background=null;scene.fog=null;summary();return;}
     const sp={...SPORTS[S.sport],id:S.sport};
     curSp=sp;
     curEnc=null;
@@ -299,14 +499,14 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     // play area and non-play area flooring
     const playFloor=S.parts.floor?S.floor.play:'PVC Synthetic Mat';
     const playCol=PLAY_COLOR[playFloor]||'#2E7D41';
-    drawPlay(sp,playCol,playFloor);
+    const autoNpa=npaFor(playFloor);
+    const npFloor=S.parts.floor&&S.floor.nonplayOn&&autoNpa?autoNpa:'-None-';
+    const npCol=npFloor!=='-None-'?(NONPLAY_COLOR[npFloor]||'#B9BDC4'):(indoor?'#B9BDC4':'#6DAA5B');
+    drawPlay(sp,playCol,playFloor,npFloor,npCol);
     const fp=floorProps(playFloor);
     floorMat.roughness=fp.roughness;floorMat.metalness=fp.metalness;
     const playMat=floorMat;
     add(G.court,new THREE.PlaneGeometry(sp.W+6,sp.L+6),playMat,0,0.005,0,-Math.PI/2);
-    // non-play area (surround) if ticked
-    const npFloor=S.parts.floor&&S.floor.nonplayOn?S.floor.nonplay:'-None-';
-    const npCol=S.parts.floor&&S.floor.nonplayOn?(NONPLAY_COLOR[S.floor.nonplay]||'#B9BDC4'):(indoor?'#B9BDC4':'#6DAA5B');
     const npFp=floorProps(npFloor);
     const npTex=makeFloorTex(npFloor,npCol);npTex.repeat.set(RW/4,RL/4);npTex.needsUpdate=true;
     const npMat=new THREE.MeshStandardMaterial({map:npTex,roughness:npFp.roughness,metalness:npFp.metalness});
@@ -370,14 +570,14 @@ function mountCourtDesigner(root: HTMLElement): () => void {
         const rail=(ax,az,bx,bz)=>{const len=Math.hypot(bx-ax,bz-az);const m=new THREE.Mesh(new THREE.BoxGeometry(len,0.06,0.06),steelMat);m.position.set((ax+bx)/2,PH,(az+bz)/2);m.rotation.y=-Math.atan2(bz-az,bx-ax);G.shell.add(m);};
         rail(-fx,-fz,fx,-fz);rail(fx,-fz,fx,fz);rail(fx,fz,-fx,fz);rail(-fx,fz,-fx,-fz);
         if(S.fab.side){
-          const nt=netTex('rgba(30,45,65,0.9)',0.5);
-          const sm=new THREE.MeshBasicMaterial({map:nt,transparent:true,opacity:0.55,side:THREE.DoubleSide,depthWrite:false});
-          const wall=(ax:number,az:number,bx:number,bz:number)=>{const len=Math.hypot(bx-ax,bz-az);const g=new THREE.PlaneGeometry(len,PH);const mat=sm.clone() as any;mat.map=nt.clone();mat.map.repeat.set(len/0.3,PH/0.3);mat.map.needsUpdate=true;const m=new THREE.Mesh(g,mat);m.position.set((ax+bx)/2,PH/2,(az+bz)/2);m.rotation.y=-Math.atan2(bz-az,bx-ax);G.net.add(m);};
+          const nt=boxNetTex('#E8EEF5');
+          const sm=new THREE.MeshBasicMaterial({map:nt,transparent:true,opacity:0.95,alphaTest:0.05,side:THREE.DoubleSide,depthWrite:false});
+          const wall=(ax:number,az:number,bx:number,bz:number)=>{const len=Math.hypot(bx-ax,bz-az);const g=new THREE.PlaneGeometry(len,PH);const mat=sm.clone() as any;mat.map=nt.clone();mat.map.repeat.set(len/0.15,PH/0.15);mat.map.needsUpdate=true;const m=new THREE.Mesh(g,mat);m.position.set((ax+bx)/2,PH/2,(az+bz)/2);m.rotation.y=-Math.atan2(bz-az,bx-ax);G.net.add(m);};
           wall(-fx,-fz,fx,-fz);wall(fx,-fz,fx,fz);wall(fx,fz,-fx,fz);wall(-fx,fz,-fx,-fz);
         }
         if(S.fab.top){
-          const nt=netTex('rgba(30,45,65,0.9)',0.4);nt.repeat.set((fx*2)/0.3,(fz*2)/0.3);nt.needsUpdate=true;
-          const tm=new THREE.Mesh(new THREE.PlaneGeometry(fx*2,fz*2),new THREE.MeshBasicMaterial({map:nt,transparent:true,opacity:0.45,side:THREE.DoubleSide,depthWrite:false}));
+          const nt=boxNetTex('#E8EEF5');nt.repeat.set((fx*2)/0.15,(fz*2)/0.15);nt.needsUpdate=true;
+          const tm=new THREE.Mesh(new THREE.PlaneGeometry(fx*2,fz*2),new THREE.MeshBasicMaterial({map:nt,transparent:true,opacity:0.95,alphaTest:0.05,side:THREE.DoubleSide,depthWrite:false}));
           tm.rotation.x=-Math.PI/2;tm.position.y=PH;G.net.add(tm);
         }
         // numbers for the summary
@@ -402,30 +602,59 @@ function mountCourtDesigner(root: HTMLElement): () => void {
         }
         courtLight.position.set(0,H-0.5,0);courtLight.intensity=70;
       } else {
-        // one light post every 10 ft (3.05 m) along the perimeter
+        // 5 flood-light poles on each of the two longer sides only
         const wattage=LIGHT_OUT[S.light.type]||100;
-        const x=sp.W/2+4, z=sp.L/2+4;
-        const pts:number[][]=[];
-        for(let t=-z;t<=z;t+=10*FT){pts.push([-x,t]);pts.push([x,t]);}
-        for(let t=-x;t<=x;t+=10*FT){pts.push([t,-z]);pts.push([t,z]);}
-        const seen=new Set<string>();
+        const COUNT=5;
+        // longer axis is Z (length), so poles go along ±X sides
+        const px=sp.W/2+3.5;
         const floodMat=new THREE.MeshStandardMaterial({color:'#D0D6DE',metalness:0.5,roughness:0.4});
         const floodLedMat=new THREE.MeshStandardMaterial({color:'#FFF8E8',emissive:'#FFF4D0',emissiveIntensity:2.0,roughness:0.1});
-        pts.forEach(([px,pz])=>{const key=px.toFixed(2)+','+pz.toFixed(2);if(seen.has(key))return;seen.add(key);
-          // tapered pole
-          add(G.lights,new THREE.CylinderGeometry(0.09,0.14,8.5,12),postMat,px,4.25,pz);
-          // crossarm
-          add(G.lights,new THREE.CylinderGeometry(0.025,0.025,1.1,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.75,roughness:0.25}),px,8.6,pz,0,0,Math.PI/2);
-          // flood housing
-          add(G.lights,new THREE.BoxGeometry(0.55,0.12,0.32),floodMat,px,8.52,pz);
-          // LED emitter face
-          add(G.lights,new THREE.BoxGeometry(0.42,0.06,0.24),floodLedMat,px,8.46,pz);
+        const armMat=new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.75,roughness:0.25});
+        const polePositions:number[]=[];
+        for(let i=0;i<COUNT;i++){polePositions.push(-sp.L/2+(sp.L/(COUNT-1))*i);}
+        [-px,px].forEach(sx=>{
+          polePositions.forEach(pz=>{
+            add(G.lights,new THREE.CylinderGeometry(0.09,0.14,8.5,12),postMat,sx,4.25,pz);
+            // crossarm reaching toward the court
+            const armDir=sx<0?1:-1;
+            add(G.lights,new THREE.CylinderGeometry(0.025,0.025,1.4,8),armMat,sx+armDir*0.7,8.6,pz,0,0,Math.PI/2);
+            // flood head at arm tip
+            add(G.lights,new THREE.BoxGeometry(0.55,0.14,0.34),floodMat,sx+armDir*1.4,8.52,pz);
+            add(G.lights,new THREE.BoxGeometry(0.42,0.06,0.26),floodLedMat,sx+armDir*1.4,8.44,pz);
+          });
         });
-        courtLight.position.set(0,12,0);courtLight.intensity=wattage/2.5;
+        courtLight.position.set(0,10,0);courtLight.intensity=wattage*COUNT*2/100;
       }
     } else { courtLight.intensity=0; }
     if(!indoor&&!semi) buildCity(sp);
     // play-area court net
+    if(sp.net==='hoop'){
+      // two basketball goals: pole behind the baseline, arm, glass backboard, orange rim and net
+      const hl2=sp.L/2;
+      const steelM=new THREE.MeshStandardMaterial({color:'#2B323D',metalness:0.8,roughness:0.3});
+      const glassM=new THREE.MeshStandardMaterial({color:'#DDEBF5',transparent:true,opacity:0.38,roughness:0.08,metalness:0.1,side:THREE.DoubleSide});
+      const rimM=new THREE.MeshStandardMaterial({color:'#E8541E',metalness:0.5,roughness:0.35});
+      const padM=new THREE.MeshStandardMaterial({color:'#C73A14',roughness:0.7});
+      const ht=netTex('rgba(250,250,250,0.95)',0.9);ht.repeat.set(10,2);ht.needsUpdate=true;
+      [-1,1].forEach(sd=>{
+        const bz=sd*(hl2-1.2);                 // backboard plane
+        const pz=sd*(hl2+1.1);                 // support pole
+        add(G.net,new THREE.CylinderGeometry(0.1,0.12,3.7,16),steelM,0,1.85,pz);
+        add(G.net,new THREE.BoxGeometry(0.7,0.12,0.9),steelM,0,0.06,pz+sd*0.1);
+        add(G.net,new THREE.BoxGeometry(0.12,0.12,Math.abs(pz-bz)+0.1),steelM,0,3.55,(pz+bz)/2);
+        add(G.net,new THREE.BoxGeometry(1.8,1.05,0.04),glassM,0,3.425,bz);
+        add(G.net,new THREE.BoxGeometry(1.84,0.04,0.05),steelM,0,2.9,bz);
+        add(G.net,new THREE.BoxGeometry(1.84,0.04,0.05),steelM,0,3.95,bz);
+        add(G.net,new THREE.BoxGeometry(0.04,1.05,0.05),steelM,-0.9,3.425,bz);
+        add(G.net,new THREE.BoxGeometry(0.04,1.05,0.05),steelM,0.9,3.425,bz);
+        add(G.net,new THREE.BoxGeometry(0.59,0.45,0.045),new THREE.MeshStandardMaterial({color:'#C73A14',transparent:true,opacity:0.0}),0,3.2,bz);
+        const rz=sd*(hl2-1.575);               // rim centre, 1.575 m from the baseline
+        add(G.net,new THREE.TorusGeometry(0.225,0.011,10,40),rimM,0,3.05,rz,Math.PI/2);
+        add(G.net,new THREE.BoxGeometry(0.1,0.03,Math.abs(rz-bz)-0.2),rimM,0,3.05,(rz+bz)/2+sd*0.1);
+        const net=add(G.net,new THREE.CylinderGeometry(0.225,0.14,0.42,24,1,true),new THREE.MeshBasicMaterial({map:ht,transparent:true,alphaTest:0.1,side:THREE.DoubleSide,depthWrite:false}),0,2.84,rz);
+        net.castShadow=false;
+      });
+    }
     if(sp.net==='net'){
       // net posts - polished steel
       [-(sp.W/2+0.9),sp.W/2+0.9].forEach(x=>{add(G.net,new THREE.CylinderGeometry(0.04,0.045,sp.netH+0.3,16),new THREE.MeshStandardMaterial({color:'#8A939E',metalness:0.85,roughness:0.15}),x,(sp.netH+0.3)/2,0);});
@@ -448,19 +677,67 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     // accessories
     if(S.parts.acc){
       if(S.accs['Scoreboard']&&indoor){
-        // scoreboard: dark panel with LED segments
-        add(G.acc,new THREE.BoxGeometry(2.8,1.4,0.15),new THREE.MeshStandardMaterial({color:'#0C0F14',metalness:0.3,roughness:0.6}),0,3.4,-(RL/2)+0.5);
-        add(G.acc,new THREE.BoxGeometry(2.4,1.0,0.05),new THREE.MeshStandardMaterial({color:'#0A1520',emissive:'#001833',emissiveIntensity:0.8}),0,3.4,-(RL/2)+0.43);
-        // mounting bracket
-        add(G.acc,new THREE.BoxGeometry(0.08,0.6,0.08),new THREE.MeshStandardMaterial({color:'#444950',metalness:0.8,roughness:0.3}),0,2.7,-(RL/2)+0.4);
+        // scoreboard: hanging above court center, two-sided so visible from both ends
+        const sbH=4.2;
+        add(G.acc,new THREE.BoxGeometry(2.8,1.4,0.15),new THREE.MeshStandardMaterial({color:'#0C0F14',metalness:0.3,roughness:0.6}),0,sbH,0);
+        // suspension rod
+        add(G.acc,new THREE.CylinderGeometry(0.03,0.03,1.0,8),new THREE.MeshStandardMaterial({color:'#444950',metalness:0.8}),0,sbH+1.1,0);
+        // LED screen canvas with ISI digital text
+        const sbCanvas=document.createElement('canvas');sbCanvas.width=512;sbCanvas.height=200;
+        const sbG=sbCanvas.getContext('2d');
+        sbG.fillStyle='#010a14';sbG.fillRect(0,0,512,200);
+        sbG.font='bold 120px "Courier New", monospace';
+        sbG.textAlign='center';sbG.textBaseline='middle';
+        sbG.shadowColor='#00cfff';sbG.shadowBlur=30;
+        sbG.fillStyle='#00e5ff';
+        sbG.fillText('ISI',256,105);
+        const sbTex=new THREE.CanvasTexture(sbCanvas);
+        // front face (-Z)
+        const sbFront=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.0),new THREE.MeshBasicMaterial({map:sbTex}));
+        sbFront.position.set(0,sbH,-0.09);G.acc.add(sbFront);
+        // back face (+Z)
+        const sbBack=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.0),new THREE.MeshBasicMaterial({map:sbTex}));
+        sbBack.position.set(0,sbH,0.09);sbBack.rotation.y=Math.PI;G.acc.add(sbBack);
       }
       if(S.accs['Player benches']){
-        [-sp.W/2-1.2,sp.W/2+1.2].forEach(x=>{
-          // bench seat
-          add(G.acc,new THREE.BoxGeometry(0.4,0.04,3.0),new THREE.MeshStandardMaterial({color:'#C88040',roughness:0.6,metalness:0.0}),x,0.46,-sp.L/4);
-          // legs
-          [[-1.3,-1.3],[1.3,-1.3],[1.3,1.3],[-1.3,1.3]].forEach(([dz])=>add(G.acc,new THREE.CylinderGeometry(0.025,0.025,0.46,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.7,roughness:0.3}),x,0.23,-sp.L/4+dz));
+        // one bench each side: left side near one end, right side near other end
+        const benchSides=[[-sp.W/2-1.2,-sp.L/4],[sp.W/2+1.2,sp.L/4]];
+        benchSides.forEach(([x,z])=>{
+          add(G.acc,new THREE.BoxGeometry(0.4,0.04,3.0),new THREE.MeshStandardMaterial({color:'#C88040',roughness:0.6,metalness:0.0}),x,0.46,z);
+          [[-1.3],[1.3]].forEach(([dz])=>add(G.acc,new THREE.CylinderGeometry(0.025,0.025,0.46,8),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.7,roughness:0.3}),x,0.23,z+dz));
         });
+      }
+      if(S.accs['Seating (spectator)']){
+        // tiered spectator stands on both long sides, stepping up away from the court
+        const len=Math.min(sp.L*0.8,16),so=runoff-2.25;
+        const stepMat=new THREE.MeshStandardMaterial({color:'#B9C0CA',roughness:0.85});
+        const seatMat=new THREE.MeshStandardMaterial({color:'#1F5FBF',roughness:0.45});
+        const backMat=new THREE.MeshStandardMaterial({color:'#164A96',roughness:0.5});
+        const railMat=new THREE.MeshStandardMaterial({color:'#2B323D',metalness:0.7,roughness:0.3});
+        [-1,1].forEach(sd=>{
+          for(let i=0;i<3;i++){
+            const hy=0.4*(i+1),cx=sd*(sp.W/2+so+0.4+i*0.8);
+            add(G.acc,new THREE.BoxGeometry(0.8,hy,len),stepMat,cx,hy/2,0);
+            const n=Math.floor(len/0.6);
+            for(let k=0;k<n;k++){
+              const z=-len/2+0.3+k*(len/n)+((len/n)-0.6)/2;
+              add(G.acc,new THREE.BoxGeometry(0.42,0.07,0.5),seatMat,cx-sd*0.08,hy+0.28,z);
+              add(G.acc,new THREE.BoxGeometry(0.06,0.34,0.5),backMat,cx+sd*0.17,hy+0.46,z);
+            }
+          }
+          // safety rail at the back of the stand
+          const rx=sd*(sp.W/2+so+0.4+2*0.8+0.45);
+          add(G.acc,new THREE.BoxGeometry(0.05,0.05,len),railMat,rx,1.9,0);
+          [-len/2,0,len/2].forEach(z=>add(G.acc,new THREE.CylinderGeometry(0.025,0.025,0.8,8),railMat,rx,1.5,z));
+        });
+      }
+      if(S.accs['Water station']){
+        // water cooler: body, tank on top, tap, drip tray
+        const wx=sp.W/2+1.0, wz=sp.L/2-0.5;
+        add(G.acc,new THREE.BoxGeometry(0.4,0.9,0.4),new THREE.MeshStandardMaterial({color:'#E8EEF4',roughness:0.4,metalness:0.1}),wx,0.45,wz);
+        add(G.acc,new THREE.CylinderGeometry(0.14,0.14,0.35,12),new THREE.MeshStandardMaterial({color:'#1A6EC4',roughness:0.3,metalness:0.05,transparent:true,opacity:0.75}),wx,1.08,wz);
+        add(G.acc,new THREE.BoxGeometry(0.08,0.06,0.12),new THREE.MeshStandardMaterial({color:'#5A6270',metalness:0.6}),wx+0.17,0.65,wz);
+        add(G.acc,new THREE.BoxGeometry(0.42,0.04,0.44),new THREE.MeshStandardMaterial({color:'#A0B4C8',roughness:0.5}),wx,0.02,wz);
       }
       if(S.accs['Umpire chair']&&sp.net==='net'){
         // umpire chair: legs, seat, backrest
@@ -484,9 +761,9 @@ function mountCourtDesigner(root: HTMLElement): () => void {
       controls.target.set(0,1.2,sp.L/4);
       controls.minDistance=1;controls.maxDistance=60;
     } else {
-      // bird view: from above, slightly angled so the sides read as 3D
+      // bird view: angled from above-side so court reads as 3D
       const d=Math.max(sp.L,sp.W)*(S.cat==='outdoor'?2.7:1.5);
-      camera.position.set(0,d*1.05,d*0.35);
+      camera.position.set(-d*0.55,d*1.1,d*0.55);
       controls.target.set(0,0,0);
       controls.minDistance=4;controls.maxDistance=110;
     }
@@ -498,21 +775,28 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   function courtCount(){return S.courts;}
   
   // ---------- summary ----------
-  function summary(sp){
-    if(!S.sport){ $('sum').innerHTML='<b>Your court preview</b><div>Choose a sport to begin. Your court, its size and its choices appear here as you go.</div>'; return; }
-    const L=[];
-    if(S.sport)L.push(`<div><b>Sport:</b> ${SPORTS[S.sport].n}</div>`);
-    if(S.cat)L.push(`<div><b>Category:</b> ${CATS[S.cat]}</div>`);
-    L.push(`<div><b>View:</b> ${S.view==='inside'?'Inside court':'Bird view'}</div>`);
-    if(S.cat)L.push(`<div><b>Courts:</b> ${S.courts}</div>`);
-    if(S.parts.fab){const f=[];if(S.cat==='indoor'){f.push('closed walls');if(S.fab.louvers)f.push('louvers');if(S.fab.roof)f.push('roofing sheets top and sides');}else if(S.cat==='semi'){f.push('open-sided frame');if(S.fab.roof)f.push('roof');if(S.fab.louvers)f.push('louvre screens');}else{if(S.fab.side)f.push('side netting');if(S.fab.top)f.push('top netting');f.push('poles');}L.push(`<div><b>Fabrication:</b> ${f.join(', ')}</div>`);if(S.cat==='indoor'&&S.fab.louvers)L.push(`<div><b>Louvres:</b> 5 ft band on all four walls</div>`);if(S.cat==='outdoor'&&curEnc){const ft=x=>Math.round(x*3.2808);L.push(`<div><b>Poles:</b> ${curEnc.poles} × 20 ft (6.1 m)</div><div><b>Perimeter:</b> ${ft(curEnc.perimeter)} ft</div>`);L.push(`<div><b>Side net:</b> ${Math.round(curEnc.sideArea*10.764)} sq ft</div><div><b>Top net:</b> ${Math.round(curEnc.topArea*10.764)} sq ft</div>`);}}
-    if(S.parts.floor){L.push(`<div><b>Play area flooring:</b> ${S.floor.play}</div>`);if(S.floor.nonplayOn)L.push(`<div><b>Non-play area flooring:</b> ${S.floor.nonplay}</div>`);}
-    if(S.parts.light&&S.cat){
-      if(S.cat==='outdoor'&&sp){const pl=Math.round(((sp.W+8)+(sp.L+8))*2/(10*FT));L.push(`<div><b>Lighting:</b> ${S.light.type} per post, about ${pl} posts (one every 10 ft)</div>`);}
-      else{const w=LIGHT_IND[S.light.type]||1500;L.push(`<div><b>Lighting:</b> ${S.light.type} · ${w*S.courts} W total for ${S.courts} court(s)</div>`);}
+  function summary(sp?:any){summaryInner(sp);const sb=$('sumBody');if(sb)localize(sb);}
+  function summaryInner(sp?:any){
+    const body=$('sumBody');if(!body)return;
+    if(!S.sport||!S.cat){body.innerHTML='<span class="cd-sum-empty">'+(S.sport?'Choose a setting to preview your court':'Choose a sport to preview your court')+'</span>';return;}
+    const rows:string[]=[];
+    rows.push(`<span class="cd-sum-row"><b>${SPORTS[S.sport].n}</b><i>Sport</i></span>`);
+    rows.push(`<span class="cd-sum-row"><b>${SPORTS[S.sport].L} × ${SPORTS[S.sport].W} m</b><i>Court size</i></span>`);
+    rows.push(`<span class="cd-sum-row"><b>${CATS[S.cat]}</b><i>Category</i></span>`);
+    rows.push(`<span class="cd-sum-row"><b>${S.courts} ${T(S.courts>1?'courts':'court')}</b><i>Count</i></span>`);
+    if(S.parts.floor){rows.push(`<span class="cd-sum-row"><b>${T(S.floor.play)}</b><i>Flooring</i></span>`);}
+    if(S.parts.light&&sp){
+      const lbl=S.cat==='outdoor'?S.light.type:`${(LIGHT_IND[S.light.type]||1500)*S.courts} W`;
+      rows.push(`<span class="cd-sum-row"><b>${lbl}</b><i>Lighting</i></span>`);
     }
-    if(S.parts.acc){const a=Object.keys(S.accs).filter(k=>S.accs[k]);L.push(`<div><b>Accessories:</b> ${a.length?a.join(', '):'None'}</div>`);}
-    $('sum').innerHTML=(L.length?L.join(''):'<b>Your court preview</b><div>Choose a sport to begin. Your court, its size and its choices appear here as you go.</div>')+'<div class="cd-fine">Stylised preview. Dimensions and wattages are indicative; confirm before quoting.</div>';
+    if(S.parts.fab){
+      let fab='';
+      if(S.cat==='indoor')fab=T('Closed hall');
+      else if(S.cat==='semi')fab=T('Semi frame');
+      else fab=T('Cage')+(S.fab.side?' + '+T('side net'):'')+(S.fab.top?' + '+T('top'):'');
+      rows.push(`<span class="cd-sum-row"><b>${fab}</b><i>Structure</i></span>`);
+    }
+    body.innerHTML=rows.join('<span class="cd-sum-div"></span>');
   }
   
   // ---------- wizard panel ----------
@@ -529,34 +813,40 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   function tiles(list,current,onpick,meta?:any){
     return h('div',{cls:'cd-tiles'},...list.map(k=>{
       const label=meta?meta(k).title:k;
-      return h('button',{cls:'cd-tile'+(current===k?' cd-on':''),on:()=>onpick(k),'aria-pressed':current===k?'true':'false'},
+      return h('button',{cls:'cd-tile'+(current===k?' cd-on':''),'data-k':k,on:()=>onpick(k),'aria-pressed':current===k?'true':'false'},
         h('span',{cls:'cd-tile-t'},label));
     }));
   }
   function choice(list,current,onpick,labelFn=x=>x){return h('div',{cls:'cd-opts'},...list.map(x=>h('button',{cls:'cd-opt'+(current===x?' cd-on':''),on:()=>onpick(x)},labelFn(x))));}
-  function collapsed(n,title,text,onChange){
-    return h('div',{cls:'cd-coll'},h('span',{cls:'cd-dot cd-done'},n),h('div',{cls:'cd-coll-t'},h('b',{},title),h('span',{},text)),h('button',{cls:'cd-change',on:onChange},'Change'));
+  function collapsed(n,title,text){
+    return h('div',{cls:'cd-coll'},h('span',{cls:'cd-dot cd-done'},n),h('div',{cls:'cd-coll-t'},h('b',{},title),h('span',{},text)));
   }
   function pipeline(){
     const cur=!S.sport?0:!S.cat?1:2;
-    const names=['Sport','Category','Parts','Accessories'];
-    return h('div',{cls:'cd-pipe','aria-label':'Progress'},...names.map((n,i)=>h('div',{cls:'cd-pn'+(i<cur?' cd-done':'')+(i===cur?' cd-now':'')},h('span',{cls:'cd-dot'},String(i+1)),h('span',{cls:'cd-pl'},n))));
+    const names=['Sport','Category','Parts'];
+    const items=[];
+    names.forEach((n,i)=>{
+      items.push(h('div',{cls:'cd-pn'+(i<cur?' cd-done':'')+(i===cur?' cd-now':'')},h('span',{cls:'cd-dot'},String(i+1)),h('span',{cls:'cd-pl'},n)));
+      if(i<names.length-1) items.push(h('div',{cls:'cd-pipe-line'+(i<cur?' cd-done':'')}));
+    });
+    return h('div',{cls:'cd-pipe','aria-label':'Progress'},...items);
   }
-  function render(){
+  function render(){renderInner();localize(panel);}
+  function renderInner(){
     panel.innerHTML='';
     const card=h('div',{cls:'cd-card-s cd-flowcard'});
     panel.append(card);
     card.append(pipeline());
     // Q1 sport: collapses to one line once chosen
     if(S.sport&&S.open!=='sport'){
-      card.append(collapsed('1','Sport',SPORTS[S.sport].n+' · '+SPORTS[S.sport].L+' × '+SPORTS[S.sport].W+' m',()=>{S.open='sport';render();}));
+      card.append(collapsed('1','Sport',T(SPORTS[S.sport].n)+' · '+SPORTS[S.sport].L+' × '+SPORTS[S.sport].W+' m'));
     } else {
       card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'1'),'Sport'),tiles(Object.keys(SPORTS),S.sport,v=>{S.sport=v;S.open='category';render();build();frame(SPORTS[v]);},k=>({title:SPORTS[k].n}))));
     }
     if(!S.sport){build();return;}
     // Q2 category: collapses to one line once chosen
     if(S.cat&&S.open!=='category'){
-      card.append(collapsed('2','Category',CATS[S.cat]+' · '+CAT_TEXT[S.cat],()=>{S.open='category';render();}));
+      card.append(collapsed('2','Category',T(CATS[S.cat])+' · '+T(CAT_TEXT[S.cat])));
     } else {
       card.append(h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'2'),'Category'),tiles(Object.keys(CATS),S.cat,v=>{S.cat=v;S.open=null;render();build();frame(SPORTS[S.sport]);},k=>({title:CATS[k]})),h('div',{cls:'cd-courts'},'Number of courts',h('input',{type:'number',min:1,max:20,value:S.courts,onchange:e=>{S.courts=Math.max(1,Math.min(20,+e.target.value||1));build();}}))));
     }
@@ -586,32 +876,48 @@ function mountCourtDesigner(root: HTMLElement): () => void {
       return out;
     });
     part('floor','Flooring',()=>{
-      return [
+      // basketball flooring rules
+      let availFloors=PLAY_FLOORS;
+      if(S.sport==='basketball'){
+        if(S.cat==='outdoor') availFloors=['Acrylic Flooring'];
+        else availFloors=['Wooden Flooring'];
+        if(!availFloors.includes(S.floor.play)){S.floor.play=availFloors[0];}
+      }
+      const autoNpa=npaFor(S.floor.play);
+      const alwaysNpa=NPA_ALWAYS.has(S.floor.play)||(S.sport==='basketball'&&S.cat!=='outdoor');
+      if(alwaysNpa) S.floor.nonplayOn=true;
+      const rows:any[]=[
         h('h4',{},'Play area'),
-        h('select',{cls:'cd-sel',onchange:e=>{S.floor.play=e.target.value;build();}},...PLAY_FLOORS.map(f=>h('option',{value:f,selected:S.floor.play===f},f))),
-        h('label',{cls:'cd-row',style:'margin-top:12px'},h('input',{type:'checkbox',checked:S.floor.nonplayOn,onchange:e=>{S.floor.nonplayOn=e.target.checked;render();build();}}),' Include non-play area flooring'),
-        ...(S.floor.nonplayOn?[h('h4',{},'Non-play area'),h('select',{cls:'cd-sel',onchange:e=>{S.floor.nonplay=e.target.value;build();}},...NONPLAY_FLOORS.map(f=>h('option',{value:f,selected:S.floor.nonplay===f},f)))]:[])
+        h('select',{cls:'cd-sel',onchange:e=>{S.floor.play=e.target.value;if(!npaFor(e.target.value))S.floor.nonplayOn=false;render();build();}},...availFloors.map(f=>h('option',{value:f,selected:S.floor.play===f},f))),
       ];
+      if(autoNpa){
+        if(!alwaysNpa){
+          rows.push(h('label',{cls:'cd-row',style:'margin-top:10px'},h('input',{type:'checkbox',checked:S.floor.nonplayOn,onchange:e=>{S.floor.nonplayOn=e.target.checked;render();build();}}),' Include non-play area'));
+        }
+        if(S.floor.nonplayOn) rows.push(h('div',{cls:'cd-npa-badge'},h('span',{cls:'cd-npa-label'},'Non-play area'),h('span',{cls:'cd-npa-val'},autoNpa)));
+      }
+      return rows;
     });
     part('light','Lighting',()=>{
       if(S.cat==='outdoor')return [h('h4',{},'Per light post'),choice(Object.keys(LIGHT_OUT),S.light.type,v=>{S.light.type=v;render();build();})];
       if(S.light.type&&!LIGHT_IND[S.light.type])S.light.type=Object.keys(LIGHT_IND)[0];
       return [h('h4',{},'Per court'),choice(Object.keys(LIGHT_IND),S.light.type,v=>{S.light.type=v;render();build();})];
     });
-    const accSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'4'),'Accessories'),h('div',{cls:'cd-accs'},...ACC.map(a=>h('label',{cls:'cd-acc'+(S.accs[a]?' cd-on':'')},h('input',{type:'checkbox',checked:!!S.accs[a],onchange:e=>{S.accs[a]=e.target.checked;render();build();}}),a))));
+    const accSec=h('div',{cls:'cd-sec'},h('div',{cls:'cd-step'},h('b',{},'3'),'Accessories'),h('div',{cls:'cd-accs'},...ACC.map(a=>h('label',{cls:'cd-acc'+(S.accs[a]?' cd-on':'')},h('input',{type:'checkbox',checked:!!S.accs[a],onchange:e=>{S.accs[a]=e.target.checked;render();build();}}),a))));
     card.append(accSec);
-    panel.append(h('div',{cls:'cd-cta'},h('div',{},h('b',{},'Happy with the design?'),h('span',{},'We will turn these choices into a quote.')),h('a',{cls:'cd-pill',href:'/contact'},'Request a quote')));
     build();
   }
   render();
+  localize(root);
   
   // ---------- camera and loop ----------
   function size(){const w=host.clientWidth,hh=host.clientHeight;renderer.setSize(w,hh);camera.aspect=w/hh;camera.updateProjectionMatrix();}
-  const onResize=()=>size();addEventListener('resize',onResize);size();
+  const onResize=()=>size();addEventListener('resize',onResize);size();const ro=new ResizeObserver(()=>size());ro.observe(host);
   function setView(v){S.view=v;$('vBird').classList.toggle('cd-on',v==='bird');$('vInside').classList.toggle('cd-on',v==='inside');if(S.sport){frame(SPORTS[S.sport]);summary(SPORTS[S.sport]);}}
   $('vBird').onclick=()=>setView('bird');
   $('vInside').onclick=()=>setView('inside');
   $('reset').onclick=()=>{if(S.sport)frame(SPORTS[S.sport]);};
+  $('startFresh').onclick=()=>{S.sport=null;S.cat=null;S.open='sport';S.courts=1;S.parts={fab:false,floor:false,light:false,acc:true};S.accs={};S.floor={play:'PVC Synthetic Mat',nonplay:'-None-',nonplayOn:true};setView('bird');render();build();};
   setView('bird');
   $('snap').onclick=()=>{renderer.render(scene,camera);const a=document.createElement('a');a.download='my-court.png';a.href=renderer.domElement.toDataURL('image/png');a.click();};
   frame(SPORTS.badminton);
@@ -626,10 +932,13 @@ function mountCourtDesigner(root: HTMLElement): () => void {
   }
   let raf=0;(function loop(){controls.update();clampInside();renderer.render(scene,camera);raf=requestAnimationFrame(loop);})();
   
-  $('sum').onclick = () => $('sum').classList.toggle('cd-open')
+  const sumToggle=$('sumToggle');
+  if(sumToggle){sumToggle.onclick=(e)=>{e.stopPropagation();$('sumBody').classList.toggle('cd-hidden');sumToggle.classList.toggle('cd-active');};}
   const themeObs = new MutationObserver(() => build())
   themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-  return () => {
+  const dispose = () => {
+    hero3dOff()
+    ro.disconnect()
     cancelAnimationFrame(raf)
     themeObs.disconnect()
     removeEventListener('resize', onResize)
@@ -637,15 +946,41 @@ function mountCourtDesigner(root: HTMLElement): () => void {
     renderer.dispose()
     root.innerHTML = ''
   }
+  return { dispose, relocalize: () => { localize(root); render() } }
 }
 
 export function CourtDesignerPage() {
   const ref = useRef<HTMLDivElement>(null)
+  const { t } = useI18n()
+  const tRef = useRef(t)
+  tRef.current = t
+  const handle = useRef<{ dispose: () => void; relocalize: () => void } | null>(null)
   useEffect(() => {
     if (!ref.current) return
-    return mountCourtDesigner(ref.current)
+    const h = mountCourtDesigner(ref.current, (s) => tRef.current(s))
+    handle.current = h
+    return () => { handle.current = null; h.dispose() }
   }, [])
+  // the dictionary loads after the language is picked, so this string changes once the translations are ready
+  const sig = t('Choose your sport')
+  const first = useRef(true)
+  useEffect(() => {
+    if (first.current) { first.current = false; return }
+    handle.current?.relocalize()
+  }, [sig])
   return (
-    <div className="cd-page" ref={ref} />
+    <div className="cd-page-wrap">
+      <div className="cd-mobile-gate">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="4" y="12" width="56" height="40" rx="4" stroke="currentColor" strokeWidth="3"/>
+          <rect x="22" y="52" width="20" height="4" rx="2" fill="currentColor" opacity=".4"/>
+          <line x1="4" y1="44" x2="60" y2="44" stroke="currentColor" strokeWidth="2.5"/>
+        </svg>
+        <h2>{t('Desktop only')}</h2>
+        <p>{t('Craft Your Court works best on a larger screen. Open it on your laptop or desktop to design your court in 3D.')}</p>
+        <a href="/contact">{t('Talk to our team instead →')}</a>
+      </div>
+      <div className="cd-page" ref={ref} />
+    </div>
   )
 }

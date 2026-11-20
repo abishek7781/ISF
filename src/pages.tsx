@@ -126,22 +126,24 @@ export function ProductsPage() {
 }
 
 export function PortfolioPage() {
-  // The 3D builds start a moment after the page has loaded (or at the first scroll or tap), so the page itself appears and responds first.
+  // 3D code and textures start loading straight away (textures are built in workers), and the builds mount at the first idle moment, so there is no long blank wait.
   const [ready3d, setReady3d] = useState(false)
   useEffect(() => {
-    let t = 0
-    const go = () => { clearTimeout(t); setReady3d(true); void import('./three/warm').then((m) => m.warm3D()); off() }
+    void import('./three/warm').then((m) => m.warm3D())
+    let done = false
+    const go = () => { if (done) return; done = true; setReady3d(true); off() }
     const evs = ['scroll', 'pointerdown', 'touchstart', 'keydown'] as const
     const off = () => evs.forEach((e) => window.removeEventListener(e, go))
     evs.forEach((e) => window.addEventListener(e, go, { once: true, passive: true }))
-    const arm = () => { t = window.setTimeout(go, 2500) }
-    if (document.readyState === 'complete') arm(); else window.addEventListener('load', arm, { once: true })
-    return () => { clearTimeout(t); off(); window.removeEventListener('load', arm) }
+    const w = window as Window & { requestIdleCallback?: (f: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (h: number) => void }
+    const useIdle = typeof w.requestIdleCallback === 'function'
+    const h = useIdle ? w.requestIdleCallback!(go, { timeout: 700 }) : window.setTimeout(go, 400)
+    return () => { done = true; off(); if (useIdle) w.cancelIdleCallback?.(h); else clearTimeout(h) }
   }, [])
   return (
     <div className="dark-page">
       <PageHeader title="Portfolio" />
-      {ready3d ? <Suspense fallback={<div style={{ minHeight: '100svh' }} />}><PortfolioBuilds /></Suspense> : <div style={{ minHeight: '100svh' }} aria-hidden="true" />}
+      {ready3d ? <Suspense fallback={<div style={{ minHeight: '100svh' }} />}><div className="pf-fade"><PortfolioBuilds /></div></Suspense> : <div style={{ minHeight: '100svh' }} aria-hidden="true" />}
       <Reach />
       <CtaBand />
     </div>

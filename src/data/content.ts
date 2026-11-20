@@ -16,7 +16,7 @@ export const CONTACT = {
 }
 
 export const NAV = [
-  ['Home', '/'], ['Products', '/products'], ['Portfolio', '/portfolio'], ['Court designer', '/designer'], ['About', '/about'], ['Contact', '/contact'],
+  ['Home', '/'], ['Products', '/products'], ['Portfolio', '/portfolio'], ['About', '/about'], ['Contact', '/contact'],
 ] as const
 
 export const STATS = [

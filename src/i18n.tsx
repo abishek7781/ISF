@@ -1,5 +1,6 @@
 import { COOKIE_STR } from './langs/cookie'
 import { FOUNDER_STR } from './langs/founder'
+import { DESIGNER_STR } from './langs/designer'
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
 export type Lang = 'en' | 'zh' | 'th' | 'hi' | 'ta' | 'te' | 'ml' | 'ms'
@@ -17,13 +18,13 @@ export const LANGS: { code: Lang; short: string; name: string; flag: string }[] 
 // Dictionaries are keyed by the English text. Anything not listed falls back to English.
 /** Dictionaries are keyed by the English text and loaded on demand, so a visitor only downloads the language they use. */
 const LOADERS: Record<Exclude<Lang, 'en'>, () => Promise<Record<string, string>>> = {
-  zh: () => import('./langs/zh').then((m) => ({ ...m.ZH, ...COOKIE_STR.zh, ...FOUNDER_STR.zh })),
-  th: () => import('./langs/th').then((m) => ({ ...m.TH, ...COOKIE_STR.th, ...FOUNDER_STR.th })),
-  hi: () => import('./langs/hi').then((m) => ({ ...m.HI, ...COOKIE_STR.hi, ...FOUNDER_STR.hi })),
-  ta: () => import('./langs/ta').then((m) => ({ ...m.TA, ...COOKIE_STR.ta, ...FOUNDER_STR.ta })),
-  te: () => import('./langs/te').then((m) => ({ ...m.TE, ...COOKIE_STR.te, ...FOUNDER_STR.te })),
-  ml: () => import('./langs/ml').then((m) => ({ ...m.ML, ...COOKIE_STR.ml, ...FOUNDER_STR.ml })),
-  ms: () => import('./langs/ms').then((m) => ({ ...m.MS, ...COOKIE_STR.ms, ...FOUNDER_STR.ms })),
+  zh: () => import('./langs/zh').then((m) => ({ ...DESIGNER_STR.zh, ...m.ZH, ...COOKIE_STR.zh, ...FOUNDER_STR.zh })),
+  th: () => import('./langs/th').then((m) => ({ ...DESIGNER_STR.th, ...m.TH, ...COOKIE_STR.th, ...FOUNDER_STR.th })),
+  hi: () => import('./langs/hi').then((m) => ({ ...DESIGNER_STR.hi, ...m.HI, ...COOKIE_STR.hi, ...FOUNDER_STR.hi })),
+  ta: () => import('./langs/ta').then((m) => ({ ...DESIGNER_STR.ta, ...m.TA, ...COOKIE_STR.ta, ...FOUNDER_STR.ta })),
+  te: () => import('./langs/te').then((m) => ({ ...DESIGNER_STR.te, ...m.TE, ...COOKIE_STR.te, ...FOUNDER_STR.te })),
+  ml: () => import('./langs/ml').then((m) => ({ ...DESIGNER_STR.ml, ...m.ML, ...COOKIE_STR.ml, ...FOUNDER_STR.ml })),
+  ms: () => import('./langs/ms').then((m) => ({ ...DESIGNER_STR.ms, ...m.MS, ...COOKIE_STR.ms, ...FOUNDER_STR.ms })),
 }
 // Indian-script fonts are fetched only for visitors who pick that language.
 const INDIC_FONT: Partial<Record<Lang, string>> = { hi: 'Devanagari', ta: 'Tamil', te: 'Telugu', ml: 'Malayalam' }

@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, ArrowUp, ArrowUpRight, ChevronDown, BadgeCheck, FileCheck, FlaskConical, ShieldCheck, Check, ChevronLeft, ChevronRight, ChevronsRight, Mail, MapPin, MessageCircle, Phone, Play, Plus, Send, User, Trophy, Clock, X } from 'lucide-react'
+import { ArrowRight, ArrowUp, ArrowUpRight, ChevronDown, BadgeCheck, FileCheck, FlaskConical, ShieldCheck, Check, ChevronLeft, ChevronRight, ChevronsRight, Mail, MapPin, MessageCircle, Phone, Play, Plus, Send, User, Trophy, Clock, X, CalendarDays, Radio, Layers, UsersRound } from 'lucide-react'
 import {
   A, CAPABILITIES, CERTS, CONTACT, FAQS, GALLERY, NAV, ZOHO, PORTFOLIO, TESTIMONIALS, VIDEOS,
 } from '../data/content'
@@ -9,10 +9,12 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useI18n } from '../i18n'
 import { postLead } from '../lib/zoho'
 import { getPrefs, openCookieSettings, useConsent } from '../lib/consent'
+import { useLightTheme } from '../lib/theme'
 import IndiaMap from './IndiaMap'
 import { Facebook, Instagram, Linkedin, Youtube } from './Brand'
 import CallDatePicker, { iso } from './CallDatePicker'
 import { Counter, Reveal } from './ui'
+import Beams from './Beams'
 
 export function Head({ num, label, title, aside }: { num?: string; label: string; title: string; aside?: string }) {
   const { t } = useI18n()
@@ -172,10 +174,14 @@ function Journey() {
 
 export function About() {
   const { t } = useI18n()
+  const lightTheme = useLightTheme()
   const wrap = useRef<HTMLDivElement>(null)
   return (
     <div className="about-dark" ref={wrap}>
       <section id="about" className="ab-hero ab2">
+        <div className="about-cubes" aria-hidden="true">
+          <Beams className="holo-bg" color={lightTheme ? '#3564AE' : '#C7D7EC'} backgroundColor={lightTheme ? '#EEF3F9' : '#07152C'} beamWidth={150} rotation={28} speed={0.8} glow={0.55} lightMode={lightTheme} opacity={lightTheme ? 0.55 : 0.88} />
+        </div>
         <svg className="ab2-rings" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <g fill="none">
             {[110, 190, 270, 350, 430].map((r, i) => <circle key={r} cx="740" cy="400" r={r} pathLength="1" style={{ ['--d' as string]: `${i * 0.35}s` }} />)}
@@ -213,19 +219,10 @@ export function About() {
 
       <Journey />
 
-      <section className="ab-founder">
+      <section className="ab-founder founder-redesign">
+        <div className="founder-bg" aria-hidden="true" />
         <div className="container founder-grid">
-          <Reveal className="founder-photo">
-            <div className="fp" role="img" aria-label={t('Manendra, founder of India Sports Infra')}>
-              <div className="fp-print fp-back" aria-hidden="true"><img src={A('founder.webp')} alt="" loading="lazy" /></div>
-              <div className="fp-print fp-front">
-                <img src={A('founder.webp')} alt="" loading="lazy" />
-                <span className="fp-sign">Manendra</span>
-              </div>
-              <span className="fp-tape" aria-hidden="true" />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="founder-text">
+          <Reveal delay={0.05} className="founder-text">
             <span className="ab-kicker">{t('The founder')}</span>
             <h2 className="founder-name">Manendra</h2>
             <p className="founder-role">{t('Founder, India Sports Infra')}</p>
@@ -233,12 +230,24 @@ export function About() {
             <p>{t('Before flooring, Manendra worked on the courts themselves. He managed venue operations at the BWF World Championships and the Thomas & Uber Cup, and was Total Event Organizer for Setup of the Tamil Nadu Badminton League, working closely with players such as Lin Dan, P.V. Sindhu and Kidambi Srikanth.')}</p>
             <p>{t('From a humble background and without a big name behind him, Manendra started India Sports Infra in Chennai in 2017. He failed, learned and kept building, until the company was delivering BWF-certified badminton courts made in India.')}</p>
             <p>{t('Today he leads the team that has built more than 700 courts, with the same belief he started with: players deserve floors that protect them.')}</p>
-            <ul className="founder-facts">
-              {([['Events', 'Total Event Organizer for Setup, Tamil Nadu Badminton League. Venue operations at the BWF World Championships and the Thomas & Uber Cup.'], ['Broadcast', 'Worked with Star Sports and DD Sports so venues met international broadcast requirements.'], ['Infrastructure', 'BWF-certified flooring systems, designed for athlete safety and for Indian climate conditions.'], ['Administration', 'Secretary, Chennai District Pickleball Association, for over two years.']] as const).map(([h, b]) => (
-                <li key={h}><b>{t(h)}</b><span>{t(b)}</span></li>
-              ))}
-            </ul>
           </Reveal>
+          <Reveal delay={0.16} className="founder-photo">
+            <figure className="founder-portrait">
+              <div className="founder-polaroid-stack">
+                <div className="founder-polaroid founder-polaroid-back"><img src={A('founder.webp')} alt="" aria-hidden="true" /></div>
+                <div className="founder-polaroid founder-polaroid-front"><span className="polaroid-tape" aria-hidden="true" /><img src={A('founder.webp')} alt={t('Manendra, founder of India Sports Infra')} loading="lazy" /><strong>Manendra</strong></div>
+              </div>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+      <section className="founder-credentials">
+        <div className="container">
+          <ul className="founder-facts">
+            {([['Events', 'Total Event Organizer for Setup, Tamil Nadu Badminton League. Venue operations at the BWF World Championships and the Thomas & Uber Cup.', CalendarDays], ['Broadcast', 'Worked with Star Sports and DD Sports so venues met international broadcast requirements.', Radio], ['Infrastructure', 'BWF-certified flooring systems, designed for athlete safety and for Indian climate conditions.', Layers], ['Administration', 'Secretary, Chennai District Pickleball Association, for over two years.', UsersRound]] as const).map(([h, b, Icon], i) => (
+              <Reveal key={h} delay={i * 0.06} className="founder-fact"><Icon size={21} /><div><b>{t(h)}</b><span>{t(b)}</span></div></Reveal>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -279,6 +288,7 @@ const LANES: { img: string; label: string; desc: string; to: string; pos?: strin
 
 export function Products() {
   const { t } = useI18n()
+  const lightTheme = useLightTheme()
   const [act, setAct] = useState<number | null>(null)
   const pgRef = useRef<HTMLElement>(null)
   // phones: when a product row scrolls into view, nudge it left and back to show it can be swiped
@@ -302,6 +312,9 @@ export function Products() {
   return (
     <>
     <section className="ph2">
+      <div className="ph2-mosaic" aria-hidden="true">
+        <Beams className="holo-bg" color={lightTheme ? '#3564AE' : '#7FA5E6'} backgroundColor={lightTheme ? '#EEF3F9' : '#07152C'} beamWidth={145} rotation={30} speed={0.85} glow={0.6} lightMode={lightTheme} opacity={lightTheme ? 0.55 : 0.9} />
+      </div>
       <div className="ph2-in">
         <div className="ph2-copy">
           <span className="ph2-eyebrow"><i /> ISF {t('Product guide')}</span>
@@ -568,34 +581,31 @@ const initials = (n: string) => n.split(' ').map((w) => w[0]).slice(0, 2).join('
 export function Testimonials() {
   const { t } = useI18n()
   const n = TESTIMONIALS.length
-  const [all, setAll] = useState(false)
-  const players = TESTIMONIALS.filter((x) => x.role !== 'Client').length
+  const [start, setStart] = useState(0)
   const words = t('What players and clients say.').split(' ')
+  const visible = [0, 1, 2].map((offset) => TESTIMONIALS[(start + offset) % n])
+  const shift = (amount: number) => setStart((value) => (value + amount + n) % n)
   return (
-    <section id="testimonials" className="section tm-sec">
+    <section id="testimonials" className="section tm-sec tm-redesign">
       <div className="container">
         <div className="tm-head">
           <div className="tm-title">
             <span className="tm-kicker"><i /> {t('Testimonials')}</span>
             <h2>{words.map((w, i) => (i >= words.length - 2 ? <em key={i}>{w} </em> : <span key={i}>{w} </span>))}</h2>
-            <p>{t('In their own words')}</p>
+            <p>{t('Real feedback from players, coaches and sports facility clients.')}</p>
           </div>
-          <div className="tm-sum" aria-label={`${players} ${t('Players')}, ${n - players} ${t('Clients')}`}>
+          <div className="tm-sum" aria-label={`${n} ${t('Voices')}`}>
             <div className="tm-avs" aria-hidden="true">
               {TESTIMONIALS.map((x, i) => <span key={x.name} className={x.role === 'Client' ? 'c' : ''} style={{ zIndex: n - i }}>{initials(x.name)}</span>)}
             </div>
             <div className="tm-tot"><strong>{n}</strong><span>{t('Voices')}</span></div>
-            <div className="tm-split" aria-hidden="true"><i style={{ flex: players }} /><i className="c" style={{ flex: n - players }} /></div>
-            <ul className="tm-key">
-              <li><b className="p" />{players} {t('Players')}</li>
-              <li><b className="c" />{n - players} {t('Clients')}</li>
-            </ul>
+            <div className="tm-nav"><button type="button" onClick={() => shift(-1)} aria-label={t('Previous')}>&lsaquo;</button><button type="button" onClick={() => shift(1)} aria-label={t('Next')}>&rsaquo;</button></div>
           </div>
         </div>
-        <div className={`tm-grid ${all ? 'all' : ''}`} role="list">
-          {TESTIMONIALS.map((x, i) => (
-            <Reveal key={x.name} delay={(i % 3) * 0.06} className="tm-cell">
-              <figure className={`tm-card ${i % 2 ? 'alt' : ''}`} role="listitem">
+        <div className="tm-grid" role="list">
+          {visible.map((x, i) => (
+            <Reveal key={`${x.name}-${start}`} delay={i * 0.06} className="tm-cell">
+              <figure className={`tm-card ${i === 1 ? 'alt' : ''}`} role="listitem">
                 <span className="tm-mark" aria-hidden="true">&ldquo;</span>
                 <blockquote>{t(x.quote)}</blockquote>
                 <figcaption className="who"><span className="ini">{initials(x.name)}</span><span><strong>{x.name}</strong><small>{t(x.role)}</small></span></figcaption>
@@ -603,9 +613,6 @@ export function Testimonials() {
             </Reveal>
           ))}
         </div>
-        <button type="button" className="tm-more" onClick={() => setAll(!all)} aria-expanded={all}>
-          {all ? t('See less') : t('See more')} <ChevronDown size={16} className={all ? 'up' : ''} />
-        </button>
       </div>
     </section>
   )
@@ -826,6 +833,7 @@ export function ContactForm() {
 
 export function Contact() {
   const { t } = useI18n()
+  const lightTheme = useLightTheme()
   const { media } = useConsent()
   const channels = [
     { icon: Phone, label: t('Phone Number'), value: CONTACT.phone, href: `tel:${CONTACT.phone}` },
@@ -835,7 +843,7 @@ export function Contact() {
   return (
     <>
       <section id="contact" className="section contact-sec">
-        <div className="c-bg" aria-hidden="true"><i className="c-wall" /><i className="c-floor" /></div>
+        <div className="c-bg" aria-hidden="true"><Beams className="contact-holo" color={lightTheme ? '#3564AE' : '#9EBBE8'} backgroundColor={lightTheme ? '#EEF3F9' : '#07152C'} beamWidth={125} rotation={26} speed={0.7} glow={0.5} lightMode={lightTheme} opacity={lightTheme ? 0.4 : 0.46} /><i className="c-wall" /><i className="c-floor" /></div>
         <div className="container contact-grid">
           <div className="contact-side">
             <span className="c-kicker"><ChevronsRight size={16} /> {t('Contact')}</span>

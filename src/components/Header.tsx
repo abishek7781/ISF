@@ -54,7 +54,7 @@ export default function Header({ theme, toggle }: { theme: string; toggle: (orig
   }, [])
   // On desktop in dark mode every page shares the home page's transparent bar until you scroll.
   return (
-    <header className={`header ${scrolled || (pathname !== '/' && pathname !== '/designer' && !(wide && theme === 'dark')) ? 'scrolled' : ''} ${pathname === '/designer' ? 'designer' : ''}`}>
+    <header className={`header ${pathname === '/' ? 'home-header' : ''} ${scrolled || (pathname !== '/' && pathname !== '/designer' && !wide) ? 'scrolled' : ''} ${pathname === '/designer' || (pathname !== '/' && theme === 'light') ? 'designer' : ''}`}>
       <div className="container header-in">
         <Link to="/" className="brand" aria-label="India Sports Infra home">
           <img src={A(theme === 'dark' ? 'logo-dark-240.webp' : 'logo-240.webp')} srcSet={`${A(theme === 'dark' ? 'logo-dark-240.webp' : 'logo-240.webp')} 1x, ${A(theme === 'dark' ? 'logo-dark-480.webp' : 'logo-480.webp')} 2x`} alt="India Sports Infra" width="240" height="92" fetchPriority="high" />

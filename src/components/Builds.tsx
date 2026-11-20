@@ -7,6 +7,8 @@ import { createStage, type Stage } from '../three/stage'
 import { FLOOR_LAYERS, INSTALL_STEPS, buildFloor, type FloorApi } from '../three/floorScene'
 import { LIGHT_STEPS, buildLighting, type SceneApi } from '../three/lightScene'
 import { FAB_STEPS, buildFabrication } from '../three/fabScene'
+import Beams from './Beams'
+import { useLightTheme } from '../lib/theme'
 
 const reducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -230,6 +232,7 @@ function MultiCourt() {
 
 export function PortfolioHero() {
   const { t } = useI18n()
+  const lightTheme = useLightTheme()
   const items = [
     { href: '#layers', icon: Layers, label: 'Flooring system' },
     { href: '#lighting', icon: Lightbulb, label: 'Lighting' },
@@ -239,7 +242,9 @@ export function PortfolioHero() {
   const words = t('Built layer by layer.').split(' ')
   return (
     <section className="pf-hero">
-      <div className="pf-grid" aria-hidden="true" />
+      <div className="pf-acid" aria-hidden="true">
+        <Beams className="acid-bg" color={lightTheme ? '#3564AE' : '#6F94D4'} backgroundColor={lightTheme ? '#EEF3F9' : '#07152C'} beamWidth={145} rotation={30} speed={0.8} glow={0.55} lightMode={lightTheme} opacity={lightTheme ? 0.55 : 0.88} />
+      </div>
       <div className="pf-in">
         <div className="pf-copy">
           <span className="pf-kicker"><i /> {t('Portfolio')}</span>
