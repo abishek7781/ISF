@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, CalendarDays, Play } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { A, CONTACT, COUNTRIES } from '../data/content'
 import { useI18n } from '../i18n'
@@ -43,15 +43,16 @@ export default function Hero() {
           allow="autoplay; encrypted-media" />}
         <div className="hero-shade" />
       </div>
+      <div className="hero-bwf" aria-label="BWF approved flooring"><img className="hero-bwf-logo" src={A('bwf-logo.png')} alt="BWF" /><span>BWF<br /><small>Approved Flooring</small></span></div>
 
       <div className="container hero-in">
         <p className="hero-kicker fade" style={{ animationDelay: '.1s' }}>
-          {t('Sports infrastructure, Chennai — since 2017')}
+          {t('India Sports Infra, Chennai — since 2017')}
         </p>
         <h1>
           {[
             <>{t('Get your players')}</>,
-            <>{lang === 'en' && 'a '}<em>{t('great sports arena')}</em>.</>,
+            <>{lang === 'en' && 'a '}<em>{lang === 'en' ? <><span className="hero-green">great sports</span> <span className="hero-arena">arena</span></> : t('great sports arena')}</em>.</>,
           ].map((line, k) => (
             <span className="line" key={k}>
               <span style={{ animationDelay: `${0.2 + k * 0.12}s` }}>{line}</span>
@@ -59,10 +60,10 @@ export default function Hero() {
           ))}
         </h1>
         <div className="hero-bottom rise" style={{ animationDelay: '.6s' }}>
-          <p>{t('Turnkey courts, turfs, tracks and training halls, built to global federation standards. Over 700 badminton courts delivered with BWF-approved wooden and synthetic flooring.')}</p>
+          <p>{t('Turnkey sports venues built to global federation standards, with 700+ badminton courts delivered.')}</p>
           <div className="hero-cta">
-            <Link to="/contact" className="visit-btn"><span className="vb-label">{t('Request a site visit')}</span><span className="vb-ico"><ArrowUpRight size={20} /></span></Link>
-            <Link to="/portfolio" className="work-btn">{t('View our work')}</Link>
+            <Link to="/contact" className="visit-btn"><span className="vb-ico"><CalendarDays size={17} /></span><span className="vb-label">{t('Request a site visit')}</span><span className="vb-ico"><ArrowUpRight size={20} /></span></Link>
+            <Link to="/portfolio" className="work-btn"><Play size={16} fill="currentColor" />{t('View our work')}</Link>
           </div>
         </div>
       </div>
