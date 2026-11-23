@@ -10,11 +10,13 @@ import { useI18n } from '../i18n'
 import { postLead } from '../lib/zoho'
 import { getPrefs, openCookieSettings, useConsent } from '../lib/consent'
 import { useLightTheme } from '../lib/theme'
-import IndiaMap from './IndiaMap'
+import ProjectGlobe from './ProjectGlobe'
 import { Facebook, Instagram, Linkedin, Youtube } from './Brand'
 import CallDatePicker, { iso } from './CallDatePicker'
 import { Counter, Reveal } from './ui'
 import Beams from './Beams'
+import DomeGallery from './DomeGallery'
+import FolderFloat from './FolderFloat'
 
 export function Head({ num, label, title, aside }: { num?: string; label: string; title: string; aside?: string }) {
   const { t } = useI18n()
@@ -30,6 +32,10 @@ export function Head({ num, label, title, aside }: { num?: string; label: string
 }
 
 const ABOUT_FACTS: [number, string, string][] = [[2017, '', 'Founded in Chennai'], [700, '+', 'Badminton courts built'], [10000, '+', 'Players on ISF floors'], [2, '', 'Offices, India and China']]
+const DOME_IMAGES = Array.from({ length: 10 }, (_, index) => ({
+  src: A(`founders_gallery/img${index + 1}.webp`),
+  alt: `Founders gallery photo ${index + 1}`,
+}))
 const PRINCIPLES = [
   ['Absorb shock', 'A professional player spends 15 hours a week on court. The floor has to protect knees and joints through every jump and lunge.'],
   ['Hold grip', 'An anti-slip surface lets players change direction with confidence, rally after rally.'],
@@ -160,7 +166,7 @@ function Journey() {
           </svg>
           {pts && JOURNEY.map((j, i) => (
             <div key={i} className={`jp-item ${j.kind} ${j.up ? 'up' : ''} ${i === JOURNEY.length - 1 ? 'last' : ''} ${i === 0 ? 'first' : ''}`} style={{ left: `${pts[i].x}%`, top: `${pts[i].y}%`, ['--i' as string]: i }}>
-              {j.kind === 'photo' && <span className="jp-photo"><img src={A(j.img!)} alt="" loading="lazy" /></span>}
+              {j.kind === 'photo' && <span className="jp-photo"><img src={A(j.img!)} alt="" width="800" height="600" loading="lazy" /></span>}
               {j.kind === 'start' && <span className="jp-badge start">{j.label}</span>}
               {j.kind === 'node' && <span className={`jp-badge ${j.icon === 'flag' ? '' : 'logo'}`}>{icon(j.icon)}</span>}
               {j.kind !== 'photo' && <span className="jp-cap"><strong>{t(j.title!)}</strong><small>{t(j.note!)}</small></span>}
@@ -174,6 +180,42 @@ function Journey() {
 
 export function About() {
   const { t } = useI18n()
+  const [galleryImage, setGalleryImage] = useState<(typeof DOME_IMAGES)[number] | null>(null)
+  const galleryPreview = useRef<HTMLDialogElement>(null)
+  const galleryTrigger = useRef<HTMLElement | null>(null)
+  const galleryStage = useRef<HTMLDivElement>(null)
+
+  useLayoutEffect(() => {
+    const dialog = galleryPreview.current
+    const stage = galleryStage.current
+    if (!galleryImage || !dialog || !stage) return
+
+    const bounds = stage.getBoundingClientRect()
+    const top = Math.max(0, bounds.top)
+    const bottom = Math.min(window.innerHeight, bounds.bottom)
+    const centerY = bottom > top ? (top + bottom) / 2 : window.innerHeight / 2
+    const size = Math.min(440, bounds.width - 32, Math.max(160, bottom - top - 40), window.innerHeight - 32)
+    dialog.style.setProperty('--preview-y', `${Math.max(size / 2 + 16, Math.min(centerY, window.innerHeight - size / 2 - 16))}px`)
+    dialog.style.setProperty('--preview-size', `${size}px`)
+    dialog.showModal()
+
+    const tile = galleryTrigger.current?.getBoundingClientRect()
+    const photo = dialog.querySelector('img')
+    if (!tile || !photo || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const destination = photo.getBoundingClientRect()
+    const x = tile.left + tile.width / 2 - (destination.left + destination.width / 2)
+    const y = tile.top + tile.height / 2 - (destination.top + destination.height / 2)
+    photo.animate([
+      { transform: `translate(${x}px, ${y}px) scale(${Math.max(.08, tile.width / size)}, ${Math.max(.08, tile.height / size)})`, opacity: .75 },
+      { transform: 'none', opacity: 1 },
+    ], { duration: 360, easing: 'cubic-bezier(.2,.75,.25,1)' })
+  }, [galleryImage])
+
+  function closeGalleryPreview() {
+    setGalleryImage(null)
+    galleryTrigger.current?.focus({ preventScroll: true })
+  }
+
   const lightTheme = useLightTheme()
   const wrap = useRef<HTMLDivElement>(null)
   return (
@@ -193,7 +235,20 @@ export function About() {
         <div className="container ab-hero-grid">
           <Reveal>
             <span className="ab2-kicker"><i /> {t('About India Sports Infra')}</span>
-            <h2 className="ab-title">{t('Building the floors India plays on,')} <em>{t('since 2017.')}</em></h2>
+            <h2 className="ab-title">
+              {t('Building the floors India plays on,')}{' '}
+              <em className="ab-hero-waterline">
+                {t('since 2017.')}
+                <svg className="ab-waterline-defs" width="0" height="0" aria-hidden="true">
+                  <defs>
+                    <clipPath id="ab-hero-water-clip" clipPathUnits="objectBoundingBox">
+                      <path d="M-.5 .52 C-.42 .47 -.33 .47 -.25 .52 S-.08 .57 0 .52 S.17 .47 .25 .52 S.42 .57 .5 .52 S.67 .47 .75 .52 S.92 .57 1 .52 S1.17 .47 1.25 .52 S1.42 .57 1.5 .52 V1 H-.5 Z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span aria-hidden="true">{t('since 2017.')}</span>
+              </em>
+            </h2>
             <p className="ab-lead">{t('From one workshop in Chennai making solid wooden sports floors to a team that builds complete venues for more than a dozen sports.')}</p>
             <div className="ab2-cta">
               <Link to="/contact" className="ab2-b1"><span>{t('Talk to our team')}</span><i><ArrowRight size={17} /></i></Link>
@@ -234,8 +289,8 @@ export function About() {
           <Reveal delay={0.16} className="founder-photo">
             <figure className="founder-portrait">
               <div className="founder-polaroid-stack">
-                <div className="founder-polaroid founder-polaroid-back"><img src={A('founder.webp')} alt="" aria-hidden="true" /></div>
-                <div className="founder-polaroid founder-polaroid-front"><span className="polaroid-tape" aria-hidden="true" /><img src={A('founder.webp')} alt={t('Manendra, founder of India Sports Infra')} loading="lazy" /><strong>Manendra</strong></div>
+                <div className="founder-polaroid founder-polaroid-back"><img src={A('founder-manendra.jpeg')} alt="" aria-hidden="true" width="1440" height="1920" /></div>
+                <div className="founder-polaroid founder-polaroid-front"><span className="polaroid-tape" aria-hidden="true" /><img src={A('founder-manendra.jpeg')} alt={t('Manendra, founder of India Sports Infra')} loading="lazy" width="1440" height="1920" /><strong>Manendra</strong></div>
               </div>
             </figure>
           </Reveal>
@@ -251,28 +306,64 @@ export function About() {
         </div>
       </section>
 
-      <section className="ab-principles">
-        <div className="container">
-          <Reveal><h2 className="ab-h2">{t('Three things every floor we build must do.')}</h2></Reveal>
-          <ol className="ab-list">
-            {PRINCIPLES.map(([title, d], i) => (
-              <Reveal key={title} delay={i * 0.06} className="ab-item">
-                <span className="ab-n">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{t(title)}</h3>
-                <p>{t(d)}</p>
-              </Reveal>
-            ))}
-          </ol>
+      <section className="ab-principles" id="dome-gallery" aria-labelledby="dome-gallery-title">
+        <Reveal className="container dome-section-heading">
+          <h2 className="ab-h2" id="dome-gallery-title">{t("Founder's")} <span>{t('Gallery')}</span></h2>
+        </Reveal>
+        <div className="about-dome-gallery" ref={galleryStage}>
+          <DomeGallery
+            images={DOME_IMAGES}
+            fit={1.67}
+            zoom={1.06}
+            autoRotate={!galleryImage}
+            minRadius={600}
+            maxVerticalRotationDeg={0}
+            dragSensitivity={10}
+            segments={34}
+            dragDampening={2}
+            grayscale={false}
+            imageBorderRadius="24px"
+            overlayBlurColor="transparent"
+            onSelectImage={(image, trigger) => {
+              galleryTrigger.current = trigger
+              setGalleryImage(image)
+            }}
+          />
         </div>
+        <dialog
+          ref={galleryPreview}
+          className="dome-project-preview"
+          aria-label={galleryImage ? t(galleryImage.alt) : t("Founder's Gallery")}
+          onClose={closeGalleryPreview}
+          onClick={e => { if (e.target === e.currentTarget) e.currentTarget.close() }}
+        >
+          {galleryImage && <img src={galleryImage.src} alt={t(galleryImage.alt)} />}
+        </dialog>
       </section>
 
       <section className="ab-vision">
-        <div className="container">
+        <div className="container ab-vision-grid">
           <Reveal>
             <span className="ab-kicker">{t('Our vision')}</span>
             <blockquote>{t('To give every player ')}<em>{t('the best playing experience')}</em>{t(', on floors and arenas scientifically designed to minimise injury.')}</blockquote>
             <Link to="/contact" className="vis-btn"><span className="vis-t">{t('Talk to our team')}</span><span className="vis-a"><ArrowRight size={18} /></span></Link>
           </Reveal>
+          <div className="ab-vision-folder">
+            <FolderFloat
+              label={t('Our vision')}
+              sublabel={t('On and off the court')}
+              items={[t('Player safety'), t('Better play'), t('Court design'), t('Sports flooring')]}
+              alwaysOpen
+              closeOnSelect={false}
+              folderColor="color-mix(in srgb, #409e45 83%, black)"
+              frontColor="#409e45"
+              labelColor="#111827"
+              itemColor={lightTheme ? '#18181b' : '#fff'}
+              itemTextColor={lightTheme ? '#fff' : '#18181b'}
+              width={200}
+              spread={128}
+            />
+          </div>
         </div>
       </section>
     </div>
@@ -334,11 +425,10 @@ export function Products() {
           </ul>
         </div>
         <div className="ph2-art">
-          <span className="ph2-chip"><i /> {t('BWF approved')}</span>
           <div className={`ph2-strips ${act !== null ? 'has' : ''}`} onMouseLeave={() => setAct(null)}>
             {LANES.map((l, i) => (
               <button key={l.label} type="button" className={`sp ${act === i ? 'on' : ''}`} style={{ ['--h' as string]: `${58 + i * 12}%` }} onMouseEnter={() => setAct(i)} onFocus={() => setAct(i)} onBlur={() => setAct(null)} onClick={() => (act === i ? document.getElementById(l.to)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) : setAct(i))} aria-label={t(l.label)}>
-                <img src={A(l.img)} alt="" loading={i ? 'lazy' : undefined} style={l.pos ? { objectPosition: l.pos } : undefined} />
+                <img src={A(l.img)} alt="" width="800" height="600" loading={i ? 'lazy' : undefined} style={l.pos ? { objectPosition: l.pos } : undefined} />
               </button>
             ))}
           </div>
@@ -357,7 +447,7 @@ export function Products() {
             <div className="pg-grid">
               {c.items.map((p) => (
                 <Link key={p.name} to="/contact" className="pg-card">
-                  <span className="pg-img">{p.image ? <img src={A(p.image)} alt="" loading="lazy" /> : <img className="ph" src={A('logo-mark.png')} alt="" />}</span>
+                  <span className="pg-img">{p.image ? <img src={A(p.image)} alt="" width="800" height="600" loading="lazy" /> : <img className="ph" src={A('logo-mark.png')} alt="" width="56" height="56" />}</span>
                   <strong>{t(p.name)}</strong>
                   <span className="pg-tx">{p.text ? t(p.text) : null}</span>
                   <em>{t('Learn more')} <ArrowUpRight size={15} /></em>
@@ -391,14 +481,18 @@ export function Reach() {
     <section className="section reach-sec">
         <div className="container">
           <div className="reach-head">
-            <h2>{t('Where we have worked.')}</h2>
+            <div className="reach-title">
+              <span className="reach-kicker">{t('Global footprint')}</span>
+              <h2>{t('Where we')} <em>{t('have worked.')}</em></h2>
+              <p>{t('Built in Chennai. Delivered wherever sport takes us.')}</p>
+            </div>
             <dl className="reach-stats">
               <div><dt>5</dt><dd>{t('Locations')}</dd></div>
               <div><dt>4</dt><dd>{t('Countries')}</dd></div>
               <div><dt>2</dt><dd>{t('Offices')}</dd></div>
             </dl>
           </div>
-          <IndiaMap />
+          <ProjectGlobe />
           <div className="tickets">
             {PLACES.map((pl, i) => (
               <Reveal key={pl.name} delay={(i % 3) * 0.07} className={`ticket ${pl.origin ? 'origin' : ''}`}>
@@ -502,7 +596,7 @@ export function Certifications() {
             const i = k % CERTS.length
             return (
               <button key={k} className="cert" onClick={() => setSel(i)} aria-hidden={k >= CERTS.length} tabIndex={k >= CERTS.length ? -1 : 0}>
-                <span className="cert-paper"><img src={A(c.image)} alt={t(c.title)} loading="lazy" /></span>
+                <span className="cert-paper"><img src={A(c.image)} alt={t(c.title)} width="800" height="1000" loading="lazy" /></span>
                 <span className="cert-name">{t(c.title)}</span>
               </button>
             )
@@ -582,9 +676,25 @@ export function Testimonials() {
   const { t } = useI18n()
   const n = TESTIMONIALS.length
   const [start, setStart] = useState(0)
+  const gridRef = useRef<HTMLDivElement>(null)
   const words = t('What players and clients say.').split(' ')
   const visible = [0, 1, 2].map((offset) => TESTIMONIALS[(start + offset) % n])
   const shift = (amount: number) => setStart((value) => (value + amount + n) % n)
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const mobile = window.matchMedia('(max-width: 680px)')
+    if (reduce) return
+    const timer = window.setInterval(() => {
+      if (!mobile.matches || document.hidden) return
+      const el = gridRef.current
+      const card = el?.querySelector<HTMLElement>('.tm-cell')
+      if (!el || !card) return
+      const step = card.offsetWidth + 10
+      if (el.scrollLeft >= step * 2 - 4) el.scrollTo({ left: 0, behavior: 'auto' })
+      else el.scrollBy({ left: step, behavior: 'smooth' })
+    }, 4200)
+    return () => window.clearInterval(timer)
+  }, [])
   return (
     <section id="testimonials" className="section tm-sec tm-redesign">
       <div className="container">
@@ -602,9 +712,9 @@ export function Testimonials() {
             <div className="tm-nav"><button type="button" onClick={() => shift(-1)} aria-label={t('Previous')}>&lsaquo;</button><button type="button" onClick={() => shift(1)} aria-label={t('Next')}>&rsaquo;</button></div>
           </div>
         </div>
-        <div className="tm-grid" role="list">
-          {visible.map((x, i) => (
-            <Reveal key={`${x.name}-${start}`} delay={i * 0.06} className="tm-cell">
+        <div className="tm-grid" ref={gridRef} role="list">
+          {[...visible, ...visible].map((x, i) => (
+            <Reveal key={`${x.name}-${start}-${i}`} delay={i * 0.06} className={`tm-cell ${i >= visible.length ? 'tm-duplicate' : ''}`}>
               <figure className={`tm-card ${i === 1 ? 'alt' : ''}`} role="listitem">
                 <span className="tm-mark" aria-hidden="true">&ldquo;</span>
                 <blockquote>{t(x.quote)}</blockquote>
