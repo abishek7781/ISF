@@ -72,7 +72,7 @@ function OurServices() {
         <div className="bento" key={group}>
           {list.map((s, k) => (
             <article key={s.name} className="bt" style={{ animationDelay: `${k * 40}ms` }}>
-              {s.image ? <img src={A(s.image)} alt="" loading="lazy" /> : <span className="bt-ph">{String(s.n).padStart(2, '0')}</span>}
+              {s.image ? <img src={A(s.image)} alt="" width="800" height="600" loading="lazy" /> : <span className="bt-ph">{String(s.n).padStart(2, '0')}</span>}
               <div><small>{t(s.group)}</small><h3>{t(s.name)}</h3></div>
             </article>
           ))}

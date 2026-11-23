@@ -11,16 +11,24 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/d3-geo": "^3.1.1",
     "@types/three": "^0.186.0",
+    "@types/topojson-client": "^3.1.5",
+    "@use-gesture/react": "^10.3.1",
     "@vercel/analytics": "^2.0.1",
+    "d3-geo": "^3.1.2",
     "framer-motion": "^13.4.4",
     "lucide-react": "^1.48.0",
+    "matter-js": "^0.20.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
-    "three": "^0.186.1"
+    "three": "^0.186.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
+    "@types/matter-js": "^0.20.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^4.7.0",
