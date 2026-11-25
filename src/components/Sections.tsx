@@ -32,9 +32,9 @@ export function Head({ num, label, title, aside }: { num?: string; label: string
 }
 
 const ABOUT_FACTS: [number, string, string][] = [[2017, '', 'Founded in Chennai'], [700, '+', 'Badminton courts built'], [10000, '+', 'Players on ISF floors'], [2, '', 'Offices, India and China']]
-const DOME_IMAGES = Array.from({ length: 10 }, (_, index) => ({
-  src: A(`founders_gallery/img${index + 1}.webp`),
-  alt: `Founders gallery photo ${index + 1}`,
+const DOME_IMAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12].map(number => ({
+  src: A(`founders_gallery/img${number}.webp`),
+  alt: `Founders gallery photo ${number}`,
 }))
 const PRINCIPLES = [
   ['Absorb shock', 'A professional player spends 15 hours a week on court. The floor has to protect knees and joints through every jump and lunge.'],
